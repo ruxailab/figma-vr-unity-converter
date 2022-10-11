@@ -1,0 +1,12 @@
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.csproj.AssemblyReference.cache
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.AssemblyInfoInputs.cache
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.AssemblyInfo.cs
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.csproj.CoreCompileInputs.cache
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\bin\Debug\net6.0\DLLTest.deps.json
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\bin\Debug\net6.0\DLLTest.dll
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\bin\Debug\net6.0\DLLTest.pdb
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.dll
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\refint\DLLTest.dll
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\DLLTest.pdb
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\DLLTest\obj\Debug\net6.0\ref\DLLTest.dll

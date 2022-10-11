@@ -1,0 +1,12 @@
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\bin\Debug\net6.0\teste.deps.json
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\bin\Debug\net6.0\teste.dll
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\bin\Debug\net6.0\teste.pdb
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.csproj.AssemblyReference.cache
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.AssemblyInfoInputs.cache
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.AssemblyInfo.cs
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.csproj.CoreCompileInputs.cache
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.dll
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\refint\teste.dll
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\teste.pdb
+C:\Users\julio\Documents\GitHub\figma-vr-unity-converter\teste\obj\Debug\net6.0\ref\teste.dll
