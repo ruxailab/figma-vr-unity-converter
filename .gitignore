@@ -1,1 +1,6 @@
-Unity
+*.meta
+/Unity/Library
+/Unity/Logs
+/Unity/Packages
+/Unity/ProjectSettings
+/Unity/Temp
