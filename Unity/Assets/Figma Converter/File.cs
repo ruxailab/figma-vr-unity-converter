@@ -1,4 +1,19 @@
 ﻿[System.Serializable]
+public class Style{
+    public string fontFamily;
+    public string fontPostScriptName;
+    public int fontWeight;
+    public string textAutoResize;
+    public float fontSize;
+    public string textAlignHorizontal;
+    public string textAlignVertical;
+    public float letterSpacing;
+    public float lineHeightPx;
+    public float lineHeightPercent;
+    public string lineHeightUnit;
+}
+
+[System.Serializable]
 public class Constrait{
     public string type;
     public string value;
@@ -66,6 +81,13 @@ public class ChildrenObj{
     public float strokeWeight;
     public string storekeAlign;
     public string[] effects;
+    public string characters;
+    public Style style;
+    public int layoutVersion;
+    public string[] characterStyleOverrides;
+    public string styleOverrideTable;
+    public string[] lineTypes;
+    public int[] lineIndentations;
 }
 
 [System.Serializable]
