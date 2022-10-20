@@ -35,7 +35,7 @@ public class FigmaConverter : EditorWindow {
             
             // Chamada da API
             File apiDocument = APIService.GetDocument(token, documentID);
-            Image apiImage = APIService.GetImages(token, documentID);
+            string apiImage = APIService.GetImages(token, documentID);
 
             // Loop Pagina
             for(int i = 0; i<apiDocument.document.children.Length; i++){
@@ -46,7 +46,7 @@ public class FigmaConverter : EditorWindow {
                 for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
                     
                     ChildrenObj apiObj = apiDocument.document.children[i].children[j];
-                    Object obj = new Object(apiObj, empty, j);
+                    Object obj = new Object(apiObj, apiImage, empty, j);
 
                     /*
                     else if(apiObj.type == "TEXT"){

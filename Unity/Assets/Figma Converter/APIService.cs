@@ -13,13 +13,12 @@ public class APIService {
         return JsonUtility.FromJson<File>(json);
     }
 
-    public static Image GetImages(string token, string documentID){
+    public static string GetImages(string token, string documentID){
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api.figma.com/v1/files{documentID}/images");
         request.Headers.Add("X-Figma-Token", token);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
-        string json = reader.ReadToEnd();
-        return JsonUtility.FromJson<Image>(json);
+        return reader.ReadToEnd();
     }
 
 }
