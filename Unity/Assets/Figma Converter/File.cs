@@ -1,10 +1,11 @@
 ﻿[System.Serializable]
-public class Style{
+public class Style {
     public string fontFamily;
     public string fontPostScriptName;
+    public bool italic;
     public int fontWeight;
     public string textAutoResize;
-    public float fontSize;
+    public int fontSize;
     public string textAlignHorizontal;
     public string textAlignVertical;
     public float letterSpacing;
@@ -14,32 +15,32 @@ public class Style{
 }
 
 [System.Serializable]
-public class Constrait{
+public class Constrait {
     public string type;
     public string value;
 }
 
 [System.Serializable]
-public class ExportSettings{
+public class ExportSettings {
     public string suffix;
     public string format;
     public Constrait constrait;
 }
 
 [System.Serializable]
-public class Size{
+public class Size {
     public string width;
     public string heigth;
 }
 
 [System.Serializable]
-public class PrototypeDevice{
+public class PrototypeDevice {
     public string type;
     public Size size;
 }
 
 [System.Serializable]
-public class Color{
+public class Color {
     public float r;
     public float g;
     public float b;
@@ -47,20 +48,22 @@ public class Color{
 }
 
 [System.Serializable]
-public class Fills{
+public class Fills {
     public string blendMode;
     public string type;
+    public string scaleMode;
+    public string imageRef;
     public Color color;
 }
 
 [System.Serializable]
-public class Constraints{
+public class Constraints {
     public string vertical;
     public string horizontal;
 }
 
 [System.Serializable]
-public class Absolute{
+public class Absolute {
     public float x;
     public float y;
     public float width;
@@ -68,7 +71,7 @@ public class Absolute{
 }
 
 [System.Serializable]
-public class ChildrenObj{
+public class ChildrenObj {
     public string id;
     public string name;
     public string type;
@@ -91,7 +94,7 @@ public class ChildrenObj{
 }
 
 [System.Serializable]
-public class ChildrenPage{
+public class ChildrenPage {
     public string id;
     public string name;
     public string type;
@@ -104,7 +107,7 @@ public class ChildrenPage{
 }
 
 [System.Serializable]
-public class Document{
+public class Document {
     public string id;
     public string name;
     public string type;
@@ -112,8 +115,7 @@ public class Document{
 }
 
 [System.Serializable]
-public class File
-{
+public class File {
     public Document document;
     public string[] components;
     public string[] componentSets;

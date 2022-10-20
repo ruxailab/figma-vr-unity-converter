@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using System;
 
 public class FigmaConverter : EditorWindow {
 
@@ -33,48 +34,22 @@ public class FigmaConverter : EditorWindow {
             }
             
             // Chamada da API
-            File api = APIHelper.GetDocument(token, documentID);            
+            File apiDocument = APIService.GetDocument(token, documentID);
+            Image apiImage = APIService.GetImages(token, documentID);
 
             // Loop Pagina
-            for(int i = 0; i<api.document.children.Length; i++){
+            for(int i = 0; i<apiDocument.document.children.Length; i++){
                 
                 GameObject empty = new GameObject("Page " + (i+1));
                 
                 // Loop Objeto
-                for(int j = 0; j<api.document.children[i].children.Length; j++){
+                for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
                     
-                    var apiObj = api.document.children[i].children[j];
-                    
-                    // Verifica se Objeto é um Retangulo
-                    if(apiObj.type == "RECTANGLE"){
-                        // Altura e Largura
-                        var width = apiObj.absoluteBoundingBox.width/100;
-                        var height = apiObj.absoluteBoundingBox.height/100;
-                        
-                        // Localização nos Eixos X e Y
-                        var x = (apiObj.absoluteBoundingBox.x/100) + (width/2); 
-                        var y = (apiObj.absoluteBoundingBox.y/100) + (height/2);
-                        
-                        // Cores
-                        var r = apiObj.fills[0].color.r;
-                        var g = apiObj.fills[0].color.g;
-                        var b = apiObj.fills[0].color.b;
-                        var a = apiObj.fills[0].color.a;
-                        
-                        // Criação do Objeto
-                        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        obj.transform.position = new Vector3(x, y, (float)(0.01*j));
-                        obj.transform.localScale = new Vector3(width, height, 1);
-                        obj.transform.parent = empty.transform;
-                        
-                        // Variavel teporaria para inserir a cor do Objeto
-                        var tempMaterial = new Material(obj.GetComponent<Renderer>().sharedMaterial);
-                        tempMaterial.color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
-                        obj.GetComponent<Renderer>().sharedMaterial = tempMaterial;
-                        Debug.Log("Objeto Criado com Sucesso");
-                    }
-                    //Verifica se é Circulo
-                    else if(apiObj.type == "ELLIPSE"){
+                    ChildrenObj apiObj = apiDocument.document.children[i].children[j];
+                    Object obj = new Object(apiObj, empty, j);
+
+                    /*
+                    else if(apiObj.type == "TEXT"){
                         // Altura e Largura
                         var width = apiObj.absoluteBoundingBox.width/100;
                         var height = apiObj.absoluteBoundingBox.height/100;
@@ -83,29 +58,35 @@ public class FigmaConverter : EditorWindow {
                         var x = (apiObj.absoluteBoundingBox.x/100) + (width/2); 
                         var y = (api.document.children[0].children[j].absoluteBoundingBox.y/100) + (height/2);
 
-                        // Cores
-                        var r = apiObj.fills[0].color.r;
-                        var g = apiObj.fills[0].color.g;
-                        var b = apiObj.fills[0].color.b;
-                        var a = apiObj.fills[0].color.a;
+                        // Negrito e Italico
+                        var negrito = false;
+                        var italic = false;
+                        if(apiObj.style.fontWeight <= 700){
+                            negrito = true;
+                        } 
+                        if(apiObj.style.italic == true){
+                            italic = true;
+                        }
 
                         // Criação do Objeto
-                        GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                        GameObject obj = new GameObject("3D Text");
                         obj.transform.position = new Vector3(x,y,(float)(0.01*j));
-                        obj.transform.localScale = new Vector3(width, height, 1);
-                        obj.transform.parent = empty.transform;
+                        TextMesh textObj = obj.AddComponent<TextMesh>() as TextMesh;
 
-                        // Variavel teporaria para inserir a cor do Objeto
-                        var tempMaterial = new Material(obj.GetComponent<Renderer>().sharedMaterial);
-                        tempMaterial.color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
-                        obj.GetComponent<Renderer>().sharedMaterial = tempMaterial;
-                        Debug.Log("Objeto Criado com Sucesso");
-                    }
-                    else if(apiObj.type == "TEXT"){
-                        TextMeshPro textmeshPro = GetComponent<TextMeshPro>();
-                        textmeshPro.SetText("The first number is {0} and the 2nd is {1:2} and the 3rd is {3:0}.", 4, 6.345f, 3.5f);
-                        Debug.Log("Text Criado");
-                    }
+                        // Propriedades do Objeto
+                        textObj.text = apiObj.characters;
+                        textObj.fontSize = apiObj.style.fontSize/5;
+                        if(italic == true || negrito == true){
+                            textObj.fontStyle = FontStyle.BoldAndItalic;
+                        }
+                        else if(negrito == true){
+                            textObj.fontStyle = FontStyle.Bold;
+                        }
+                        else if(italic == true){
+                            textObj.fontStyle = FontStyle.Italic;
+                        }
+                        Debug.Log("3DText Criado");
+                    }*/
                 }
                 empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
             }
