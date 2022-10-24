@@ -1,7 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Networking;
 
-public class Object{
+public class Object {
     
     private string type;
     private float width;
@@ -61,14 +66,18 @@ public class Object{
         }
         else if(this.colorType == "IMAGE"){
             this.imageRef = apiObj.fills[0].imageRef;
-            string image = apiImage;
-            image = image.Remove(0, image.IndexOf("e05bba2c8c22d0d36fc41b8c01c3d4286dc33fdd"));
-            image = image.Remove(0, image.IndexOf("https:"));
-            image = image.Remove(image.IndexOf('"'));
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFile(new Uri(url), "Image.png");
+            string imageUrl = apiImage;
+            imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(this.imageRef));
+            imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https:"));
+            imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
+            
+            string contentType = APIService.ContentType(imageUrl);
+            if(!APIService.DownloadImage(imageUrl, imageRef, contentType)) {
+                Debug.Log("Erro no Download da Imagem");
+                return;
             }
+
+            
         }
     }
 }
