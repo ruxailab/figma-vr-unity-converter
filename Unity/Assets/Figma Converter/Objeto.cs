@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.Networking;
+using System.Text;
 
 public class Object {
     
@@ -70,14 +66,27 @@ public class Object {
             imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(this.imageRef));
             imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https:"));
             imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
-            
+
             string contentType = APIService.ContentType(imageUrl);
-            if(!APIService.DownloadImage(imageUrl, imageRef, contentType)) {
+            string path = $"Assets/FigmaConverter/Images/{imageRef}.{contentType}";
+            
+            if(!APIService.DownloadImage(imageUrl, path)) {
                 Debug.Log("Erro no Download da Imagem");
                 return;
             }
-
-            
+            if(!System.IO.File.Exists(path)){
+                Debug.Log("Erro no Arquivo de Material");
+                return;
+            }
+            byte[] readImg = System.IO.File.ReadAllBytes(path);
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(readImg);
+            Material material = new Material(Shader.Find("Unlit/Texture"));
+            material.mainTexture = tex;
+            material.mainTextureScale = new Vector2(-1, -1);
+            System.IO.Directory.CreateDirectory("Assets/FigmaConverter/Materials");
+            AssetDatabase.CreateAsset(material, $"Assets/FigmaConverter/Materials/{imageRef}.mat");
+            this.gameObject.GetComponent<Renderer>().material = material;
         }
     }
 }

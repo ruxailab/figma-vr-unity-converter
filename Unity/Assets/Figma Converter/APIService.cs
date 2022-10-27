@@ -22,25 +22,24 @@ public class APIService {
         return reader.ReadToEnd();
     }
 
-    public static string ContentType(string url) {
+    public static string  ContentType(string url) {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         string type = response.ContentType;
         return type.Remove(0, type.IndexOf("/")+1);
     }
 
-    public static bool DownloadImage(string url, string imageRef, string ContentType) {        
+    public static bool DownloadImage(string url, string path) {        
         UnityWebRequest uwr = new UnityWebRequest(url, UnityWebRequest.kHttpVerbGET);
-        string path = Path.Combine("Assets/FigmaConverter/Images", $"{imageRef}.{ContentType}");
         uwr.downloadHandler = new DownloadHandlerFile(path);
         uwr.SendWebRequest();
+        while(!uwr.isDone){}
         if(uwr.isNetworkError) {
             return false;
         } else {
-           return true;
+            return true;
         }
     }
-
 }
 
 
