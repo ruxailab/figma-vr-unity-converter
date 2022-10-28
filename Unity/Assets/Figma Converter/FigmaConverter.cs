@@ -26,8 +26,8 @@ public class FigmaConverter : EditorWindow {
 
         if(GUILayout.Button("Apply")) {
             int cont = 0;
-            for(int i = documentID.Length-1; i > 0; i--){
-                if(documentID[i] == '/'){
+            for(int i = documentID.Length-1; i > 0; i--) {
+                if(documentID[i] == '/') {
                     cont++;
                     if(cont == 1)
                         documentID = documentID.Remove(i);
@@ -43,12 +43,12 @@ public class FigmaConverter : EditorWindow {
             string apiImage = APIService.GetImages(token, documentID);
 
             // Loop Pagina
-            for(int i = 0; i<apiDocument.document.children.Length; i++){
+            for(int i = 0; i<apiDocument.document.children.Length; i++) {
                 
                 GameObject empty = new GameObject("Page " + (i+1));
                 
                 // Loop Objeto
-                for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
+                for(int j = 0; j<apiDocument.document.children[i].children.Length; j++) {
                     apiObj = apiDocument.document.children[i].children[j];
                     Object obj = new Object(apiObj, apiImage, empty, j, escala);
                 }
