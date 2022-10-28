@@ -28,15 +28,22 @@ public class Object {
         }
         else {
             if(this.type == "RECTANGLE")
-            this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             else if(this.type == "ELLIPSE")
                 this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            else if(this.type == "FRAME") {
+                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                this.gameObject.name = "FRAME";
+                for(int i=0; i < apiObj.children.Length; i++) {
+                    ChildrenObj apiObjChildren = frame(apiObj,i);
+                    Object obj = new Object(apiObjChildren, apiImage, empty, (z+i+1), escala);
+                }
+            }
             setSize(apiObj);   // Define Altura e Largura
         }
         setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
         setColor(apiObj, apiImage);  // Define Cor e Textura
         this.gameObject.transform.parent = empty.transform;
-
         Debug.Log(this.type + " Criado com Sucesso");
         
     }
@@ -53,8 +60,8 @@ public class Object {
     }
     
     private void setSize(ChildrenObj apiObj) {
-        this.width = apiObj.absoluteBoundingBox.width/escala;
-        this.height = apiObj.absoluteBoundingBox.height/escala;
+        this.width = apiObj.absoluteBoundingBox.width/this.escala;
+        this.height = apiObj.absoluteBoundingBox.height/this.escala;
         this.size = new Vector3(this.width, this.height, 1);
         this.gameObject.transform.localScale = this.size;
     }
@@ -108,5 +115,32 @@ public class Object {
             AssetDatabase.CreateAsset(material, $"Assets/FigmaConverter/Materials/{imageRef}.mat");
             this.gameObject.GetComponent<Renderer>().material = material;
         }
+    }
+
+    public ChildrenObj frame(ChildrenObj apiObj, int i) {
+        ChildrenObj apiObjChildren = new ChildrenObj();
+        apiObjChildren.id = apiObj.children[i].id;
+        apiObjChildren.name = apiObj.children[i].name;
+        apiObjChildren.type = apiObj.children[i].type;
+        apiObjChildren.blendMode = apiObj.children[i].blendMode;
+        apiObjChildren.absoluteBoundingBox = apiObj.children[i].absoluteBoundingBox;
+        apiObjChildren.absoluteRenderBounds = apiObj.children[i].absoluteRenderBounds;
+        apiObjChildren.constraits = apiObj.children[i].constraits;
+        apiObjChildren.clipsContent = apiObj.children[i].clipsContent;
+        apiObjChildren.background = apiObj.children[i].background;
+        apiObjChildren.fills = apiObj.children[i].fills;
+        apiObjChildren.strokes = apiObj.children[i].strokes;
+        apiObjChildren.strokeWeight = apiObj.children[i].strokeWeight;
+        apiObjChildren.storekeAlign = apiObj.children[i].storekeAlign;
+        apiObjChildren.backgroundColor = apiObj.children[i].backgroundColor;
+        apiObjChildren.effects = apiObj.children[i].effects;
+        apiObjChildren.characters = apiObj.children[i].characters;
+        apiObjChildren.style = apiObj.children[i].style;
+        apiObjChildren.layoutVersion = apiObj.children[i].layoutVersion;
+        apiObjChildren.characterStyleOverrides = apiObj.children[i].characterStyleOverrides;
+        apiObjChildren.styleOverrideTable = apiObj.children[i].styleOverrideTable;
+        apiObjChildren.lineTypes = apiObj.children[i].lineTypes;
+        apiObjChildren.lineIndentations = apiObj.children[i].lineIndentations;
+        return apiObjChildren;
     }
 }
