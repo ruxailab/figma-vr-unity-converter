@@ -5,6 +5,7 @@ using System;
 
 public class FigmaConverter : EditorWindow {
 
+    int escala;
     string token;
     string documentID;
 
@@ -15,6 +16,10 @@ public class FigmaConverter : EditorWindow {
 
     private void OnGUI() {
         GUILayout.Label("Settings", EditorStyles.label);  //Escrita
+        escala = EditorGUILayout.IntField("Enter Scale:", escala);
+        EditorGUILayout.Space();
+        
+        GUILayout.Label("Account", EditorStyles.label);  //Escrita
         token = EditorGUILayout.TextField("Enter Token:", token);
         documentID = EditorGUILayout.TextField("Enter URL Document:", documentID);
         EditorGUILayout.Space();
@@ -44,9 +49,8 @@ public class FigmaConverter : EditorWindow {
                 
                 // Loop Objeto
                 for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
-                    
-                    ChildrenObj apiObj = apiDocument.document.children[i].children[j];
-                    Object obj = new Object(apiObj, apiImage, empty, j);
+                    apiObj = apiDocument.document.children[i].children[j];
+                    Object obj = new Object(apiObj, apiImage, empty, j, escala);
                 }
                 empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
             }
