@@ -28,47 +28,25 @@ public class FigmaConverter : EditorWindow {
                         documentID = documentID.Remove(i);
                     else if(cont == 2){
                         documentID = documentID.Remove(0,i);
-;
+                        break;
+                    }
+                }
+            }
+            
+            // Chamada da API
+            File apiDocument = APIService.GetDocument(token, documentID);
+            string apiImage = APIService.GetImages(token, documentID);
 
-                    /*
-                    else if(apiObj.type == "TEXT"){
-                        // Altura e Largura
-                        var width = apiObj.absoluteBoundingBox.width/100;
-                        var height = apiObj.absoluteBoundingBox.height/100;
-
-                        // Localização nos Eixos X e Y
-                        var x = (apiObj.absoluteBoundingBox.x/100) + (width/2); 
-                        var y = (api.document.children[0].children[j].absoluteBoundingBox.y/100) + (height/2);
-
-                        // Negrito e Italico
-                        var negrito = false;
-                        var italic = false;
-                        if(apiObj.style.fontWeight <= 700){
-                            negrito = true;
-                        } 
-                        if(apiObj.style.italic == true){
-                            italic = true;
-                        }
-
-                        // Criação do Objeto
-                        GameObject obj = new GameObject("3D Text");
-                        obj.transform.position = new Vector3(x,y,(float)(0.01*j));
-                        TextMesh textObj = obj.AddComponent<TextMesh>() as TextMesh;
-
-                        // Propriedades do Objeto
-                        textObj.text = apiObj.characters;
-                        textObj.fontSize = apiObj.style.fontSize/5;
-                        if(italic == true || negrito == true){
-                            textObj.fontStyle = FontStyle.BoldAndItalic;
-                        }
-                        else if(negrito == true){
-                            textObj.fontStyle = FontStyle.Bold;
-                        }
-                        else if(italic == true){
-                            textObj.fontStyle = FontStyle.Italic;
-                        }
-                        Debug.Log("3DText Criado");
-                    }*/
+            // Loop Pagina
+            for(int i = 0; i<apiDocument.document.children.Length; i++){
+                
+                GameObject empty = new GameObject("Page " + (i+1));
+                
+                // Loop Objeto
+                for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
+                    
+                    ChildrenObj apiObj = apiDocument.document.children[i].children[j];
+                    Object obj = new Object(apiObj, apiImage, empty, j);
                 }
                 empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
             }
