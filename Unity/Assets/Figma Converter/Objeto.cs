@@ -112,7 +112,7 @@ public class Object {
             byte[] readImg = System.IO.File.ReadAllBytes(path);
             Texture2D tex = new Texture2D(2, 2);
             tex.LoadImage(readImg);
-            Material material = new Material(Shader.Find("Unlit/Texture"));
+            Material material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
             material.mainTexture = tex;
             material.mainTextureScale = new Vector2(-1, -1);
             System.IO.Directory.CreateDirectory("Assets/FigmaConverter/Materials");
