@@ -4,7 +4,7 @@ using System.Text;
 
 public class Object {
     
-    public int escala;
+    private int escala;
     private string type;
     private float width;
     private float height;
@@ -20,35 +20,38 @@ public class Object {
     public Object(ChildrenObj apiObj, string apiImage, GameObject empty, int z, int escala) {
         this.escala = escala;
         this.type = apiObj.type;
-        if(this.type == "TEXT") {
-            this.gameObject = new GameObject("3D Text");
-            TextMesh textObj = this.gameObject.AddComponent<TextMesh>() as TextMesh;
-            setText(apiObj, textObj); // Define Texto e Estilo
-            this.gameObject.transform.Rotate(180.0f, 0f, 0f, Space.World);
-        }
-        else {
-            if(this.type == "RECTANGLE")
-                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            else if(this.type == "ELLIPSE")
-                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            else if(this.type == "FRAME") {
-                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                this.gameObject.name = "FRAME";
-                for(int i=0; i < apiObj.children.Length; i++) {
-                    ChildrenObj apiObjChildren = frame(apiObj,i);
-                    Object obj = new Object(apiObjChildren, apiImage, empty, (z+i+1), escala);
-                }
+        
+        if(this.type == "FRAME") {
+            this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            setSize(apiObj);
+            setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
+            for(int i=0; i < apiObj.children.Length; i++) {
+                ChildrenObj apiObjChildren = childrenFrame(apiObj.children[i]);
+                Object obj = new Object(apiObjChildren, apiImage, this.gameObject, (z+i+1), escala);
             }
-            setSize(apiObj);   // Define Altura e Largura
+        } else {
+            if(this.type == "TEXT")
+                createText(apiObj); // Define Texto e Estilo
+            else {
+                if(this.type == "RECTANGLE")
+                    this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                else if(this.type == "ELLIPSE")
+                    this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                setSize(apiObj);   // Define Altura e Largura
+            }
+            setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
         }
-        setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
+
         setColor(apiObj, apiImage);  // Define Cor e Textura
+        this.gameObject.name = apiObj.name;
         this.gameObject.transform.parent = empty.transform;
-        Debug.Log(this.type + " Criado com Sucesso");
+        Debug.Log(apiObj.name + " Criado com Sucesso");
         
     }
 
-    private void setText(ChildrenObj apiObj, TextMesh textObj) {
+    private void createText(ChildrenObj apiObj) {
+        this.gameObject = new GameObject("3D Text");
+        TextMesh textObj = this.gameObject.AddComponent<TextMesh>() as TextMesh;
         textObj.text = apiObj.characters;
         textObj.fontSize = apiObj.style.fontSize;
         if(apiObj.style.italic == true && apiObj.style.fontWeight >= 700)
@@ -57,6 +60,7 @@ public class Object {
             textObj.fontStyle = FontStyle.Bold;
         else if(apiObj.style.italic == true)
             textObj.fontStyle = FontStyle.Italic;
+        this.gameObject.transform.Rotate(180.0f, 0f, 0f, Space.World);
     }
     
     private void setSize(ChildrenObj apiObj) {
@@ -117,30 +121,30 @@ public class Object {
         }
     }
 
-    public ChildrenObj frame(ChildrenObj apiObj, int i) {
+    public ChildrenObj childrenFrame(ChildrenFrame apiObj) {
         ChildrenObj apiObjChildren = new ChildrenObj();
-        apiObjChildren.id = apiObj.children[i].id;
-        apiObjChildren.name = apiObj.children[i].name;
-        apiObjChildren.type = apiObj.children[i].type;
-        apiObjChildren.blendMode = apiObj.children[i].blendMode;
-        apiObjChildren.absoluteBoundingBox = apiObj.children[i].absoluteBoundingBox;
-        apiObjChildren.absoluteRenderBounds = apiObj.children[i].absoluteRenderBounds;
-        apiObjChildren.constraits = apiObj.children[i].constraits;
-        apiObjChildren.clipsContent = apiObj.children[i].clipsContent;
-        apiObjChildren.background = apiObj.children[i].background;
-        apiObjChildren.fills = apiObj.children[i].fills;
-        apiObjChildren.strokes = apiObj.children[i].strokes;
-        apiObjChildren.strokeWeight = apiObj.children[i].strokeWeight;
-        apiObjChildren.storekeAlign = apiObj.children[i].storekeAlign;
-        apiObjChildren.backgroundColor = apiObj.children[i].backgroundColor;
-        apiObjChildren.effects = apiObj.children[i].effects;
-        apiObjChildren.characters = apiObj.children[i].characters;
-        apiObjChildren.style = apiObj.children[i].style;
-        apiObjChildren.layoutVersion = apiObj.children[i].layoutVersion;
-        apiObjChildren.characterStyleOverrides = apiObj.children[i].characterStyleOverrides;
-        apiObjChildren.styleOverrideTable = apiObj.children[i].styleOverrideTable;
-        apiObjChildren.lineTypes = apiObj.children[i].lineTypes;
-        apiObjChildren.lineIndentations = apiObj.children[i].lineIndentations;
+        apiObjChildren.id = apiObj.id;
+        apiObjChildren.name = apiObj.name;
+        apiObjChildren.type = apiObj.type;
+        apiObjChildren.blendMode = apiObj.blendMode;
+        apiObjChildren.absoluteBoundingBox = apiObj.absoluteBoundingBox;
+        apiObjChildren.absoluteRenderBounds = apiObj.absoluteRenderBounds;
+        apiObjChildren.constraits = apiObj.constraits;
+        apiObjChildren.clipsContent = apiObj.clipsContent;
+        apiObjChildren.background = apiObj.background;
+        apiObjChildren.fills = apiObj.fills;
+        apiObjChildren.strokes = apiObj.strokes;
+        apiObjChildren.strokeWeight = apiObj.strokeWeight;
+        apiObjChildren.storekeAlign = apiObj.storekeAlign;
+        apiObjChildren.backgroundColor = apiObj.backgroundColor;
+        apiObjChildren.effects = apiObj.effects;
+        apiObjChildren.characters = apiObj.characters;
+        apiObjChildren.style = apiObj.style;
+        apiObjChildren.layoutVersion = apiObj.layoutVersion;
+        apiObjChildren.characterStyleOverrides = apiObj.characterStyleOverrides;
+        apiObjChildren.styleOverrideTable = apiObj.styleOverrideTable;
+        apiObjChildren.lineTypes = apiObj.lineTypes;
+        apiObjChildren.lineIndentations = apiObj.lineIndentations;
         return apiObjChildren;
     }
 }
