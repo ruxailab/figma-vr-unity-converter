@@ -3,7 +3,6 @@ using UnityEditor;
 using System.Text;
 
 public class Object {
-    
     private int escala;
     private string type;
     private float width;
@@ -20,15 +19,16 @@ public class Object {
     public Object(ChildrenObj apiObj, string apiImage, GameObject empty, int z, int escala) {
         this.escala = escala;
         this.type = apiObj.type;
-        
+
         if(this.type == "FRAME") {
             this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             setSize(apiObj);
             setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
-            for(int i=0; i < apiObj.children.Length; i++) {
+            Debug.Log(apiObj.children[0]);
+            /*for(int i=0; i < apiObj.children.Length; i++) {
                 ChildrenObj apiObjChildren = childrenFrame(apiObj.children[i]);
                 Object obj = new Object(apiObjChildren, apiImage, this.gameObject, (z+i+1), escala);
-            }
+            }*/
         } else {
             if(this.type == "TEXT")
                 createText(apiObj); // Define Texto e Estilo
@@ -41,12 +41,10 @@ public class Object {
             }
             setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
         }
-
         setColor(apiObj, apiImage);  // Define Cor e Textura
         this.gameObject.name = apiObj.name;
         this.gameObject.transform.parent = empty.transform;
         Debug.Log(apiObj.name + " Criado com Sucesso");
-        
     }
 
     private void createText(ChildrenObj apiObj) {

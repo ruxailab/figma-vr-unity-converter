@@ -75,7 +75,9 @@ public class ChildrenFrame {
     public string id;
     public string name;
     public string type;
+    public string scrollBehavior;
     public string blendMode;
+    // public ChildrenFrame[] children;
     public Absolute absoluteBoundingBox;
     public Absolute absoluteRenderBounds;
     public Constraints constraits;
@@ -83,9 +85,12 @@ public class ChildrenFrame {
     public Fills[] background;
     public Fills[] fills;
     public string[] strokes;
+    public float cornerRadius;
     public float strokeWeight;
     public string storekeAlign;
     public Color backgroundColor;
+    // public LayoutGrids[] layoutGrids;
+    public ExportSettings[] exportSettings;
     public string[] effects;
     public string characters;
     public Style style;
@@ -101,6 +106,7 @@ public class ChildrenObj {
     public string id;
     public string name;
     public string type;
+    public string scrollBehavior;
     public string blendMode;
     public ChildrenFrame[] children;
     public Absolute absoluteBoundingBox;
@@ -110,9 +116,12 @@ public class ChildrenObj {
     public Fills[] background;
     public Fills[] fills;
     public string[] strokes;
+    public float cornerRadius;
     public float strokeWeight;
     public string storekeAlign;
     public Color backgroundColor;
+    // public LayoutGrids[] layoutGrids;
+    public ExportSettings[] exportSettings;
     public string[] effects;
     public string characters;
     public Style style;
@@ -128,6 +137,7 @@ public class ChildrenPage {
     public string id;
     public string name;
     public string type;
+    public string scrollBehavior;
     public ChildrenObj[] children;
     public Color backgroundColor;
     public string prototypeStartNodeID;
@@ -141,6 +151,7 @@ public class Document {
     public string id;
     public string name;
     public string type;
+    public string scrollBehavior;
     public ChildrenPage[] children;
 }
 
