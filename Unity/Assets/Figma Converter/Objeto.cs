@@ -20,26 +20,28 @@ public class Object {
         this.escala = escala;
         this.type = apiObj.type;
 
-        if(this.type == "FRAME") {
-            this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            setSize(apiObj);
-            setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
-            Debug.Log(apiObj.children[0]);
-            /*for(int i=0; i < apiObj.children.Length; i++) {
-                ChildrenObj apiObjChildren = childrenFrame(apiObj.children[i]);
-                Object obj = new Object(apiObjChildren, apiImage, this.gameObject, (z+i+1), escala);
-            }*/
-        } else {
-            if(this.type == "TEXT")
-                createText(apiObj); // Define Texto e Estilo
-            else {
-                if(this.type == "RECTANGLE")
-                    this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                else if(this.type == "ELLIPSE")
-                    this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                setSize(apiObj);   // Define Altura e Largura
-            }
-            setPosition(apiObj, z);  // Define Localização nos Eixos X e Y
+        switch (this.type) {
+            case "FRAME":
+                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                setSize(apiObj);
+                setPosition(apiObj, z);
+                for(int i=0; i < apiObj.children.Length; i++) {
+                    Object obj = new Object(apiObj.children[i], apiImage, this.gameObject, (z+i+1), escala);
+                }
+                break;
+            case "TEXT":
+                createText(apiObj);
+                break;
+            case "RECTANGLE":
+                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                setSize(apiObj);
+                setPosition(apiObj, z);
+                break;
+            case "ELLIPSE":
+                this.gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                setSize(apiObj);
+                setPosition(apiObj, z);
+                break;
         }
         setColor(apiObj, apiImage);  // Define Cor e Textura
         this.gameObject.name = apiObj.name;
@@ -117,32 +119,5 @@ public class Object {
             AssetDatabase.CreateAsset(material, $"Assets/FigmaConverter/Materials/{imageRef}.mat");
             this.gameObject.GetComponent<Renderer>().material = material;
         }
-    }
-
-    public ChildrenObj childrenFrame(ChildrenFrame apiObj) {
-        ChildrenObj apiObjChildren = new ChildrenObj();
-        apiObjChildren.id = apiObj.id;
-        apiObjChildren.name = apiObj.name;
-        apiObjChildren.type = apiObj.type;
-        apiObjChildren.blendMode = apiObj.blendMode;
-        apiObjChildren.absoluteBoundingBox = apiObj.absoluteBoundingBox;
-        apiObjChildren.absoluteRenderBounds = apiObj.absoluteRenderBounds;
-        apiObjChildren.constraits = apiObj.constraits;
-        apiObjChildren.clipsContent = apiObj.clipsContent;
-        apiObjChildren.background = apiObj.background;
-        apiObjChildren.fills = apiObj.fills;
-        apiObjChildren.strokes = apiObj.strokes;
-        apiObjChildren.strokeWeight = apiObj.strokeWeight;
-        apiObjChildren.storekeAlign = apiObj.storekeAlign;
-        apiObjChildren.backgroundColor = apiObj.backgroundColor;
-        apiObjChildren.effects = apiObj.effects;
-        apiObjChildren.characters = apiObj.characters;
-        apiObjChildren.style = apiObj.style;
-        apiObjChildren.layoutVersion = apiObj.layoutVersion;
-        apiObjChildren.characterStyleOverrides = apiObj.characterStyleOverrides;
-        apiObjChildren.styleOverrideTable = apiObj.styleOverrideTable;
-        apiObjChildren.lineTypes = apiObj.lineTypes;
-        apiObjChildren.lineIndentations = apiObj.lineIndentations;
-        return apiObjChildren;
     }
 }
