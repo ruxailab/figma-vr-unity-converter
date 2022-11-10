@@ -16,7 +16,7 @@ public class Object {
     private Color32 color;
     private GameObject gameObject;
 
-    public Object(ChildrenObj apiObj, string apiImage, GameObject empty, int z, int escala) {
+    public Object(ObjectProperty apiObj, string apiImage, GameObject empty, int z, int escala) {
         this.escala = escala;
         this.type = apiObj.type;
 
@@ -49,7 +49,7 @@ public class Object {
         Debug.Log(apiObj.name + " Criado com Sucesso");
     }
 
-    private void createText(ChildrenObj apiObj) {
+    private void createText(ObjectProperty apiObj) {
         this.gameObject = new GameObject("3D Text");
         TextMesh textObj = this.gameObject.AddComponent<TextMesh>() as TextMesh;
         textObj.text = apiObj.characters;
@@ -63,21 +63,21 @@ public class Object {
         this.gameObject.transform.Rotate(180.0f, 0f, 0f, Space.World);
     }
     
-    private void setSize(ChildrenObj apiObj) {
+    private void setSize(ObjectProperty apiObj) {
         this.width = apiObj.absoluteBoundingBox.width/this.escala;
         this.height = apiObj.absoluteBoundingBox.height/this.escala;
         this.size = new Vector3(this.width, this.height, 1);
         this.gameObject.transform.localScale = this.size;
     }
 
-    private void setPosition(ChildrenObj apiObj,int z) {
+    private void setPosition(ObjectProperty apiObj,int z) {
         this.x = (apiObj.absoluteBoundingBox.x/escala) + (this.width/2);
         this.y = (apiObj.absoluteBoundingBox.y/escala) + (this.height/2);
         this.position = new Vector3(this.x, this.y, (float)(0.01*z));
         this.gameObject.transform.position = this.position;
     }
 
-    private void setColor(ChildrenObj apiObj, string apiImage) {
+    private void setColor(ObjectProperty apiObj, string apiImage) {
         this.colorType = apiObj.fills[0].type;
         if(this.colorType == "SOLID") {
             float r = apiObj.fills[0].color.r;

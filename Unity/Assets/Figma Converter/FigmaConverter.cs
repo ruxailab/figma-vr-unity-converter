@@ -50,7 +50,7 @@ public class FigmaConverter : EditorWindow {
                 // Loop Objeto
                 for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
                     
-                    ChildrenObj apiObj = apiDocument.document.children[i].children[j];
+                    ObjectProperty apiObj = apiDocument.document.children[i].children[j];
                     Object obj = new Object(apiObj, apiImage, empty, j, escala);
                 }
                 empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
