@@ -22,7 +22,7 @@ public class APIService {
         return reader.ReadToEnd();
     }
 
-    public static string  ContentType(string url) {
+    public static string ContentType(string url) {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         string type = response.ContentType;
@@ -34,11 +34,7 @@ public class APIService {
         uwr.downloadHandler = new DownloadHandlerFile(path);
         uwr.SendWebRequest();
         while(!uwr.isDone){}
-        if(uwr.isNetworkError) {
-            return false;
-        } else {
-            return true;
-        }
+        return uwr.isNetworkError ? false : true;
     }
 }
 
