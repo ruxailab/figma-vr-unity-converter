@@ -2,59 +2,79 @@ using UnityEngine;
 using UnityEditor;
 
 public class Objects {
-    public ObjectProperty obj;
-    public string apiImage;
-    public int z;
-    public int escala;
-    private string type;
+    private ObjectProperty obj;
+    public ObjectProperty Obj { get => obj; set => obj = value; }
+    private string apiImage;
+    public string ApiImage { get => apiImage; set => apiImage = value; }
+    private int z;
+    public int Z { get => z; set => z = value; }
+    private int escala;
+    public int Escala { get => escala; set => escala = value; }
     private float width;
+    public float Width { get => width; set => width = value; }
     private float height;
+    public float Height { get => height; set => height = value; }
     private Vector3 size;
-    private float x;
-    private float y;
+    public Vector3 Size { get => size; set => size = value; }
+    private float eixoX;
+    public float EixoX { get => eixoX; set => eixoX = value; }
+    private float eixoY;
+    public float EixoY { get => eixoY; set => eixoY = value; }
     private Vector3 position;
+    public Vector3 Position { get => position; set => position = value; }
     private string colorType;
+    public string ColorType { get => colorType; set => colorType = value; }
     private string imageRef;
+    public string ImageRef { get => imageRef; set => imageRef = value; }
     private Color32 color;
-    public GameObject gameObject;
+    public Color32 Color { get => color; set => color = value; }
+    private GameObject gameObject;
+    public GameObject GameObject { get => gameObject; set => gameObject = value; }
+
+    public Objects(ObjectProperty obj, string apiImage, int z, int escala) {
+        Obj = obj;
+        ApiImage = apiImage;
+        Z = z;
+        Escala = escala;
+    }
 
     public void setSize() {
-        this.width = obj.absoluteBoundingBox.width/this.escala;
-        this.height = obj.absoluteBoundingBox.height/this.escala;
-        this.size = new Vector3(this.width, this.height, 1);
-        this.gameObject.transform.localScale = this.size;
+        Width = Obj.absoluteBoundingBox.width/Escala;
+        Height = Obj.absoluteBoundingBox.height/Escala;
+        Size = new Vector3(Width, Height, 1);
+        GameObject.transform.localScale = Size;
     }
 
     public void setPosition() {
-        this.x = (obj.absoluteBoundingBox.x/escala) + (this.width/2);
-        this.y = (obj.absoluteBoundingBox.y/escala) + (this.height/2);
-        this.position = new Vector3(this.x, this.y, (float)(0.01*z));
-        this.gameObject.transform.position = this.position;
+        EixoX = (Obj.absoluteBoundingBox.x/Escala) + (Width/2);
+        EixoY = (Obj.absoluteBoundingBox.y/Escala) + (Height/2);
+        Position = new Vector3(EixoX, EixoY, (float)(0.01*Z));
+        GameObject.transform.position = Position;
     }
 
     public void setColor() {
-        this.colorType = obj.fills[0].type;
-        if(this.colorType == "SOLID") {
+        ColorType = obj.fills[0].type;
+        if(ColorType == "SOLID") {
             float r = obj.fills[0].color.r;
             float g = obj.fills[0].color.g;
             float b = obj.fills[0].color.b;
             float a = obj.fills[0].color.a;
-            this.color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
+            Color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
 
             // Variavel teporaria para inserir a cor do Objeto
-            Material tempMaterial = new Material(this.gameObject.GetComponent<Renderer>().sharedMaterial);
+            Material tempMaterial = new Material(GameObject.GetComponent<Renderer>().sharedMaterial);
             tempMaterial.color = this.color;
-            this.gameObject.GetComponent<Renderer>().sharedMaterial = tempMaterial;
+            GameObject.GetComponent<Renderer>().sharedMaterial = tempMaterial;
         }
-        else if(this.colorType == "IMAGE") {
-            this.imageRef = obj.fills[0].imageRef;
+        else if(ColorType == "IMAGE") {
+            ImageRef = obj.fills[0].imageRef;
             string imageUrl = apiImage;
-            imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(this.imageRef));
+            imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(ImageRef));
             imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https:"));
             imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
 
             string contentType = APIService.ContentType(imageUrl);
-            string path = $"Assets/FigmaConverter/Images/{imageRef}.{contentType}";
+            string path = $"Assets/Figma Converter/Images/{ImageRef}.{contentType}";
             
             if(!APIService.DownloadImage(imageUrl, path)) {
                 Debug.Log("Erro no Download da Imagem");
@@ -70,9 +90,9 @@ public class Objects {
             Material material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
             material.mainTexture = tex;
             material.mainTextureScale = new Vector2(-1, -1);
-            System.IO.Directory.CreateDirectory("Assets/FigmaConverter/Materials");
-            AssetDatabase.CreateAsset(material, $"Assets/FigmaConverter/Materials/{imageRef}.mat");
-            this.gameObject.GetComponent<Renderer>().material = material;
+            System.IO.Directory.CreateDirectory("Assets/Figma Converter/Materials");
+            AssetDatabase.CreateAsset(material, $"Assets/Figma Converter/Materials/{ImageRef}.mat");
+            GameObject.GetComponent<Renderer>().material = material;
         }
     }
 }
