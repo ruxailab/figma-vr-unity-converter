@@ -2,37 +2,33 @@ using UnityEngine;
 
 public class Text : Objects{
 
-    public Text(ObjectProperty obj, string apiImage, int z) {
-        this.obj = obj;
-        this.apiImage = apiImage;
-        this.z = z;
-    }
+    public Text(ObjectProperty obj, string apiImage, int z) : base(obj, apiImage, z, 0){}
     public GameObject createObject() {
-        this.gameObject = new GameObject("3D Text");
-        TextMesh textMesh = this.gameObject.AddComponent<TextMesh>() as TextMesh;
+        GameObject = new GameObject("3D Text");
+        TextMesh textMesh = GameObject.AddComponent<TextMesh>() as TextMesh;
         setCharacters(textMesh);
         setFontSize(textMesh);
         italicAndNegrito(textMesh);
-        this.gameObject.transform.Rotate(180.0f, 0f, 0f, Space.World);
+        GameObject.transform.Rotate(180.0f, 0f, 0f, Space.World);
         setPosition();
         setColor();
-        return this.gameObject;
+        return GameObject;
     }
 
     public void italicAndNegrito(TextMesh textMesh) {
-        if(obj.style.italic == true && obj.style.fontWeight >= 700)
+        if(Obj.style.italic == true && Obj.style.fontWeight >= 700)
             textMesh.fontStyle = FontStyle.BoldAndItalic;
-        else if(obj.style.fontWeight >= 700)
+        else if(Obj.style.fontWeight >= 700)
             textMesh.fontStyle = FontStyle.Bold;
-        else if(obj.style.italic == true)
+        else if(Obj.style.italic == true)
             textMesh.fontStyle = FontStyle.Italic;
     }
 
     public void setFontSize(TextMesh textMesh) {
-        textMesh.fontSize = obj.style.fontSize;
+        textMesh.fontSize = Obj.style.fontSize;
     }
 
     public void setCharacters(TextMesh textMesh) {
-        textMesh.text = obj.characters;
+        textMesh.text = Obj.characters;
     }
 }
