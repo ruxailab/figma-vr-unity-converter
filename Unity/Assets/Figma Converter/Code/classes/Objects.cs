@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public class Objects {
+public abstract class Objects {
     private ObjectProperty obj;
     public ObjectProperty Obj { get => obj; set => obj = value; }
     private string apiImage;
@@ -14,20 +14,6 @@ public class Objects {
     public float Width { get => width; set => width = value; }
     private float height;
     public float Height { get => height; set => height = value; }
-    private Vector3 size;
-    public Vector3 Size { get => size; set => size = value; }
-    private float eixoX;
-    public float EixoX { get => eixoX; set => eixoX = value; }
-    private float eixoY;
-    public float EixoY { get => eixoY; set => eixoY = value; }
-    private Vector3 position;
-    public Vector3 Position { get => position; set => position = value; }
-    private string colorType;
-    public string ColorType { get => colorType; set => colorType = value; }
-    private string imageRef;
-    public string ImageRef { get => imageRef; set => imageRef = value; }
-    private Color32 color;
-    public Color32 Color { get => color; set => color = value; }
     private GameObject gameObject;
     public GameObject GameObject { get => gameObject; set => gameObject = value; }
 
@@ -41,40 +27,41 @@ public class Objects {
     public void setSize() {
         Width = Obj.absoluteBoundingBox.width/Escala;
         Height = Obj.absoluteBoundingBox.height/Escala;
-        Size = new Vector3(Width, Height, 1);
-        GameObject.transform.localScale = Size;
+        Vector3 size = new Vector3(Width, Height, 1);
+        GameObject.transform.localScale = size;
     }
 
     public void setPosition() {
-        EixoX = (Obj.absoluteBoundingBox.x/Escala) + (Width/2);
-        EixoY = (Obj.absoluteBoundingBox.y/Escala) + (Height/2);
-        Position = new Vector3(EixoX, EixoY, (float)(0.01*Z));
-        GameObject.transform.position = Position;
+        float eixoX = (Obj.absoluteBoundingBox.x/Escala) + (Width/2);
+        float eixoY = (Obj.absoluteBoundingBox.y/Escala) + (Height/2);
+        Vector3 position = new Vector3(eixoX, eixoY, (float)(0.01*Z));
+        GameObject.transform.position = position;
     }
 
     public void setColor() {
-        ColorType = obj.fills[0].type;
-        if(ColorType == "SOLID") {
-            float r = obj.fills[0].color.r;
-            float g = obj.fills[0].color.g;
-            float b = obj.fills[0].color.b;
-            float a = obj.fills[0].color.a;
-            Color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
+        Debug.Log(Obj.fills[0].type);
+        string colorType = Obj.fills[0].type;
+        if(colorType == "SOLID") {
+            float r = Obj.fills[0].color.r;
+            float g = Obj.fills[0].color.g;
+            float b = Obj.fills[0].color.b;
+            float a = Obj.fills[0].color.a;
+            Color32 color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
 
             // Variavel teporaria para inserir a cor do Objeto
             Material tempMaterial = new Material(GameObject.GetComponent<Renderer>().sharedMaterial);
-            tempMaterial.color = this.color;
+            tempMaterial.color = color;
             GameObject.GetComponent<Renderer>().sharedMaterial = tempMaterial;
         }
-        else if(ColorType == "IMAGE") {
-            ImageRef = obj.fills[0].imageRef;
-            string imageUrl = apiImage;
-            imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(ImageRef));
+        else if(colorType == "IMAGE") {
+            string imageRef = Obj.fills[0].imageRef;
+            string imageUrl = ApiImage;
+            imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(imageRef));
             imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https:"));
             imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
 
             string contentType = APIService.ContentType(imageUrl);
-            string path = $"Assets/Figma Converter/Images/{ImageRef}.{contentType}";
+            string path = $"Assets/Figma Converter/Images/{imageRef}.{contentType}";
             
             if(!APIService.DownloadImage(imageUrl, path)) {
                 Debug.Log("Erro no Download da Imagem");
@@ -91,7 +78,7 @@ public class Objects {
             material.mainTexture = tex;
             material.mainTextureScale = new Vector2(-1, -1);
             System.IO.Directory.CreateDirectory("Assets/Figma Converter/Materials");
-            AssetDatabase.CreateAsset(material, $"Assets/Figma Converter/Materials/{ImageRef}.mat");
+            AssetDatabase.CreateAsset(material, $"Assets/Figma Converter/Materials/{imageRef}.mat");
             GameObject.GetComponent<Renderer>().material = material;
         }
     }

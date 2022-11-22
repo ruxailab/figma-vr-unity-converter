@@ -37,9 +37,7 @@ public class Build {
         setParent();
         Debug.Log(obj.name + " Criado com Sucesso");
     }
-
-
-
+    
     private void setParent() {
         gameObject.transform.parent = parent.transform;
     }

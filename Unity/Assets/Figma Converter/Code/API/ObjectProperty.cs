@@ -12,7 +12,7 @@ public class ObjectProperty {
     public bool clipsContent;
     public Fills[] background;
     public Fills[] fills;
-    public string[] strokes;
+    public Fills[] strokes;
     public float cornerRadius;
     public float strokeWeight;
     public string storekeAlign;
