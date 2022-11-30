@@ -5,7 +5,7 @@ public class CoreBuilder {
     public int xSize = 10;
     public int ySize = 10;
     public int zSize = 10;
-    private int roundness = 2;
+    private int roundness = 0;
     private Vector3[] vertices;
     private Mesh mesh;
     private Vector3[] normals;
@@ -48,7 +48,7 @@ public class CoreBuilder {
             }
         }        
         for(int z = 1; z < zSize; z++) {
-            for (int x = 1; x < xSize; x++) {
+            for(int x = 1; x < xSize; x++) {
                 SetVertex(index++, x, ySize, z);
             }
         }

@@ -4,6 +4,8 @@ using UnityEditor;
 public abstract class Object {
     public ObjectProperty obj;
     public string apiImage;
+    public float eixoX;
+    public float eixoY;
     public float eixoZ;
     public int escala;
     public float width;
@@ -19,21 +21,21 @@ public abstract class Object {
     }
 
     public void setSize() {
-        width = (obj.absoluteBoundingBox.width/escala)/escalaRadius;
+        width = (obj.absoluteBoundingBox.width/escala) / escalaRadius;
         height = (obj.absoluteBoundingBox.height/escala) / escalaRadius;
-        Vector3 size = new Vector3(width, height, /*(float)1.0f/escalaRadius*/0.1f);
+        Vector3 size = new Vector3(width, height, (float)1.0f/escalaRadius);
         gameObject.transform.localScale = size;
     }
 
     public void setPosition() {
-        float eixoX = (obj.absoluteBoundingBox.x/escala) + (width/2);
-        float eixoY = (obj.absoluteBoundingBox.y/escala) + (height/2);
+        eixoX = (obj.absoluteBoundingBox.x/escala) + (width/2);
+        eixoY = (obj.absoluteBoundingBox.y/escala) + (height/2);
         Vector3 position = new Vector3(eixoX, eixoY, eixoZ);
         gameObject.transform.position = position;
     }
 
     public void setColor() {
-        int i =obj.fills.Length;
+        int i = obj.fills.Length;
         if(i == 0) {
             gameObject.GetComponent<Renderer>().enabled = false;
             return;

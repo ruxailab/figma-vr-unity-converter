@@ -33,7 +33,7 @@ public class Builder {
                 break;
         }
         setName();
-        // setParent();
+        setParent();
         Debug.Log(obj.name + " Criado com Sucesso");
     }
 
