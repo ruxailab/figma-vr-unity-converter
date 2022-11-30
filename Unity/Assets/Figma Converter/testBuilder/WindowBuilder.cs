@@ -12,13 +12,8 @@ public class WindowBuilder : EditorWindow {
 
     private void OnGUI() {
         if(GUILayout.Button("Apply")) {
-            // try {
-                var core = new CoreBuilder();
-                core.Start();
-            // }
-            // catch (Exception e){
-                // Debug.Log(e);
-            // }
+            var core = new CoreBuilder();
+            core.Start();
         }
     }
 }

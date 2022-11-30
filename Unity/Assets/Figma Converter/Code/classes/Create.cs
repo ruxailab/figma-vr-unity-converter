@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoreBuilder {
+public class Create {
     public int xSize = 10;
     public int ySize = 10;
     public int zSize = 10;
-    private int roundness = 2;
+    private float roundness;
     private Vector3[] vertices;
     private Mesh mesh;
     private Vector3[] normals;
 
-    public GameObject Start() {
+    public GameObject createCubo(float roundness) {
+        this.roundness = roundness;
         GameObject gameObject = new GameObject("Cubo");
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
@@ -18,7 +19,7 @@ public class CoreBuilder {
         mesh = new Mesh();
         CreateVertices();
         CreateTriangles();
-        meshFilter.mesh = mesh;
+        meshFilter.mesh = mesh; 
         return gameObject;
     }
 

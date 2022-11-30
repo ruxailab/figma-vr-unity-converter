@@ -26,9 +26,10 @@ public class Core {
             GameObject empty = new GameObject("Page " + (i+1));
                     
             // Loop Objeto
-            for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
+            float z = 0;
+            for(int j = 0; j<apiDocument.document.children[i].children.Length; j++, z += 0.1f){
                 ObjectProperty apiObj = apiDocument.document.children[i].children[j];
-                Build objeto = new Build(apiObj, apiImage, empty, j, escala);
+                Builder objeto = new Builder(apiObj, apiImage, empty, z, escala);
                 objeto.createObject();
             }
             empty.transform.Rotate(180.0f, 0f, 0f, Space.World);

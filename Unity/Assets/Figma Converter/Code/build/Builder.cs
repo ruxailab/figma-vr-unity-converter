@@ -1,16 +1,15 @@
 using UnityEngine;
-using UnityEditor;
 using System.Text;
 
-public class Build {
+public class Builder {
     private ObjectProperty obj;
     private string apiImage;
     private GameObject parent;
-    private int z;
+    private float z;
     private int escala;
     private GameObject gameObject;
 
-    public Build(ObjectProperty apiObj, string apiImage, GameObject parent, int z, int escala) {
+    public Builder(ObjectProperty apiObj, string apiImage, GameObject parent, float z, int escala) {
         this.obj = apiObj;
         this.apiImage = apiImage;
         this.parent = parent;
@@ -33,9 +32,13 @@ public class Build {
                 gameObject = new Ellipse(obj, apiImage, z, escala).createObject();
                 break;
         }
-        gameObject.name = obj.name;
-        setParent();
+        setName();
+        // setParent();
         Debug.Log(obj.name + " Criado com Sucesso");
+    }
+
+    private void setName() {
+        gameObject.name = obj.name;
     }
     
     private void setParent() {

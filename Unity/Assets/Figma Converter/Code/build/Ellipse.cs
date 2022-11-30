@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Ellipse : Objects {
+public class Ellipse : Object {
     
-    public Ellipse(ObjectProperty obj, string apiImage, int z, int escala) : base(obj, apiImage, z, escala){}
+    public Ellipse(ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){}
     
     public GameObject createObject() {
-        GameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         setSize();
         setPosition();
         setColor();
-        return GameObject;
+        return gameObject;
     }
 }

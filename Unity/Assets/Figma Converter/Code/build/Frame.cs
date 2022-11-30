@@ -1,18 +1,29 @@
 using UnityEngine;
 
-public class Frame : Objects {
+public class Frame : Object {
     
-    public Frame(ObjectProperty obj, string apiImage, int z, int escala) : base(obj, apiImage, z, escala){}
+    public Frame(ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){}
 
     public GameObject createObject(){
-        GameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cornerRadius();
         setSize();
         setPosition();
         setColor();
-        for(int i=0; i < Obj.children.Length; i++) {
-            Build objeto = new Build(Obj.children[i], ApiImage, GameObject, (Z+i+1), Escala);
+        float z = 0;
+        for(int i = 0; i < obj.children.Length; i++, z += 0.1f) {
+            Builder objeto = new Builder(obj.children[i], apiImage, gameObject, (eixoZ+z), escala);
             objeto.createObject();
         }
-        return GameObject;
+        return gameObject;
+    }
+
+    public void cornerRadius() {
+        if(obj.cornerRadius == 0){
+            gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            return;
+        }
+        Create create = new Create();
+        gameObject = create.createCubo((obj.cornerRadius/10));
+        escalaRadius = 10;
     }
 }
