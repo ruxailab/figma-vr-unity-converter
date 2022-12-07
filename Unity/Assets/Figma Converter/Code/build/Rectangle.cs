@@ -18,6 +18,6 @@ public class Rectangle : Object {
             return;
         }
         Create create = new Create();
-        gameObject = create.createCubo((obj.cornerRadius/5));
+        create.createCubo((obj.cornerRadius/40), obj.strokeWeight-1, obj.absoluteBoundingBox.height);
     }
 }

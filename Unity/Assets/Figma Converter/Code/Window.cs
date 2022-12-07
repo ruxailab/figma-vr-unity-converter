@@ -25,12 +25,12 @@ public class Window : EditorWindow {
         EditorGUILayout.Space();
 
         if(GUILayout.Button("Apply")) {
-            try {
+            // try {
                 Core.Start(token, documentID, escala);
-            }
-            catch (Exception e){
-                Debug.Log(e);
-            }
+            // }
+            // catch (Exception e){
+                // Debug.Log(e);
+            // }
         }
     }
 }

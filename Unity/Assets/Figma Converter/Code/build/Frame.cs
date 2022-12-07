@@ -23,7 +23,7 @@ public class Frame : Object {
             return;
         }
         Create create = new Create();
-        gameObject = create.createCubo((obj.cornerRadius/10));
-        escalaRadius = 10;
+        gameObject = create.createCubo((obj.cornerRadius/40), obj.strokeWeight-1, obj.absoluteBoundingBox.height);
+        escalaRadius = 40;
     }
 }
