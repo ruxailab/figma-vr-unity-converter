@@ -17,7 +17,7 @@ public class Rectangle : Object {
             gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             return;
         }
-        Create create = new Create();
-        create.createCubo((obj.cornerRadius/40), obj.strokeWeight-1, obj.absoluteBoundingBox.height);
+        Create create = new Create(obj.cornerRadius/40, obj.strokeWeight-1, obj.absoluteBoundingBox.height);
+        create.createCubo();
     }
 }

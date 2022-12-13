@@ -1,18 +1,20 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CoreBuilder {
-    private int xSize = 40;
-    private int ySize = 40;
-    private int zSize = 40;
+    private int xSize = 350;
+    private int ySize = 80;
+    private int zSize = 10;
     private Vector3[] vertices;
     private Mesh mesh;
     private Vector3[] normals;
     private int tB;
-    private int border = 0;
-    private int roundness = 0;
+    private int border = 2;
+    private int roundness;
 
     public void Start() {
+        this.roundness = Convert.ToInt32(3.730018);
         Material[] materials = new Material[2];
         GameObject gameObject = new GameObject("Cubo");
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -87,7 +89,6 @@ public class CoreBuilder {
         int quads = (xSize * ySize + xSize * zSize + ySize * zSize) * 2;
         int[] triangles = new int [quads * 6];
         int[] trianglesBorder = new int[triangles.Length];
-        Debug.Log(triangles.Length);
         int ring = (xSize + zSize) * 2;
         int t = 0, v = 0;
         tB = 0;
@@ -140,6 +141,8 @@ public class CoreBuilder {
         mesh.subMeshCount = 2;
         mesh.SetTriangles(triangles, 0);
 		mesh.SetTriangles(trianglesBorder, 1);
+        // mesh.triangles = triangles;
+        // mesh.triangles = trianglesBorder;
     }
 
     private int CreateTopFace (int[] triangles, int[] trianglesBorder,int t, int ring) {

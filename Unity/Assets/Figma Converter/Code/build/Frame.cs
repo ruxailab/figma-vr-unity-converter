@@ -4,7 +4,7 @@ public class Frame : Object {
 
     public Frame(ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){}
 
-    public GameObject createObject(){
+    public GameObject createObject() {
         cornerRadius();
         setSize();
         setPosition();
@@ -22,8 +22,8 @@ public class Frame : Object {
             gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             return;
         }
-        Create create = new Create();
-        gameObject = create.createCubo((obj.cornerRadius/40), obj.strokeWeight-1, obj.absoluteBoundingBox.height);
+        Create create = new Create(obj.cornerRadius, obj.strokeWeight-1, obj.absoluteBoundingBox.height);
+        gameObject = create.createCubo();
         escalaRadius = 40;
     }
 }

@@ -13,13 +13,14 @@ public class Create {
     private int border = 0;
     private float roundness = 0;
 
-    public GameObject createCubo(float roundness, float border, float height) {
+    public Create(float roundness, float border, float height) {
         this.roundness = roundness;
         if(border > height/2)
             this.border = xSize/2;
         else
             this.border = Convert.ToInt32(Math.Round(0+(border-0)*((xSize/2)-0)/((height/2)-0)));
-
+    }
+    public GameObject createCubo() {
         Material[] materials = new Material[2];
         GameObject gameObject = new GameObject("Cubo");
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -57,12 +58,14 @@ public class Create {
                 SetVertex(index++, 0, y, z);
         }        
         for(int z = 1; z < zSize; z++) {
-            for(int x = 1; x < xSize; x++)
+            for(int x = 1; x < xSize; x++) {
                 SetVertex(index++, x, ySize, z);
+            }
         }
         for(int z = 1; z< zSize; z++) {
-            for(int x = 1; x < xSize; x++)
+            for(int x = 1; x < xSize; x++) {
                 SetVertex(index++, x, 0, z);
+            }
         }
         mesh.vertices = vertices;
     }
@@ -221,6 +224,7 @@ public class Create {
 		    t = SetQuad(triangles, t, vMid, v + 2, v, v + 1);
         }
 
+
 		int vMin = ring - 2;
 		vMid -= xSize - 2;
 		int vMax = v + 2;
@@ -258,6 +262,7 @@ public class Create {
             }
             t = SetQuad(triangles, t, vTop, vTop - 1, vMid, vTop - 2);
         }
+		
 		return t;
 	}
 
