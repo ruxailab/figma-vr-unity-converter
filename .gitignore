@@ -4,10 +4,8 @@
 /Unity/Packages
 /Unity/ProjectSettings
 /Unity/Temp
-/Image Unity/Assets/Scenes
-/Image Unity/Library
-/Image Unity/Logs
-/Image Unity/Packages
-/Image Unity/ProjectSettings
-/Image Unity/Temp
-/Image Unity/Assets/Scenes
+/Unity/Scenes
+/Unity/ProBuilder Data
+/Image Unity
+/Figma-API.md
+/Unity.md
