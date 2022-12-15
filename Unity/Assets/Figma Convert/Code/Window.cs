@@ -9,9 +9,9 @@ public class Window : EditorWindow {
     string token;
     string documentID;
 
-    [MenuItem("Tools/Figma Converter")] // Aba onde irá achar a ferramenta
+    [MenuItem("Tools/Figma Convert")] // Aba onde irá achar a ferramenta
     public static void ShowWindow() { //Mostrar janela da ferramenta
-        GetWindow<Window>("Figma Converter");  //Title da ferramenta
+        GetWindow<Window>("Figma Convert");  //Title da ferramenta
     }
 
     private void OnGUI() {

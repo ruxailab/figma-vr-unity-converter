@@ -23,7 +23,7 @@ public abstract class Object {
     public void setSize() {
         width = (obj.absoluteBoundingBox.width/escala) / escalaRadius;
         height = (obj.absoluteBoundingBox.height/escala) / escalaRadius;
-        Vector3 size = new Vector3(width, height, (float)1.0f/escalaRadius);
+        Vector3 size = new Vector3(width, height, (float)0.1f);
         gameObject.transform.localScale = size;
     }
 
@@ -36,46 +36,65 @@ public abstract class Object {
 
     public void setColor() {
         Renderer renderer = gameObject.GetComponent<Renderer>();
-        int i = obj.fills.Length;
-        if(i == 0) {
-            renderer.enabled = false;
-            return;
-        }
         int subMeshCount = gameObject.GetComponent<MeshFilter>().sharedMesh.subMeshCount;
-        string colorType = obj.fills[0].type;
-        if(colorType == "SOLID") {
-            float r = obj.fills[0].color.r;
-            float g = obj.fills[0].color.g;
-            float b = obj.fills[0].color.b;
-            float a = obj.fills[0].color.a;
-            Color32 color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
+        int i = obj.fills.Length;
+        string colorType = "";
+        float r = 0, g = 0, b = 0, a = 0;
+        
+        if(i != 0)
+            colorType = obj.fills[0].type;
 
-            if(subMeshCount == 1){
-                Material tempColor = new Material(renderer.sharedMaterial);
-                tempColor.color = color;
-                renderer.sharedMaterial = tempColor;
+        if(subMeshCount == 1) {
+            if(i == 0 || colorType == "SOLID") {
+                Material materialBody = setColorBody(r, g, b, a);
+                renderer.sharedMaterial = materialBody;
                 return;
             }
+            else if(colorType == "IMAGE") {
+                setImage(renderer);
+                return;
+            }
+        }
+        if(i == 0 || colorType == "SOLID") {
+            Material materialBody = setColorBody(r, g, b, a);
+            Material materialBorder = setColorBorder(r, g, b, a);
 
-            r = obj.strokes[0].color.r;
-            g = obj.strokes[0].color.g;
-            b = obj.strokes[0].color.b;
-            a = obj.strokes[0].color.a;
-            Color32 colorBorder = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
-            
             Material[] tempMaterials = renderer.sharedMaterials;
-            Material materialColor = new Material(Shader.Find("Standard"));
-            materialColor.color = color;
-            Material materialBorder = new Material(Shader.Find("Standard"));
-            materialBorder.color = colorBorder;
-
-            tempMaterials[0] = materialColor;
+            tempMaterials[0] = materialBody;
             tempMaterials[1] = materialBorder;
             renderer.sharedMaterials = tempMaterials;
         }
-        else if(colorType == "IMAGE") {
-            setImage(renderer);
+    }
+
+    public Material setColorBody(float r, float g, float b, float a) {
+        int i = obj.fills.Length;
+        Color32 color;
+        Material material;
+        if(i == 0) {
+            color = new Color32((byte)(255), (byte)(255), (byte)(255), (byte)(0.1*255));
+            material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
+            material.color = color;
+            return material;
         }
+        r = obj.fills[0].color.r;
+        g = obj.fills[0].color.g;
+        b = obj.fills[0].color.b;
+        a = obj.fills[0].color.a;
+        color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
+        material = new Material(Shader.Find("Standard"));
+        material.color = color;
+        return material;
+    }
+
+    public Material setColorBorder(float r, float g, float b, float a) {
+        r = obj.strokes[0].color.r;
+        g = obj.strokes[0].color.g;
+        b = obj.strokes[0].color.b;
+        a = obj.strokes[0].color.a;
+        Color32 color = new Color32((byte)(r * 255), (byte)(g * 255), (byte)(b * 255), (byte)(a * 255));
+        Material material = new Material(Shader.Find("Standard"));
+        material.color = color;
+        return material;
     }
 
     public void setImage(Renderer renderer) {
@@ -86,7 +105,7 @@ public abstract class Object {
         imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
 
         string contentType = APIService.ContentType(imageUrl);
-        string path = $"Assets/Figma Converter/Images/{imageRef}.{contentType}";
+        string path = $"Assets/Figma Convert/Images/{imageRef}.{contentType}";
             
         if(!APIService.DownloadImage(imageUrl, path)) {
             Debug.Log("Erro no Download da Imagem");
@@ -102,8 +121,8 @@ public abstract class Object {
         Material material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
         material.mainTexture = tex;
         material.mainTextureScale = new Vector2(-1, -1);
-        System.IO.Directory.CreateDirectory("Assets/Figma Converter/Materials");
-        AssetDatabase.CreateAsset(material, $"Assets/Figma Converter/Materials/{imageRef}.mat");
+        System.IO.Directory.CreateDirectory("Assets/Figma Convert/Materials");
+        AssetDatabase.CreateAsset(material, $"Assets/Figma Convert/Materials/{imageRef}.mat");
         renderer.material = material;
     }
 }

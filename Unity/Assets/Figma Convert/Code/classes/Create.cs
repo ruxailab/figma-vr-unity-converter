@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Create {
-    private int xSize = 40;
-    private int ySize = 40;
-    private int zSize = 40;
+    private int xSize;
+    private int ySize;
+    private int zSize;
     private Vector3[] vertices;
     private Mesh mesh;
     private Vector3[] normals;
     private int tB;
     private int border = 0;
-    private float roundness = 0;
+    private int roundness = 0;
 
-    public Create(float roundness, float border, float height) {
-        this.roundness = roundness;
-        if(border > height/2)
-            this.border = xSize/2;
-        else
-            this.border = Convert.ToInt32(Math.Round(0+(border-0)*((xSize/2)-0)/((height/2)-0)));
+    public Create(float roundness, float border, float height, float width) {
+        this.xSize = Convert.ToInt32(width);
+        this.ySize = Convert.ToInt32(height);
+        this.zSize = 10;
+        this.roundness = Convert.ToInt32(roundness);
+        this.border = Convert.ToInt32(border*2);
     }
     public GameObject createCubo() {
         Material[] materials = new Material[2];
