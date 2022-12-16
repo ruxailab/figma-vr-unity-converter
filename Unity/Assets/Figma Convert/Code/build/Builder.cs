@@ -22,6 +22,9 @@ public class Builder {
             case "FRAME":
                 gameObject = new Frame(obj, apiImage, z, escala).createObject();
                 break;
+            case "COMPONENT":
+                gameObject = new Frame(obj, apiImage, z, escala).createObject();
+                break;
             case "TEXT":
                 gameObject = new Text(obj, apiImage, z).createObject();
                 break;
