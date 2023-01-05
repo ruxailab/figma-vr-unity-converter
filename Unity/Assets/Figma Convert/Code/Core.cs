@@ -29,7 +29,7 @@ public class Core {
             float z = 0;
             for(int j = 0; j<apiDocument.document.children[i].children.Length; j++, z+=0.1f){
                 ObjectProperty apiObj = apiDocument.document.children[i].children[j];
-                Builder objeto = new Builder(apiObj, apiImage, empty, z, escala);
+                Builder objeto = new Builder(documentID, token, apiObj, apiImage, empty, z, escala);
                 objeto.createObject();
             }
             empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
