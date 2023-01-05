@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System;
 using System.Net;
 using System.IO;
 
-public class APIService {
+abstract class APIService {
 
     public static File GetDocument(string token, string documentID) {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api.figma.com/v1/files{documentID}");
-        request.Headers.Add("X-Figma-Token", token);
+        request.Headers.Add("Authorization", "Bearer "+ token);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string json = reader.ReadToEnd();
@@ -16,7 +17,7 @@ public class APIService {
 
     public static string GetImages(string token, string documentID) {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api.figma.com/v1/files{documentID}/images");
-        request.Headers.Add("X-Figma-Token", token);
+        request.Headers.Add("Authorization", "Bearer "+ token);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         return reader.ReadToEnd();
@@ -34,8 +35,14 @@ public class APIService {
         uwr.downloadHandler = new DownloadHandlerFile(path);
         uwr.SendWebRequest();
         while(!uwr.isDone){}
-        return uwr.isNetworkError ? false : true;
+        return uwr.responseCode == 200 ? true : false;
+    }
+
+    public static string GetImageID(string token, string documentID, string id) {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api.figma.com/v1/images{documentID}?ids={id}");
+        request.Headers.Add("Authorization", "Bearer "+ token);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        return reader.ReadToEnd();
     }
 }
-
-
