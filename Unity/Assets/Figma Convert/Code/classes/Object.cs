@@ -3,7 +3,6 @@ using UnityEditor;
 
 public abstract class Object {
     public ObjectProperty obj;
-    public string apiImage;
     public float eixoX;
     public float eixoY;
     public float eixoZ;
@@ -13,9 +12,8 @@ public abstract class Object {
     public GameObject gameObject;
     public int escalaRadius = 1;
 
-    public Object(ObjectProperty obj, string apiImage, float eixoZ, int escala) {
+    public Object(ObjectProperty obj, float eixoZ, int escala) {
         this.obj = obj;
-        this.apiImage = apiImage;
         this.eixoZ = eixoZ;
         this.escala = escala;
     }
@@ -98,14 +96,39 @@ public abstract class Object {
     }
 
     public void setImage(Renderer renderer) {
-        string imageRef = obj.fills[0].imageRef;
-        string imageUrl = apiImage;
-        imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(imageRef));
-        imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https:"));
-        imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
+        // string imageRef = obj.fills[0].imageRef;
+        // string imageUrl = apiImage;
+        // imageUrl = imageUrl.Remove(0, imageUrl.IndexOf(imageRef));
+        // imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https:"));
+        // imageUrl = imageUrl.Remove(imageUrl.IndexOf('"'));
 
+        // string contentType = APIService.ContentType(imageUrl);
+        // string path = $"Assets/Figma Convert/Images/{imageRef}.{contentType}";
+            
+        // if(!APIService.DownloadImage(imageUrl, path)) {
+        //     Debug.Log("Erro no Download da Imagem");
+        //     return;
+        // }
+        // if(!System.IO.File.Exists(path)) {
+        //     Debug.Log("Erro no Arquivo de Material");
+        //     return;
+        // }
+        // byte[] readImg = System.IO.File.ReadAllBytes(path);
+        // Texture2D tex = new Texture2D(2, 2);
+        // tex.LoadImage(readImg);
+        // Material material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
+        // material.mainTexture = tex;
+        // material.mainTextureScale = new Vector2(-1, -1);
+        // System.IO.Directory.CreateDirectory("Assets/Figma Convert/Materials");
+        // AssetDatabase.CreateAsset(material, $"Assets/Figma Convert/Materials/{imageRef}.mat");
+        // renderer.material = material;
+
+        string id = obj.id.Remove(obj.id.IndexOf(';'));
+        string imageUrl = APIService.GetImageID(Global.token, Global.documentID, id);
+        imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("http"));
+        imageUrl = imageUrl.Remove(imageUrl.IndexOf("\"}}"));
         string contentType = APIService.ContentType(imageUrl);
-        string path = $"Assets/Figma Convert/Images/{imageRef}.{contentType}";
+        string path = $"Assets/Figma Convert/Images/{id}.{contentType}";
             
         if(!APIService.DownloadImage(imageUrl, path)) {
             Debug.Log("Erro no Download da Imagem");
@@ -122,7 +145,8 @@ public abstract class Object {
         material.mainTexture = tex;
         material.mainTextureScale = new Vector2(-1, -1);
         System.IO.Directory.CreateDirectory("Assets/Figma Convert/Materials");
-        AssetDatabase.CreateAsset(material, $"Assets/Figma Convert/Materials/{imageRef}.mat");
+        id = id.Remove(id.IndexOf(":"));
+        AssetDatabase.CreateAsset(material, $"Assets/Figma Convert/Materials/{id}.mat");
         renderer.material = material;
     }
 }

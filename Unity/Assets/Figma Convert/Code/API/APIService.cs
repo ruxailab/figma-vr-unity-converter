@@ -15,14 +15,6 @@ abstract class APIService {
         return JsonUtility.FromJson<File>(json);
     }
 
-    public static string GetImages(string token, string documentID) {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api.figma.com/v1/files{documentID}/images");
-        request.Headers.Add("Authorization", "Bearer "+ token);
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        return reader.ReadToEnd();
-    }
-
     public static string ContentType(string url) {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();

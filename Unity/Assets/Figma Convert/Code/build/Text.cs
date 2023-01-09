@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Text : Object {
 
-    public Text(ObjectProperty obj, string apiImage, float eixoZ) : base(obj, apiImage, eixoZ, 0){}
+    public Text(ObjectProperty obj, float eixoZ) : base(obj, eixoZ, 0){}
 
     public GameObject createObject() {
         gameObject = new GameObject("3D Text");

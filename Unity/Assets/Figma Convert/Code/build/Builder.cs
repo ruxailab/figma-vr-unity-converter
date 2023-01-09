@@ -3,15 +3,13 @@ using System.Text;
 
 public class Builder {
     private ObjectProperty obj;
-    private string apiImage;
     private GameObject parent;
     private float z;
     private int escala;
     private GameObject gameObject;
 
-    public Builder(ObjectProperty apiObj, string apiImage, GameObject parent, float z, int escala) {
+    public Builder(ObjectProperty apiObj, GameObject parent, float z, int escala) {
         this.obj = apiObj;
-        this.apiImage = apiImage;
         this.parent = parent;
         this.z = z;
         this.escala = escala;
@@ -20,31 +18,31 @@ public class Builder {
     public void createObject() {
         switch (obj.type) {
             case "FRAME":
-                gameObject = new Frame(obj, apiImage, z, escala).createObject();
+                gameObject = new Frame(obj, z, escala).createObject();
                 break;
             case "COMPONENT":
-                gameObject = new Frame(obj, apiImage, z, escala).createObject();
+                gameObject = new Frame(obj, z, escala).createObject();
                 break;
             case "INSTANCE":
-                gameObject = new Frame(obj, apiImage, z, escala).createObject();
+                gameObject = new Frame(obj, z, escala).createObject();
                 break;
             case "GRUP":
-                gameObject = new Frame(obj, apiImage, z, escala).createObject();
+                gameObject = new Frame(obj, z, escala).createObject();
                 break;
             case "TEXT":
-                gameObject = new Text(obj, apiImage, z).createObject();
+                gameObject = new Text(obj, z).createObject();
                 break;
             case "RECTANGLE":
-                gameObject = new Rectangle(obj, apiImage, z, escala).createObject();
+                gameObject = new Rectangle(obj, z, escala).createObject();
                 break;
             case "VECTOR":
-                gameObject = new Vector(obj, apiImage, z, escala).createObject();
+                gameObject = new Vector(obj, z, escala).createObject();
                 if(gameObject == null)
                     return;
                 else
                     break;
             case "ELLIPSE":
-                gameObject = new Ellipse(obj, apiImage, z, escala).createObject();
+                gameObject = new Ellipse(obj, z, escala).createObject();
                 break;
         }
         setName();

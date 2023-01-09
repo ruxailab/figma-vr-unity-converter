@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Rectangle : Object {
 
-    public Rectangle(ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){}
+    public Rectangle(ObjectProperty obj, float eixoZ, int escala) : base(obj, eixoZ, escala){}
     
     public GameObject createObject(){
         cornerRadius();
