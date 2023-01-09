@@ -26,7 +26,7 @@ abstract class loginService {
         HttpListenerResponse response = context.Response;
 
         // Construct a response.
-        string responseString = "<script>window.close()</script>";
+        string responseString = "<html><body><h1>Pode fechar e voltar para o Unity</h1></body></html>";
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
         response.ContentLength64 = buffer.Length;
         System.IO.Stream output = response.OutputStream;

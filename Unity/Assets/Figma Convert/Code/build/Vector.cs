@@ -2,13 +2,8 @@ using UnityEngine;
 using UnityEditor;
 
 public class Vector : Object {
-    private string documentID;
-    private string token;
 
-    public Vector(string documentID, string token, ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){
-        this.documentID = documentID;
-        this.token = token;
-    }
+    public Vector(ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){}
     
     public GameObject createObject(){
         if(vertorExist())
@@ -32,7 +27,7 @@ public class Vector : Object {
     public void setSVG() {
         Renderer renderer = gameObject.GetComponent<Renderer>();
         string id = obj.id.Remove(obj.id.IndexOf(';'));
-        string imageUrl = APIService.GetImageID(token, documentID, id);
+        string imageUrl = APIService.GetImageID(Global.token, Global.documentID, id);
         imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("http"));
         imageUrl = imageUrl.Remove(imageUrl.IndexOf("\"}}"));
         string contentType = APIService.ContentType(imageUrl);

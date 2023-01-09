@@ -20,8 +20,8 @@ class Window : EditorWindow {
         EditorGUILayout.Space();
         
         GUILayout.Label("Account", EditorStyles.label);  //Escrita
-        token = EditorGUILayout.TextField("Enter Token:", token);
-        documentID = EditorGUILayout.TextField("Enter URL Document:", documentID);
+        Global.token = token = EditorGUILayout.TextField("Enter Token:", token);
+        Global.documentID = documentID = EditorGUILayout.TextField("Enter URL Document:", documentID);
         EditorGUILayout.Space();
 
         if(GUILayout.Button("Login Browser")) {
@@ -35,7 +35,7 @@ class Window : EditorWindow {
 
         if(GUILayout.Button("Download Projet")) {
             // try {
-                Core.Start(token, documentID, escala);
+                Core.Start(escala);
             // }
             // catch (Exception e){
                 // Debug.Log(e);

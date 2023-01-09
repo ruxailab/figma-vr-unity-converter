@@ -1,13 +1,8 @@
 using UnityEngine;
 
 public class Frame : Object {
-    private string documentID;
-    private string token;
 
-    public Frame(string documentID, string token, ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){
-        this.documentID = documentID;
-        this.token = token;
-    }
+    public Frame(ObjectProperty obj, string apiImage, float eixoZ, int escala) : base(obj, apiImage, eixoZ, escala){}
 
     public GameObject createObject() {
         bool isCorner = cornerRadius();
@@ -19,7 +14,7 @@ public class Frame : Object {
         setColor();
         float z = 0.1f;
         for(int i = 0; i < obj.children.Length; i++, z += 0.1f) {
-            Builder objeto = new Builder(documentID, token, obj.children[i], apiImage, gameObject, (eixoZ+z), escala);
+            Builder objeto = new Builder(obj.children[i], apiImage, gameObject, (eixoZ+z), escala);
             objeto.createObject();
         }
         return gameObject;
