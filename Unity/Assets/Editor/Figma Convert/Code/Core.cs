@@ -18,6 +18,7 @@ public class Core {
                 
         // Chamada da API
         File apiDocument = APIService.GetDocument();
+        Global.apiImage = APIService.GetImage();
         
         // Loop Pagina
         for(int i = 0; i<apiDocument.document.children.Length; i++){

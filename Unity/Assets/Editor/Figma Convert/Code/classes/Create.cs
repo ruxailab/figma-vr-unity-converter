@@ -148,6 +148,7 @@ public class Create {
         mesh.subMeshCount = 2;
         mesh.SetTriangles(triangles, 0);
 		mesh.SetTriangles(trianglesBorder, 1);
+        // mesh.triangles = trianglesBorder;
     }
 
     private int CreateTopFace (int[] triangles, int[] trianglesBorder,int t, int ring) {

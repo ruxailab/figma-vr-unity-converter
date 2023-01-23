@@ -21,7 +21,7 @@ public class Frame : Object {
     }
 
     public bool cornerRadius() {
-        if(obj.cornerRadius == 0){
+        if(obj.cornerRadius == 0 && obj.strokes.Length == 0){
             gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             return false;
         }

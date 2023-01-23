@@ -70,7 +70,9 @@ public abstract class Object {
         Material material;
         if(i == 0) {
             color = new Color32((byte)(255), (byte)(255), (byte)(255), (byte)(0.1*255));
-            material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
+            material = new Material(Shader.Find("Standard"));
+            material.SetOverrideTag("RenderType", "TransparentCutout");
+            material.EnableKeyword("_ALPHATEST_ON");
             material.color = color;
             return material;
         }
@@ -96,14 +98,13 @@ public abstract class Object {
     }
 
     public void setImage(Renderer renderer) {
-        string id = obj.id.Remove(obj.id.IndexOf(';'));
-        string imageUrl = APIService.GetImageID(id);
-        imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("http"));
-        imageUrl = imageUrl.Remove(imageUrl.IndexOf("\"}}"));
-        // string contentType = APIService.ContentType(imageUrl);
-        id = id.Remove(id.IndexOf(":"), 1);
-        string path = $"Assets/Editor/Figma Convert/Images/{id}.png";
-            
+        string imageRef = obj.fills[0].imageRef;
+        string imageUrl = Global.apiImage;
+        imageUrl = imageUrl.Remove(0, Global.apiImage.IndexOf(imageRef));
+        imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https://"));
+        imageUrl = imageUrl.Remove(imageUrl.IndexOf('\"'));
+        string contentType = APIService.ContentType(imageUrl);
+        string path = $"Assets/Editor/Figma Convert/Images/{imageRef}.{contentType}";
         if(!APIService.DownloadImage(imageUrl, path)) {
             Debug.Log("Erro no Download da Imagem");
             return;
@@ -115,11 +116,11 @@ public abstract class Object {
         byte[] readImg = System.IO.File.ReadAllBytes(path);
         Texture2D tex = new Texture2D(2, 2);
         tex.LoadImage(readImg);
-        Material material = new Material(Shader.Find("Legacy Shaders/Transparent/Diffuse"));
+        Material material = new Material(Shader.Find("Legacy Shaders/Specular"));
         material.mainTexture = tex;
         material.mainTextureScale = new Vector2(-1, -1);
         System.IO.Directory.CreateDirectory("Assets/Editor/Figma Convert/Materials");
-        AssetDatabase.CreateAsset(material, $"Assets/Editor/Figma Convert/Materials/{id}.mat");
+        AssetDatabase.CreateAsset(material, $"Assets/Editor/Figma Convert/Materials/{imageRef}.mat");
         renderer.material = material;
     }
 }

@@ -4,7 +4,7 @@ public class Rectangle : Object {
 
     public Rectangle(ObjectProperty obj, float eixoZ, int escala) : base(obj, eixoZ, escala){}
     
-    public GameObject createObject(){
+    public GameObject createObject() {
         cornerRadius();
         setSize();
         setPosition();
@@ -13,7 +13,7 @@ public class Rectangle : Object {
     }
 
     public void cornerRadius() {
-        if(obj.cornerRadius == 0){
+        if(obj.cornerRadius == 0 && obj.strokes.Length == 0) {
             gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             return;
         }

@@ -17,7 +17,7 @@ public class Builder {
 
     public void createObject() {
         switch (obj.type) {
-            case "FRAME":
+            /*case "FRAME":
                 gameObject = new Frame(obj, z, escala).createObject();
                 break;
             case "COMPONENT":
@@ -26,21 +26,21 @@ public class Builder {
             case "INSTANCE":
                 gameObject = new Frame(obj, z, escala).createObject();
                 break;
-            case "GRUP":
+            case "GROUP":
                 gameObject = new Frame(obj, z, escala).createObject();
                 break;
             case "TEXT":
                 gameObject = new Text(obj, z).createObject();
-                break;
+                break;**/
             case "RECTANGLE":
                 gameObject = new Rectangle(obj, z, escala).createObject();
                 break;
-            case "VECTOR":
+            /*case "VECTOR":
                 gameObject = new Vector(obj, z, escala).createObject();
                 break;
             case "ELLIPSE":
                 gameObject = new Ellipse(obj, z, escala).createObject();
-                break;
+                break;*/
         }
         if(gameObject == null)
             return;
