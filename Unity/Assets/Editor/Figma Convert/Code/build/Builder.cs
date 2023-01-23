@@ -31,7 +31,7 @@ public class Builder {
                 break;
             case "TEXT":
                 gameObject = new Text(obj, z).createObject();
-                break;**/
+                break;
             case "RECTANGLE":
                 gameObject = new Rectangle(obj, z, escala).createObject();
                 break;
