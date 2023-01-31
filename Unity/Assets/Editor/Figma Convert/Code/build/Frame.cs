@@ -12,8 +12,8 @@ public class Frame : Object {
             setSize();
         setPosition();
         setColor();
-        float z = 0.1f;
-        for(int i = 0; i < obj.children.Length; i++, z += 0.1f) {
+        float z = 0.01f;
+        for(int i = 0; i < obj.children.Length; i++, z += 0.01f) {
             Builder objeto = new Builder(obj.children[i], gameObject, (eixoZ+z), escala);
             objeto.createObject();
         }

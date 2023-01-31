@@ -73,6 +73,7 @@ public abstract class Object {
             material = new Material(Shader.Find("Standard"));
             material.SetOverrideTag("RenderType", "TransparentCutout");
             material.EnableKeyword("_ALPHATEST_ON");
+            material.renderQueue = 2449;
             material.color = color;
             return material;
         }

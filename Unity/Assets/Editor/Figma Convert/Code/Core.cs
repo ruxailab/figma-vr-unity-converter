@@ -27,7 +27,7 @@ public class Core {
                     
             // Loop Objeto
             float z = 0;
-            for(int j = 0; j<apiDocument.document.children[i].children.Length; j++, z+=0.1f){
+            for(int j = 0; j<apiDocument.document.children[i].children.Length; j++, z+=0.01f){
                 ObjectProperty apiObj = apiDocument.document.children[i].children[j];
                 Builder objeto = new Builder(apiObj, empty, z, escala);
                 objeto.createObject();

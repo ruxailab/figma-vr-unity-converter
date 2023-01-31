@@ -37,6 +37,12 @@ abstract class APIService {
         uwr.SendWebRequest();
         while(!uwr.isDone){}
         return uwr.responseCode == 200 ? true : false;
+
+        // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        // System.Drawing.Image img = System.Drawing.Image.FromStream(response.GetResponseStream());
+        // Response.ContentType = ;
+        // img.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Gif);
     }
 
     public static string GetImageID(string id) {

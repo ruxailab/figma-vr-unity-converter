@@ -2,6 +2,7 @@
 public class ObjectProperty {
     public string id;
     public string name;
+    public bool visible = true;
     public string type;
     public string scrollBehavior;
     public string blendMode;

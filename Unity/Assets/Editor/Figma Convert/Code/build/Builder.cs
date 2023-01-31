@@ -16,6 +16,8 @@ public class Builder {
     }
 
     public void createObject() {
+        if(!obj.visible)
+           return;
         switch (obj.type) {
             case "FRAME":
                 gameObject = new Frame(obj, z, escala).createObject();
