@@ -1,5 +1,5 @@
 using UnityEngine;
-
+o
 public class Core {
     public static void Start(int escala){
         
