@@ -15,14 +15,14 @@ class WindowTest : EditorWindow {
     }
 
     private void OnGUI() {
-        GUILayout.Label("Settings", EditorStyles.label);  //Escrita
-        escala = EditorGUILayout.IntField("Enter Scale:", escala);
-        EditorGUILayout.Space();
+        // GUILayout.Label("Settings", EditorStyles.label);  //Escrita
+        // escala = EditorGUILayout.IntField("Enter Scale:", escala);
+        // EditorGUILayout.Space();
         
-        GUILayout.Label("Account", EditorStyles.label);  //Escrita
-        Global.token = token = EditorGUILayout.TextField("Enter Token:", token);
-        Global.documentID = documentID = EditorGUILayout.TextField("Enter URL Document:", documentID);
-        EditorGUILayout.Space();
+        // GUILayout.Label("Account", EditorStyles.label);  //Escrita
+        // Global.token = token = EditorGUILayout.TextField("Enter Token:", token);
+        // Global.documentID = documentID = EditorGUILayout.TextField("Enter URL Document:", documentID);
+        // EditorGUILayout.Space();
 
         if(GUILayout.Button("Download Projet")) {
             // try {

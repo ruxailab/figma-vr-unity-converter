@@ -1,40 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class CoreTest {
     public static void Start(int escala){
-        int cont = 0;
-        for(int i = Global.documentID.Length-1; i > 0; i--){
-            if(Global.documentID[i] == '/'){
-                cont++;
-                if(cont == 1)
-                    Global.documentID = Global.documentID.Remove(i);
-                else if(cont == 2){
-                    Global.documentID = Global.documentID.Remove(0,i);
-                    break;
-                }
-            }
-        }
-                
-        // Chamada da API
-        File apiDocument = APIService.GetDocument();
-        
-        ObjectProperty apiObj = apiDocument.document.children[0].children[0];
-        GameObject gameobject = new Vector(apiObj,(float) 1.0, 100).createObject();
-        
+        GameObject myGO;
+        GameObject myText;
+        GameObject myPainel;
+        Canvas myCanvas;
+        TextMeshProUGUI text;
+        RectTransform rectTransform;
+        Image painel;
 
-        // Loop Pagina
-        // for(int i = 0; i<apiDocument.document.children.Length; i++){
-                    
-        //     GameObject empty = new GameObject("Page " + (i+1));
-                    
-        //     // Loop Objeto
-        //     float z = 0;
-        //     for(int j = 0; j<apiDocument.document.children[i].children.Length; j++, z+=0.1f){
-        //         ObjectProperty apiObj = apiDocument.document.children[i].children[j];
-        //         Builder objeto = new Builder(apiObj, empty, z, escala);
-        //         objeto.createObject();
-        //     }
-        //     empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
-        // }
+        // Canvas
+        myGO = new GameObject();
+        myGO.name = "TestCanvas";
+        myGO.AddComponent<Canvas>();
+
+        myCanvas = myGO.GetComponent<Canvas>();
+        myCanvas.renderMode = RenderMode.WorldSpace;
+        myGO.AddComponent<CanvasScaler>();
+        myGO.AddComponent<GraphicRaycaster>();
+
+        // Text
+        myText = new GameObject();
+        myText.transform.parent = myGO.transform;
+        myText.name = "wibble";
+
+        
+        text = myText.AddComponent<TextMeshProUGUI>();
+        text.text = "wobble";
+        text.fontSize = 100;
+
+        // Text position
+        rectTransform = text.GetComponent<RectTransform>();
+        rectTransform.localPosition = new Vector3(0, 0, 0);
+        rectTransform.sizeDelta = new Vector2(400, 200);
+
+        /// Painel
+        myPainel = new GameObject();
+        myPainel.transform.parent = myGO.transform;
+        myPainel.name = "Painel";
+
+        painel = myPainel.AddComponent<Image>(); 
+
     }
 }
