@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.IO;
 
@@ -9,10 +10,18 @@ abstract class APIService {
     public static File GetDocument() {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api.figma.com/v1/files{Global.documentID}");
         request.Headers.Add("Authorization", $"Bearer {Global.token}");
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        string json = reader.ReadToEnd();
-        return JsonUtility.FromJson<File>(json);
+        using (HttpWebResponse response = (HttpWebResponse) request.GetResponse()) {
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string json = reader.ReadToEnd();
+            return JsonUtility.FromJson<File>(json);
+        }
+        
+        // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        // StreamReader reader = new StreamReader(response.GetResponseStream());
+        // string json = reader.ReadToEnd();
+        // return JsonUtility.FromJson<File>(json);
+        // return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+        // return JsonConvert.DeserializeObject(json);
     }
 
     public static string GetImage() {
@@ -37,12 +46,6 @@ abstract class APIService {
         uwr.SendWebRequest();
         while(!uwr.isDone){}
         return uwr.responseCode == 200 ? true : false;
-
-        // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        // System.Drawing.Image img = System.Drawing.Image.FromStream(response.GetResponseStream());
-        // Response.ContentType = ;
-        // img.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Gif);
     }
 
     public static string GetImageID(string id) {

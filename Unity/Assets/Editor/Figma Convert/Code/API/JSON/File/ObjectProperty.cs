@@ -5,8 +5,9 @@ public class ObjectProperty {
     public bool visible = true;
     public string type;
     public string scrollBehavior;
+    // public ComponentProperty componentPropertyDefinitions;
     public string blendMode;
-    public ObjectProperty[] children;
+    public ObjectProperty[] children = null;
     public Absolute absoluteBoundingBox;
     public Absolute absoluteRenderBounds;
     public Constraints constraits;
@@ -15,7 +16,7 @@ public class ObjectProperty {
     public Fills[] fills;
     public Fills[] strokes;
     public float cornerRadius;
-    public float strokeWeight;
+    public float strokeWeight = 0;
     public string storekeAlign;
     public Color backgroundColor;
     // public LayoutGrids[] layoutGrids;

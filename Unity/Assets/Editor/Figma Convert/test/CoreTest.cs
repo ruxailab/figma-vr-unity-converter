@@ -33,14 +33,14 @@ public class CoreTest {
         
         text = myText.AddComponent<TextMeshProUGUI>();
         text.text = "wobble";
-        text.fontSize = 100;
+        text.fontSize = 18;
 
         // Text position
         rectTransform = text.GetComponent<RectTransform>();
-        rectTransform.localPosition = new Vector3(0, 0, 0);
-        rectTransform.sizeDelta = new Vector2(400, 200);
+        rectTransform.localPosition = new Vector3(18, 0, 0);
+        rectTransform.sizeDelta = new Vector2(10, 100);
 
-        /// Painel
+        // Painel
         myPainel = new GameObject();
         myPainel.transform.parent = myGO.transform;
         myPainel.name = "Painel";

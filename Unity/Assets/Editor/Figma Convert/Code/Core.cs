@@ -18,6 +18,7 @@ public class Core {
                 
         // Chamada da API
         File apiDocument = APIService.GetDocument();
+        // Object apiDocument = APIService.GetDocument();
         Global.apiImage = APIService.GetImage();
         
         // Loop Pagina
@@ -26,10 +27,9 @@ public class Core {
             GameObject empty = new GameObject("Page " + (i+1));
                     
             // Loop Objeto
-            float z = 0;
-            for(int j = 0; j<apiDocument.document.children[i].children.Length; j++, z+=0.01f){
+            for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
                 ObjectProperty apiObj = apiDocument.document.children[i].children[j];
-                Builder objeto = new Builder(apiObj, empty, z, escala);
+                Builder objeto = new Builder(apiObj, empty, escala);
                 objeto.createObject();
             }
             empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
