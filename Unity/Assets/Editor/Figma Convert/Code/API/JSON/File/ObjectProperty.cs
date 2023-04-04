@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 [System.Serializable]
 public class ObjectProperty {
     public string id;
@@ -5,7 +7,7 @@ public class ObjectProperty {
     public bool visible = true;
     public string type;
     public string scrollBehavior;
-    // public ComponentProperty componentPropertyDefinitions;
+    public ComponentProperty componentPropertyDefinitions;
     public string blendMode;
     public ObjectProperty[] children = null;
     public Absolute absoluteBoundingBox;

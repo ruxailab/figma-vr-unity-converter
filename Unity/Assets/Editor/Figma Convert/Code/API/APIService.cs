@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Net;
 using System.IO;
 
@@ -13,15 +14,10 @@ abstract class APIService {
         using (HttpWebResponse response = (HttpWebResponse) request.GetResponse()) {
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
+            Regex regex = new Regex("(|(Distance)|(RotationX)|(RotationY))#[0-9]+:[0-9]+");
+            json = regex.Replace(json, "$1");
             return JsonUtility.FromJson<File>(json);
         }
-        
-        // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        // StreamReader reader = new StreamReader(response.GetResponseStream());
-        // string json = reader.ReadToEnd();
-        // return JsonUtility.FromJson<File>(json);
-        // return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-        // return JsonConvert.DeserializeObject(json);
     }
 
     public static string GetImage() {

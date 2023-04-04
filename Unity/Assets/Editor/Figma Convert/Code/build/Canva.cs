@@ -26,5 +26,4 @@ public class Canva : Object {
         painel.transform.SetParent(gameObject.transform);
         return gameObject;
     }
-
 }

@@ -7,6 +7,7 @@ public abstract class Object {
     public ObjectProperty obj;
     public float eixoX;
     public float eixoY;
+    public float eixoZ = 0;
     public int escala;
     public float width;
     public float height;
@@ -34,7 +35,12 @@ public abstract class Object {
             eixoX += obj.strokeWeight/(float)escala;
             eixoY += obj.strokeWeight/(float)escala/2;
         }
-        rectTransform.localPosition = new Vector3(eixoX, eixoY, 0);
+        eixoZ = Global.objEixoZ;
+        rectTransform.localPosition = new Vector3(eixoX, eixoY, eixoZ);
+    }
+
+    public void setRotation() {
+        
     }
 
     public void setColor(Image painel) {
