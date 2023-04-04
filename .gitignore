@@ -1,5 +1,6 @@
 *.meta
 /Unity/Library
+/Unity/.vscode
 /Unity/Logs
 /Unity/Packages
 /Unity/ProjectSettings
@@ -7,6 +8,7 @@
 /Unity/ProBuilder Data
 /Unity/UserSettings
 /Unity/Assets/Scenes
+/Unity/Assets/TextMesh Pro
 /Unity/Assets/Figma Convert/testBuilder
 /Image Unity
 /Figma-API.md
