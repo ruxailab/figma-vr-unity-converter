@@ -11,7 +11,6 @@ public class Painel : Object {
         RectTransform rectTransform = painel.GetComponent<RectTransform>();
         setSize(rectTransform);
         setPosition(rectTransform);
-        setRotation(rectTransform);
         setColor(painel);
         setCornerRadius();
         setBorder();
