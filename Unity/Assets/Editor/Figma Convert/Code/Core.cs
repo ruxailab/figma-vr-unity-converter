@@ -32,6 +32,7 @@ public class Core {
                 objeto.createObject();
             }
             empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
+            empty.transform.position = new Vector3(0, (float)4.25, 0);
         }
     }
 }

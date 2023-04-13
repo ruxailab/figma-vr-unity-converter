@@ -20,13 +20,17 @@ public class Builder {
         if(obj.type == "TEXT")
             gameObject = new Text(obj, escala).createObject();
         else if(parent.name.Contains("Page")) {
-            if(obj.componentPropertyDefinitions.Distance != null) {
-                Global.objEixoZ = (float)(float.Parse(obj.componentPropertyDefinitions.Distance.defaultValue) * -1);
-                Global.objRotationX = (float) float.Parse(obj.componentPropertyDefinitions.RotationX.defaultValue);
-                Global.objRotationY = (float) float.Parse(obj.componentPropertyDefinitions.RotationY.defaultValue);
+            if(obj.componentPropertyDefinitions.PositionX != null) {
+                Global.objPositionX = (float) (float.Parse(obj.componentPropertyDefinitions.PositionX.defaultValue) * 0.5);
+                Global.objPositionY = (float) (float.Parse(obj.componentPropertyDefinitions.PositionY.defaultValue) * -1 * 0.5);
+                Global.objPositionZ = (float) (float.Parse(obj.componentPropertyDefinitions.PositionZ.defaultValue) * 0.5);
+                Global.objRotationX = (float) (float.Parse(obj.componentPropertyDefinitions.RotationX.defaultValue) * -1 * 0.5);
+                Global.objRotationY = (float) (float.Parse(obj.componentPropertyDefinitions.RotationY.defaultValue) * 0.5);
             }
             else {
-                Global.objEixoZ = 0;
+                Global.objPositionX = 0;
+                Global.objPositionY = 0;
+                Global.objPositionZ = 0;
                 Global.objRotationX = 0;
                 Global.objRotationY = 0;
             }

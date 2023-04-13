@@ -20,6 +20,7 @@ public class Canva : Object {
         RectTransform rectTransform = canvas.GetComponent<RectTransform>();
         setSize(rectTransform);
         setPosition(rectTransform);
+        setRotation(rectTransform);
         
         GameObject painel = new Painel(obj, escala).createObject();
         painel.name = obj.name;
