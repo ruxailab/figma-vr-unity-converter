@@ -5,7 +5,7 @@ using System;
 
 class Window : EditorWindow {
 
-    int escala = 100;
+    int escala = 150;
     string token;
     string documentID;
     
