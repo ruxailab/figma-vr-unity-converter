@@ -20,11 +20,19 @@ public class Canva : Object {
         RectTransform rectTransform = canvas.GetComponent<RectTransform>();
         setSize(rectTransform);
         setPosition(rectTransform);
-        setRotation(rectTransform);
         
         GameObject painel = new Painel(obj, escala).createObject();
         painel.name = obj.name;
         painel.transform.SetParent(gameObject.transform);
+        setPositionCanva(rectTransform);
+        setRotation(rectTransform);
         return gameObject;
+    }
+
+    public void setPositionCanva(RectTransform rectTransform) {
+        eixoX = Global.objPositionX;
+        eixoY = Global.objPositionY;
+        eixoZ = Global.objPositionZ;
+        rectTransform.localPosition = new Vector3(eixoX, eixoY, eixoZ);
     }
 }
