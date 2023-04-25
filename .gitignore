@@ -1,4 +1,5 @@
 *.meta
+*.unity
 /Unity/Library
 /Unity/.vscode
 /Unity/Logs
@@ -9,8 +10,3 @@
 /Unity/UserSettings
 /Unity/Assets/Scenes
 /Unity/Assets/TextMesh Pro
-/Unity/Assets/Figma Convert/testBuilder
-/Image Unity
-/Figma-API.md
-/Unity.md
-/test
