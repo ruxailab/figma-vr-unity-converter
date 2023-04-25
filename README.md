@@ -17,29 +17,29 @@ The objective of this project is to facilitate the prototyping of user interface
 Before starting, you need to have an account and install [Unity (2021.3)](https://unity.com/en/download) and [Figma](https://www.figma.com/downloads/) on your computer. Then install Unity UI Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
 
 ### How to Install
-Primeiramente realize o [download dos plugins do Unity e Figma](https://github.com/uramakilab/figma-vr-unity-converter/releases) no GitHub.
+First perform [download Unity and Figma plugins](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
 
 <img src="/assets/download.gif">
 
-Com o Unity aberto importe o plugin para o Unity.
+With Unity open importer plugin for Unity.
 
 <img src="/assets/importUnity.gif">
 
-Em seguida extraia o arquivo zip e importe o manifest plugin para o Figma.
+Then extract the zip file and import the plugin manifest to Figma.
 
 <img src="/assets/importFigma.gif">
 
 
 ### How to Use
-Para utilizar o Figma Convert primeiramente desenhe um ou mais interfaces (importante as interfaces precição ser componentes).
+To use Figma Convert first draw one or more interfaces (it is important that precision interfaces are components).
 
 <img src="/assets/interfaceFigma.png">
 
-Em seguida selecione os componentes que deseja exportar para o Unity e click no icone do Figma para abrir o menu, vá em plugin, development e FTU (Figma To Unity). Nesse plugin você irá posicionar todas as interfaces que foram criadas, de forma que deseje que elas sejam posicionadas no Unity. 
+Then select the components you want to export to Unity and click on the Figma icon to open the menu, go to plugin, development and FTU (Figma To Unity). In this plugin you will position all the interfaces that were created, in a way that you want them to be positioned in Unity.
 
 <img src="/assets/pluginFigma.gif">
 
-Agora vá no Unity click em tools, Figma Convert. Com a janela do Figma Convert click em Login Browser para que possa ser obtido o token automaticamente ou insira o token manualmente. Em seguida copie a url do Documento da Unity e por final click em Download Projet.
+Now go to Unity click on tools, Figma Convert. With the window of Figma Convert click on Login Browser so that the token can be obtained automatically or enter the token manually. Then copy the url of the Unity Document and finally click on Download Project.
 
 <img src="/assets/pluginUnity.gif">
 
@@ -61,24 +61,24 @@ Some of the documentation used in the project:
 
 ## 🔨 Features
 * [x] Unity Tools
-* [x] GameObject Cube and Rectangle
-* [x] GameObject Sphere
-* [ ] GameObject Circle
-* [ ] GameObject Triangle
-* [ ] GameObject Start
-* [x] GameObject Text
-* [x] GameObject Frame
-* [ ] GameObject Component
+* [x] GameObject Canva
+* [x] GameObject Painel
 * [x] Position
 * [x] Size
 * [x] Color
 * [x] None Color
 * [x] Image
 * [x] Image PNG
-* [ ] Image SVG
+* [x] Image SVG
 * [x] Frame in Frame
 * [x] Rounded Cube
-* [ ] Border Color
+* [x] Border Color
+* [ ] Sphere
+* [ ] Circle
+* [ ] Triangle
+* [ ] Start
+* [x] Text
+
 
 ## Additional Information
 
