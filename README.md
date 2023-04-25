@@ -6,7 +6,7 @@ The objective of this project is to facilitate the prototyping of user interface
 
 ## Summary
 * [Prerequisites](#prerequisites)
-    * [How to Install](#how)
+    * [How to Install](#howInstall)
     * [How to Use](#run)
 * [Technologies](#🛠️-technologies)
 * [Documentations](#📚-documents-used)
@@ -15,6 +15,8 @@ The objective of this project is to facilitate the prototyping of user interface
 
 ## Prerequisites
 Before starting, you need to have an account and install [Unity (2021.3)](https://unity.com/en/download) and [Figma](https://www.figma.com/downloads/) on your computer. Then install Unity UI Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+
+<div id="howInstall"/>
 
 ### How to Install
 First perform [download Unity and Figma plugins](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
@@ -29,6 +31,7 @@ Then extract the zip file and import the plugin manifest to Figma.
 
 <img src="/assets/importFigma.gif">
 
+<div id="howUse"/>
 
 ### How to Use
 To use Figma Convert first draw one or more interfaces (it is important that precision interfaces are components).
