@@ -21,11 +21,11 @@ public class Builder {
             gameObject = new Text(obj, escala).createObject();
         else if(parent.name.Contains("Page")) {
             if(obj.componentPropertyDefinitions.PositionX != null) {
-                Global.objPositionX = (float) (float.Parse(obj.componentPropertyDefinitions.PositionX.defaultValue) * 0.5);
-                Global.objPositionY = (float) (float.Parse(obj.componentPropertyDefinitions.PositionY.defaultValue) * -1 * 0.5);
-                Global.objPositionZ = (float) (float.Parse(obj.componentPropertyDefinitions.PositionZ.defaultValue) * 0.5);
-                Global.objRotationX = (float) (float.Parse(obj.componentPropertyDefinitions.RotationX.defaultValue) * -1 * 0.5);
-                Global.objRotationY = (float) (float.Parse(obj.componentPropertyDefinitions.RotationY.defaultValue) * 0.5);
+                Global.objPositionX = (float) (float.Parse(obj.componentPropertyDefinitions.PositionX.defaultValue) * 0.75);
+                Global.objPositionY = (float) (float.Parse(obj.componentPropertyDefinitions.PositionY.defaultValue) * -1 * 0.75);
+                Global.objPositionZ = (float) (float.Parse(obj.componentPropertyDefinitions.PositionZ.defaultValue) * 0.75);
+                Global.objRotationX = (float) (float.Parse(obj.componentPropertyDefinitions.RotationX.defaultValue) * -1 * 0.75);
+                Global.objRotationY = (float) (float.Parse(obj.componentPropertyDefinitions.RotationY.defaultValue) * 0.75);
             }
             else {
                 Global.objPositionX = 0;
