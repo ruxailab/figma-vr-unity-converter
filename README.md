@@ -2,18 +2,46 @@
 
 ![license](https://img.shields.io/github/license/uramakilab/figma-vr-unity-converter) ![Issues](https://img.shields.io/github/issues/uramakilab/figma-vr-unity-converter) ![Stars](https://img.shields.io/github/stars/uramakilab/figma-vr-unity-converter) ![Status](https://img.shields.io/badge/status-Development-orange)
 
+The objective of this project is to facilitate the prototyping of user interfaces for the metaverse, thus facilitating and assisting in the development of software and systems for it.
 
 ## Summary
-* [Description](#project-description)
+* [Prerequisites](#prerequisites)
+    * [How to Install](#how)
+    * [How to Use](#run)
 * [Technologies](#🛠️-technologies)
 * [Documentations](#📚-documents-used)
 * [Features](#🔨-features)
-* [Prerequisites](#prerequisites)
-    * [Run](#run)
 * [Additional Information](#additional-information)
 
-## Project Description
-The objective of this project is to facilitate the prototyping of user interfaces for the metaverse, thus facilitating and assisting in the development of software and systems for it.
+## Prerequisites
+Before starting, you need to have an account and install [Unity (2021.3)](https://unity.com/en/download) and [Figma](https://www.figma.com/downloads/) on your computer. Then install Unity UI Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+
+### How to Install
+First perform [download Unity and Figma plugins](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
+
+<img src="/assets/download.gif">
+
+With Unity open importer plugin for Unity.
+
+<img src="/assets/importUnity.gif">
+
+Then extract the zip file and import the plugin manifest to Figma.
+
+<img src="/assets/importFigma.gif">
+
+
+### How to Use
+To use Figma Convert first draw one or more interfaces (it is important that precision interfaces are components).
+
+<img src="/assets/interfaceFigma.png">
+
+Then select the components you want to export to Unity and click on the Figma icon to open the menu, go to plugin, development and FTU (Figma To Unity). In this plugin you will position all the interfaces that were created, in a way that you want them to be positioned in Unity.
+
+<img src="/assets/pluginFigma.gif">
+
+Now go to Unity click on tools, Figma Convert. With the window of Figma Convert click on Login Browser so that the token can be obtained automatically or enter the token manually. Then copy the url of the Unity Document and finally click on Download Project.
+
+<img src="/assets/pluginUnity.gif">
 
 ## 🛠️ Technologies
 The following tools and technologies were used in the construction of the project:
@@ -33,40 +61,24 @@ Some of the documentation used in the project:
 
 ## 🔨 Features
 * [x] Unity Tools
-* [x] GameObject Cube and Rectangle
-* [x] GameObject Sphere
-* [ ] GameObject Circle
-* [ ] GameObject Triangle
-* [ ] GameObject Start
-* [x] GameObject Text
-* [x] GameObject Frame
-* [ ] GameObject Component
+* [x] GameObject Canva
+* [x] GameObject Painel
 * [x] Position
 * [x] Size
 * [x] Color
 * [x] None Color
 * [x] Image
 * [x] Image PNG
-* [ ] Image SVG
+* [x] Image SVG
 * [x] Frame in Frame
 * [x] Rounded Cube
-* [ ] Border Color
+* [x] Border Color
+* [ ] Sphere
+* [ ] Circle
+* [ ] Triangle
+* [ ] Start
+* [x] Text
 
-## Prerequisites
-Before starting, you will need to have the [Unity](https://unity.com/pt) and an account at[Figma](https://figma.com/).
-
-### Run
-First you will need to get your access token from your [Figma](https://figma.com/) account, copy the token.
-<img src="/assets/getToken.gif">
-
-In we will also need the URL of the file we want to send to Unity.
-<img src="/assets/getUrl.png">
-
-Now open Unity in ongoing project or create a new one. Download the folder [Figma Convert](https://github.com/uramakilab/figma-vr-unity-converter/tree/main/Unity/Assets/Figma%20Converter). Once the download is complete, move the folder into Unity's Assets folder.
-<img src="/assets/pastaFigmaConvert.png">
-
-After moving the folder, you will enable a button on the top menu called Tools, inside it will have the Figma Convert tool. Clicking on it will open a window to enter the default scale 100, token and URL of the document.
-<img src="/assets/figmaConvert.gif">
 
 ## Additional Information
 
