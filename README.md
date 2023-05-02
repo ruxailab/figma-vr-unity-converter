@@ -1,7 +1,10 @@
 <h2 align="center">Prototyped for User Interfaces in the Metaverse</h2>
-<p align="center">EN - BR</p>
+
+<div align="center">
 
 ![license](https://img.shields.io/github/license/uramakilab/figma-vr-unity-converter) ![Issues](https://img.shields.io/github/issues/uramakilab/figma-vr-unity-converter) ![Stars](https://img.shields.io/github/stars/uramakilab/figma-vr-unity-converter) ![Status](https://img.shields.io/badge/status-Development-orange)
+
+</div>
 
 The objective of this project is to facilitate the prototyping of user interfaces for the metaverse, thus facilitating and assisting in the development of software and systems for it.
 
@@ -17,7 +20,7 @@ The objective of this project is to facilitate the prototyping of user interface
 <!--* [Thanks](#thanks)-->
 
 ## Prerequisites
-Before starting, you need to have an account and install <a href="https://unity.com/pt/download" target="_blank">Unity (2021.3)</a> and <a href="https://www.figma.com/downloads/" target="_blank">Figma Desktop APP</a> on your computer. Then install Unity UI Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+Before starting, you need to have an account and install <a href="https://unity.com/pt/download" target="_blank">Unity (2021.3)</a> and <a href="https://www.figma.com/downloads/" target="_blank">Figma Desktop APP</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners), if you don't have VR configured in Unity see the following [documentation](./vrDocument.md).
 
 <div id="howInstall"/>
 
@@ -81,7 +84,7 @@ Some of the documentation used in the project:
 * [Figma API](https://www.figma.com/developers/api)
 
 
-## Additional Information
+## ➕Additional Information
 
 - Access [Postman](https://orange-space-957236.postman.co/workspace/Prototipado-para-interfaces-de-~d9f0f502-42b6-4da1-b34c-cacaf76b84bf/collection/21577195-86734ae6-cf68-4ac8-8aee-78992c835af9?action=share&creator=21577195)
 - Tested on Unity 2021 release

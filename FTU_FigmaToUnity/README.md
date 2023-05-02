@@ -1,40 +1,32 @@
-Below are the steps to get your plugin running. You can also find instructions at:
+# FTU (Figma To Unity)
 
-  https://www.figma.com/plugin-docs/plugin-quickstart/
+Below are the steps to get the plugin up and running.
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+This plugin model uses Typescript and NPM, two standard tools in JavaScript application creation.
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+First, download Node.js that comes with NPM. This will allow you to install TypeScript and other libraries. You can find the download link here:
 
   https://nodejs.org/en/download/
 
-Next, install TypeScript using the command:
+Then install all dependencies with the following command:
 
-  npm install -g typescript
-
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
-
-  npm install --save-dev @figma/plugin-typings
-
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
+```bash
+npm install
+```
+If you're familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
+is already valid TypeScript code.
 
 TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
+to provide information about the Figma API as you write code, as well as help catch bugs.
 
 For more information, visit https://www.typescriptlang.org/
 
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
+Using TypeScript requires a compiler to convert TypeScript (code.ts) to JavaScript (code.js) for the browser to run.
 
-We recommend writing TypeScript code using Visual Studio code:
+We recommend writing the TypeScript code using Visual Studio:
 
 1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-    then select "npm: watch". You will have to do this again every time
-    you reopen Visual Studio Code.
+2. Open that directory in Visual Studio Code.
+3. Compile TypeScript to JavaScript: Press Ctrl-Shift -B in Windows or Command -Shift -B` for Mac. Then select watch-tsconfig.json.
 
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+The plugin has two essential files, code.ts and ui.html. The code.ts is responsible for all the data handling, while the ui.html where the entire user interface will be.

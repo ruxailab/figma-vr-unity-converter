@@ -1,3 +1,3 @@
 # Contributing
 
-O projeto é dividido em duas partes o plugin do Unity e do Figma, o plugin do figma se chama [FTU (Figma To Unity)](/FTU_FigmaToUnity/README.md) o do Unity se chama [Figma Convert](/Figma%20Convert/README.md).
+The project is divided into two plugins: Unity and Figma, the figma plugin is called [FTU (Figma To Unity)](/FTU_FigmaToUnity/README.md) and the Unity plugin is called [Figma Convert](./Figma%20Convert/README.md).
