@@ -10,6 +10,7 @@ The objective of this project is to facilitate the prototyping of user interface
 
 ## Summary
 * [Prerequisites](#prerequisites)
+    * [Install VR](#installVR)
     * [How to Install](#howInstall)
     * [How to Use](#howUse)
 * [Technologies](#🛠️-technologies)
@@ -20,7 +21,18 @@ The objective of this project is to facilitate the prototyping of user interface
 <!--* [Thanks](#thanks)-->
 
 ## Prerequisites
-Before starting, you need to have an account and install <a href="https://unity.com/pt/download" target="_blank">Unity (2021.3)</a> and <a href="https://www.figma.com/downloads/" target="_blank">Figma Desktop APP</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners), if you don't have VR configured in Unity see the following [documentation](./vrDocument.md).
+Before starting, you need to have an account and install <a href="https://unity.com/pt/download" target="_blank">Unity (2021.3)</a> and <a href="https://www.figma.com/downloads/" target="_blank">Figma Desktop APP</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+
+<div id="installVR"/>
+
+### Install VR
+The following steps have been tested with Meta's VR Glasses Quest 2. If you haven't downloaded the software for your VR, install it so you can connect your computer to the VR.
+
+Then turn on the VR, allow access to the files and enable the VR's "Quest Link" or "Rift" setting.
+
+Now in Uniy Hub, create a new project using the VR option as a template, that way everything will be configured. Now just press play in Unity.
+
+<img src="/assets/createProject.png">
 
 <div id="howInstall"/>
 
