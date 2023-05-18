@@ -21,7 +21,7 @@ The objective of this project is to facilitate the prototyping of user interface
 <!--* [Thanks](#thanks)-->
 
 ## Prerequisites
-Before starting, you need to have an account and install <a href="https://unity.com/pt/download" target="_blank">Unity (2021.3)</a> and <a href="https://www.figma.com/downloads/" target="_blank">Figma Desktop APP</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+Before you start, you need to have an account on <a href="https://www.figma.com" target="_blank">Figma</a> and install <a href="https://unity.com /en/download" target="_blank">Unity (2021.3)</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
 
 <div id="installVR"/>
 
@@ -37,7 +37,7 @@ Now in Uniy Hub, create a new project using the VR option as a template, that wa
 <div id="howInstall"/>
 
 ### How to Install
-First download the [Plugin.Figma.zip](https://github.com/uramakilab/figma-vr-unity-converter/releases) and [Plugin.Unity.unitypackage](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
+First download the [Plugin.Unity.unitypackage](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
 
 <img src="/assets/download.gif">
 
@@ -49,13 +49,10 @@ Then import the plugin into Unity:
 
 <img src="/assets/importUnity.gif">
 
-Now to import the plugin into figma:
-* Extract the Plugin.Figma.zip.
-* Open Figma Desktop.
+Now, to use the plugin open <a href="https://www.figma.com/" target="_blank">figma</a>:
 * Open a project in Figma.
-* Click on the Figma icon to open the menu.
-* Go to Plugins, Development, Import plugin from manifest.
-* Choose the manifest.json file inside the folder that was extracted.
+* Click the Figma icon to open the menu.
+* Go to Plugins, search for plugins, search for Figma To Unity For Virtual Reality (FUVR) then select.
 
 <img src="/assets/importFigma.gif">
 
@@ -67,9 +64,9 @@ To use Figma Convert first draw one or more interfaces (it is important that pre
 <img src="/assets/interfaceFigma.png">
 
 Then, to position the components the way you want them to be positioned in Unity:
-* Select the components you want to export
-* Click the Figma icon to open the menu
-* Go to plugin, development and FTU (Figma To Unity)
+* Select the components you want to export.
+* Click the Figma icon to open the menu.
+* Go to plugin and Figma To Unity For Virtual Reality (FUVR).
 
 In the plugin you can position each component in the place you want, just select the component with double click and place it in the position you want.
 
