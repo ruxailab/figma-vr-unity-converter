@@ -153,7 +153,7 @@
   button {
     border-radius: 25px;
     padding: 8px 15px;
-    margin: 15px 15px;
+    margin: 10px 10px;
     color: white;
   }
     
@@ -181,6 +181,7 @@
 
 <div>
   <div id="ui">
+    <img id="my-img">
     <nav id="nav">
       <ul>
         <li id="btn_scene" style="color: #18a0fb;">Scene</li>
@@ -280,11 +281,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js'
-// import { VRButton } from 'https://threejs.org/examples/jsm/webxr/VRButton.js'
 
 onmessage = (event) => {
   let data = event.data.pluginMessage
-  // console.log(data.components[0].)
   if(!data.isComponent){
     alert('Selecione somente componentes')
     parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
@@ -292,7 +291,7 @@ onmessage = (event) => {
 
   // Renderer
   const renderer = new THREE.WebGLRenderer()
-  renderer.setSize( /*window.innerWidth*0.74, window.innerHeight*/ 588, 540)
+  renderer.setSize( /*window.innerWidth*0.74, window.innerHeight*/ 520, 450)
   document.querySelector('#threeJS').appendChild(renderer.domElement)
 
   // Scene
@@ -300,7 +299,7 @@ onmessage = (event) => {
   scene.background = new THREE.Color(0x121212)
 
   // Camera
-  const camera = new THREE.PerspectiveCamera(75, /*window.innerWidth / window.innerHeight*/ 588 / 540, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(75, /*window.innerWidth / window.innerHeight*/ 520 / 450, 0.1, 1000)
   const controls = new OrbitControls(camera, renderer.domElement)
   camera.position.set(0, 0, 5)
 
@@ -73745,8 +73744,9 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     const imageBlob = new Blob([component.image], {type: "image/png"})
     const url = URL.createObjectURL(imageBlob)
     const textureComponent = new THREE.TextureLoader().load(url);
-    const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent })
+    const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent})
     const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
+    document.getElementById('my-img').src = url
     meshComponent.position.x = component.property.positionX
     meshComponent.position.y = component.property.positionY
     meshComponent.position.z = component.property.positionZ

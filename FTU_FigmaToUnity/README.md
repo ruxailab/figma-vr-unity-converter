@@ -30,3 +30,11 @@ We recommend writing the TypeScript code using Visual Studio:
 3. Compile TypeScript to JavaScript: Press Ctrl-Shift -B in Windows or Command -Shift -B` for Mac. Then select watch-tsconfig.json.
 
 The plugin has two essential files, code.ts and ui.html. The code.ts is responsible for all the data handling, while the ui.html where the entire user interface will be.
+
+Now to import the plugin into Figma Desktop:
+* Extract the Plugin.Figma.zip.
+* Open Figma Desktop.
+* Open a project in Figma.
+* Click on the Figma icon to open the menu.
+* Go to Plugins, Development, Import plugin from manifest.
+* Choose the manifest.json file inside the folder that was extracted.

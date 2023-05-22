@@ -1,6 +1,6 @@
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__, { themeColors: true })
-figma.ui.resize(800, 540)
+figma.ui.resize(700, 450)
 
 let isComponent = () => {
   if(figma.currentPage.selection.length < 1){
