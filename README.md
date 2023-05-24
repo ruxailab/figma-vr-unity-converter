@@ -54,7 +54,7 @@ Now, to use the plugin open <a href="https://www.figma.com/" target="_blank">fig
 * Click the Figma icon to open the menu.
 * Go to Plugins, search for plugins, search for Figma To Unity For Virtual Reality (FUVR) then select.
 
-<img src="/assets/importFigma.gif">
+<img src="/assets/importeFigma.gif">
 
 <div id="howUse"/>
 
