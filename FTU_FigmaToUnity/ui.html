@@ -181,7 +181,6 @@
 
 <div>
   <div id="ui">
-    <img id="my-img">
     <nav id="nav">
       <ul>
         <li id="btn_scene" style="color: #18a0fb;">Scene</li>
@@ -272,12 +271,13 @@
 <script type="importmap">
   {
     "imports": {
-      "three": "https://threejs.org/build/three.module.js"
+      "three": "https://unpkg.com/three@0.152.2/build/three.module.js"
     }
   }
 </script>
 
 <script type="module">
+  // https://threejs.org/build/three.module.js
 import * as THREE from 'three'
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js'
@@ -290,8 +290,11 @@ onmessage = (event) => {
   }
 
   // Renderer
-  const renderer = new THREE.WebGLRenderer()
+  const renderer = new THREE.WebGLRenderer(/*{ alpha: true, premultipliedAlpha: false }*/)
   renderer.setSize( /*window.innerWidth*0.74, window.innerHeight*/ 520, 450)
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  // renderer.gammaOutput = true
+  // renderer.gammaFactor = 10
   document.querySelector('#threeJS').appendChild(renderer.domElement)
 
   // Scene
@@ -73743,17 +73746,19 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     const geometryComponent = new THREE.BoxGeometry(component.width, component.height, 0.001)
     const imageBlob = new Blob([component.image], {type: "image/png"})
     const url = URL.createObjectURL(imageBlob)
-    const textureComponent = new THREE.TextureLoader().load(url);
-    const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent})
-    const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
-    document.getElementById('my-img').src = url
-    meshComponent.position.x = component.property.positionX
-    meshComponent.position.y = component.property.positionY
-    meshComponent.position.z = component.property.positionZ
-    meshComponent.rotation.x = mapEuler(component.property.rotationX)
-    meshComponent.rotation.y = mapEuler(component.property.rotationY)
-    scene.add(meshComponent)
-    meshComponents.push(meshComponent)
+    const textureComponent = new THREE.TextureLoader().load(url, () =>{
+      const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent})
+      materialComponent.needsUpdate = true
+      materialComponent.map.encoding = THREE.sRGBEncoding
+      const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
+      meshComponent.position.x = component.property.positionX
+      meshComponent.position.y = component.property.positionY
+      meshComponent.position.z = component.property.positionZ
+      meshComponent.rotation.x = mapEuler(component.property.rotationX)
+      meshComponent.rotation.y = mapEuler(component.property.rotationY)
+      scene.add(meshComponent)
+      meshComponents.push(meshComponent)
+    });
   }
 
 
