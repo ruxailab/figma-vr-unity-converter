@@ -34,12 +34,12 @@ class Window : EditorWindow {
         }
 
         if(GUILayout.Button("Download Projet")) {
-            // try {
+            try {
                 Core.Start(escala);
-            // }
-            // catch (Exception e){
-                // Debug.Log(e);
-            // }
+            }
+            catch (Exception e){
+                Debug.Log(e);
+            }
         }
     }
 }

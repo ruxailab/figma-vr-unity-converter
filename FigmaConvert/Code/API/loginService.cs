@@ -8,12 +8,16 @@ using System.Text;
 abstract class loginService {
     public static string login(){
         string url = "https://www.figma.com/oauth?client_id=5OT2eSe3pVPAEENW6YdOvG&redirect_uri=http%3A%2F%2Flocalhost%3A4444%2F&scope=file_read&state=true&response_type=code";
-        System.Diagnostics.Process.Start("chrome.exe", url);
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            System.Diagnostics.Process.Start(url);
+        else if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
+            System.Diagnostics.Process.Start("open", url);
+        else
+            System.Diagnostics.Process.Start("xdg-open", url);
         string urlResponse = startHttpListener();
         string code = getCode(urlResponse);
         Token tokenAccess = getToken(code);
         return tokenAccess.access_token;
-        // return "oi";
     }
 
     public static string startHttpListener() {

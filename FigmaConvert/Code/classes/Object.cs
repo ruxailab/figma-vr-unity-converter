@@ -29,13 +29,16 @@ public abstract class Object {
     }
 
     public void setPosition(RectTransform rectTransform) {
-        eixoX = (obj.absoluteBoundingBox.x/escala) + (width/2);
-        eixoY = (obj.absoluteBoundingBox.y/escala) + (height/2);
-        if(obj.strokeWeight != 0 && obj.strokes.Length == 1 && obj.strokes[0].visible == true) {
-            eixoX += obj.strokeWeight/(float)escala;
-            eixoY += obj.strokeWeight/(float)escala/2;
-        }
-        rectTransform.localPosition = new Vector3(eixoX, eixoY, 0);
+        // eixoX = (obj.absoluteBoundingBox.x/escala) + (width/2);
+        // eixoY = (obj.absoluteBoundingBox.y/escala) + (height/2);
+        // if(obj.strokeWeight != 0 && obj.strokes.Length == 1 && obj.strokes[0].visible == true) {
+        //     eixoX += obj.strokeWeight/(float)escala;
+        //     eixoY += obj.strokeWeight/(float)escala/2;
+        // }
+        eixoX = Global.objPositionX;
+        eixoY = Global.objPositionY;
+        eixoZ = Global.objPositionZ;
+        rectTransform.localPosition = new Vector3(eixoX, eixoY, eixoZ);
     }
 
     public void setRotation(RectTransform rectTransform) {

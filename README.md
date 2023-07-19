@@ -42,9 +42,9 @@ First download the [Plugin.Unity.unitypackage](https://github.com/uramakilab/fig
 <img src="/assets/download.gif">
 
 Then import the plugin into Unity:
-* Open Unity.
-* Go to where the Plugin.Unity.unitypackage was downloaded.
-* Open the Plugin.Unity.unitypackage file.
+* Open the Unity.
+* On the top menu click on Asset -> Import Package -> Custom Package.
+* Select the Plugin.Unity.unitypackage file.
 * When the import window appears, click import.
 
 <img src="/assets/importUnity.gif">
