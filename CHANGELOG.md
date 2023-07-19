@@ -1,3 +1,11 @@
+## v1.0.1
+
+<h4>Plugin Unity</h4>
+
+* [x] Linux Compatibility
+* [x] Mac Compatibility
+
+
 ## v1.0.0
 
 <h4>Plugin Unity</h4>
@@ -23,4 +31,6 @@
 
 * [x] Position X, Y, Z
 * [x] Rotation X, Y
+* [x] Orbit
+* [x] Human 3D
 * [x] ThreeJS

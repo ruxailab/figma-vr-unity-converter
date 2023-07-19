@@ -1,0 +1,30 @@
+{
+  "name": "com.uramakilab.figmaconverter",
+  "displayName": "Figma To Unity For Virtual Reality",
+  "version": "1.0.1",
+  "description": "This package provides components and shaders that allow you to add rounded corners to UI elements!",
+  "keywords": [
+      "UI",
+      "VR",
+      "Unity",
+      "Figma",
+      "3d",
+      "desing",
+      "mockup",
+      "prototype",
+      "prototyping",
+      "skew",
+      "usability",
+      "xr tools"
+  ],
+  "category": "UI",
+  "files": [
+      "/LICENSE",
+      "/README.md",
+      "/package.json",
+      "/FigmaConvert"
+  ],
+  "dependencies": {
+    "com.nobi.roundedcorners": "https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git"
+  }
+}
