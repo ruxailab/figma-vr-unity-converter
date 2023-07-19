@@ -25,8 +25,8 @@
     "/README.md.meta",
     "/package.json",
     "/package.json.meta",
-    "/FigmaConvert",
-    "/FigmaConvert.meta"
+    "/Editor",
+    "/Editor.meta"
   ],
   "dependencies": {
     "com.nobi.roundedcorners": "https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git"
