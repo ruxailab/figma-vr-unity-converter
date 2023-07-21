@@ -21,7 +21,7 @@ The objective of this project is to facilitate the prototyping of user interface
 <!--* [Thanks](#thanks)-->
 
 ## Prerequisites
-Before you start, you need to have an account on <a href="https://www.figma.com" target="_blank">Figma</a> and install <a href="https://unity.com /en/download" target="_blank">Unity (2021.3)</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+Before you start, you need to have an account on <a href="https://www.figma.com" target="_blank">Figma</a> and install <a href="https://unity.com/download" target="_blank">Unity (2021.3)</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
 
 <div id="installVR"/>
 

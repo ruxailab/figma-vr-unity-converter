@@ -28,11 +28,13 @@ public class Core {
             // Loop Objeto
             for(int j = 0; j<apiDocument.document.children[i].children.Length; j++){
                 ObjectProperty apiObj = apiDocument.document.children[i].children[j];
-                Builder objeto = new Builder(apiObj, empty, escala);
-                objeto.createObject();
+                if(apiObj.componentPropertyDefinitions.PositionX != null) {
+                    Builder objeto = new Builder(apiObj, empty, escala);
+                    objeto.createObject();
+                }
             }
             empty.transform.Rotate(180.0f, 0f, 0f, Space.World);
-            empty.transform.position = new Vector3(0, (float)4.25, 0);
+            empty.transform.position = new Vector3(0, 1, 0);
         }
     }
 }

@@ -7,4 +7,8 @@ static class Global {
     public static float objPositionZ;
     public static float objRotationX;
     public static float objRotationY;
+    public static float objWidth;
+    public static float objHeigth;
+    public static float objAbsoluteX;
+    public static float objAbsoluteY;
 }
