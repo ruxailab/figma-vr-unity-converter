@@ -35,27 +35,35 @@ let componentCreate = () => __awaiter(void 0, void 0, void 0, function* () {
                 constraint: { type: 'SCALE', value: 2 }
             });
             let propertys = select.componentPropertyDefinitions;
-            let property = { rotationX: 0, rotationY: 0, positionX: 0, positionY: 0, positionZ: -1 };
-            if (Object.keys(propertys).length === 5) {
-                const keys = Object.keys(propertys);
-                keys.forEach(key => {
-                    if (key.includes('RotationX')) {
-                        property.rotationX = Number(propertys[key].defaultValue);
-                    }
-                    else if (key.includes('RotationY')) {
-                        property.rotationY = Number(propertys[key].defaultValue);
-                    }
-                    else if (key.includes('PositionX')) {
-                        property.positionX = Number(propertys[key].defaultValue);
-                    }
-                    else if (key.includes('PositionY')) {
-                        property.positionY = Number(propertys[key].defaultValue);
-                    }
-                    else if (key.includes('PositionZ')) {
-                        property.positionZ = Number(propertys[key].defaultValue);
-                    }
-                });
-            }
+            let property = {
+                rotationX: 0,
+                rotationY: 0,
+                positionX: 0,
+                positionY: 0,
+                positionZ: -1,
+                visiable: true,
+            };
+            const keys = Object.keys(propertys);
+            keys.forEach(key => {
+                if (key.includes('RotationX')) {
+                    property.rotationX = Number(propertys[key].defaultValue);
+                }
+                else if (key.includes('RotationY')) {
+                    property.rotationY = Number(propertys[key].defaultValue);
+                }
+                else if (key.includes('PositionX')) {
+                    property.positionX = Number(propertys[key].defaultValue);
+                }
+                else if (key.includes('PositionY')) {
+                    property.positionY = Number(propertys[key].defaultValue);
+                }
+                else if (key.includes('PositionZ')) {
+                    property.positionZ = Number(propertys[key].defaultValue);
+                }
+                else if (key.includes('Visiable')) {
+                    property.visiable = Boolean(propertys[key].defaultValue);
+                }
+            });
             let component = { width, height, image, property };
             components.push(component);
         }
@@ -73,6 +81,7 @@ figma.ui.onmessage = msg => {
                 addComponent(node, 'PositionZ', msg.components[i].positionZ.toString());
                 addComponent(node, 'PositionX', msg.components[i].positionX.toString());
                 addComponent(node, 'PositionY', msg.components[i].positionY.toString());
+                addComponent(node, 'Visiable', msg.components[i].visiable.toString());
             }
         });
         figma.closePlugin();

@@ -48,6 +48,21 @@
     padding-left: 10px;
   }
 
+  .scrollable-div {
+    width: 165px;
+    height: 325px;
+    overflow: auto;
+  }
+
+  .scrollable-div::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scrollable-div::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+  }
+
   input[type=number]::-webkit-inner-spin-button { 
     -webkit-appearance: none;
     
@@ -187,7 +202,7 @@
         <li id="btn_settings">Settings</li>
       </ul>
     </nav>
-    <div id="scene">
+    <div id="scene" class="scrollable-div">
       <div>
         <p>Positon X</p>
         <div class="input">
@@ -231,6 +246,14 @@
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
           <input type="number" id="rotationY" value="0" class="input_element">
+        </div>
+      </div>
+      <div>
+        <p>Show Component</p>
+        <div class="input">
+          <div>
+            <input type="checkbox" id="visiable" checked>
+          </div>
         </div>
       </div>
     </div>
@@ -289,12 +312,14 @@ onmessage = (event) => {
     parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
   }
 
+  // Obtenha a largura e altura da tela
+  const screenWidth = 520;
+  const screenHeight = 450;
+
   // Renderer
-  const renderer = new THREE.WebGLRenderer(/*{ alpha: true, premultipliedAlpha: false }*/)
-  renderer.setSize( /*window.innerWidth*0.74, window.innerHeight*/ 520, 450)
+  const renderer = new THREE.WebGLRenderer()
+  renderer.setSize(screenWidth, screenHeight)
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  // renderer.gammaOutput = true
-  // renderer.gammaFactor = 10
   document.querySelector('#threeJS').appendChild(renderer.domElement)
 
   // Scene
@@ -302,7 +327,7 @@ onmessage = (event) => {
   scene.background = new THREE.Color(0x121212)
 
   // Camera
-  const camera = new THREE.PerspectiveCamera(75, /*window.innerWidth / window.innerHeight*/ 520 / 450, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(75, screenWidth / screenHeight, 0.1, 1000)
   const controls = new OrbitControls(camera, renderer.domElement)
   camera.position.set(0, 0, 5)
 
@@ -73725,7 +73750,6 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       // console.log((xhr.loaded / xhr.total * 100) + '% loaded')
     },
     (error) => {
-      // console.log('An error happened')
       // console.log(error)
     }
   );
@@ -73740,6 +73764,10 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   circle.position.y = -1
   scene.add(circle)
 
+  // Eixos
+  // const axesHelper = new THREE.AxesHelper( 1 );
+  // scene.add( axesHelper );
+
   // Component
   var meshComponents = []
   for(const component of data.components){
@@ -73747,15 +73775,21 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     const imageBlob = new Blob([component.image], {type: "image/png"})
     const url = URL.createObjectURL(imageBlob)
     const textureComponent = new THREE.TextureLoader().load(url, () =>{
-      const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent})
+      const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent })
       materialComponent.needsUpdate = true
       materialComponent.map.encoding = THREE.sRGBEncoding
+
       const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
       meshComponent.position.x = component.property.positionX
       meshComponent.position.y = component.property.positionY
       meshComponent.position.z = component.property.positionZ
       meshComponent.rotation.x = mapEuler(component.property.rotationX)
       meshComponent.rotation.y = mapEuler(component.property.rotationY)
+      meshComponent.componentVisiable = component.property.visiable
+      meshComponent.material.color.b = component.property.visiable ? 1 : 0.2
+      meshComponent.material.color.g = component.property.visiable ? 1 : 0.2
+      meshComponent.material.color.r = component.property.visiable ? 1 : 0.2
+      console.log(meshComponent)
       scene.add(meshComponent)
       meshComponents.push(meshComponent)
     });
@@ -73787,6 +73821,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       document.querySelector('#distance').value = select.position.z*-1
       document.querySelector('#rotationX').value = mapRadianos(select.rotation.x)
       document.querySelector('#rotationY').value = mapRadianos(select.rotation.y)
+      document.querySelector('#visiable').checked = select.componentVisiable
     }
     else {
       scene.remove(line)
@@ -73804,6 +73839,10 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       select.position.z = document.querySelector('#distance').value*-1
       select.rotation.x = mapEuler(document.querySelector('#rotationX').value)
       select.rotation.y = mapEuler(document.querySelector('#rotationY').value)
+      select.componentVisiable = document.querySelector('#visiable').checked
+      select.material.color.b = document.querySelector('#visiable').checked ? 1 : 0.2
+      select.material.color.g = document.querySelector('#visiable').checked ? 1 : 0.2
+      select.material.color.r = document.querySelector('#visiable').checked ? 1 : 0.2
       line.position.x = select.position.x
       line.position.y = select.position.y
       line.position.z = select.position.z
@@ -73824,6 +73863,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       component.positionZ = meshComponent.position.z
       component.rotationX = mapRadianos(meshComponent.rotation._x)
       component.rotationY = mapRadianos(meshComponent.rotation._y)
+      component.visiable = meshComponent.componentVisiable
       components.push(component)
     }
     parent.postMessage({ pluginMessage: { type: 'apply', components: components } }, '*')
