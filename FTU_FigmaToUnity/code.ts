@@ -2,70 +2,57 @@
 figma.showUI(__html__, { themeColors: true })
 figma.ui.resize(700, 450)
 
-let isComponent = () => {
-  if(figma.currentPage.selection.length < 1){
-    return false
-  }
-  for(const node of figma.currentPage.selection) {
-    if(node.type !== 'COMPONENT'){
-      return false
-    }
-  }
-  return true
-}
+async function componentCreate () {
+  const components = []
 
-let componentCreate = async () => {
-  let components = []
-  for(let i=0; i<figma.currentPage.selection.length; i++){
-    let select = figma.currentPage.selection[i]
-    if(typeof(select.absoluteBoundingBox?.width) === 'number' && select.type === 'COMPONENT'){
-      let width = select.absoluteBoundingBox?.width/100
-      let height = select.absoluteBoundingBox?.height/100
-      let image = await figma.currentPage.selection[i].exportAsync({
-        format: 'PNG',
-        constraint: { type: 'SCALE', value: 2 }
-      })
-      let propertys = select.componentPropertyDefinitions
-      let property: { rotationX: number, rotationY: number, positionX: number, positionY: number, positionZ: number } = {rotationX: 0, rotationY: 0, positionX: 0, positionY: 0, positionZ: -1}
-      if(Object.keys(propertys).length === 5) {
-        const keys = Object.keys(propertys)
-        keys.forEach( key => {
-          if(key.includes('RotationX')) {
-            property.rotationX = Number(propertys[key].defaultValue)
-          }
-          else if(key.includes('RotationY')) {
-            property.rotationY = Number(propertys[key].defaultValue)
-          }
-          else if(key.includes('PositionX')) {
-            property.positionX = Number(propertys[key].defaultValue)
-          }
-          else if(key.includes('PositionY')) {
-            property.positionY = Number(propertys[key].defaultValue)
-          }
-          else if(key.includes('PositionZ')) {
-            property.positionZ = Number(propertys[key].defaultValue)
-          }
-        })
+  for (const selection of figma.currentPage.selection) {
+    if(typeof selection.absoluteBoundingBox?.width === 'number' && selection.type === 'COMPONENT') {
+      const width = selection.absoluteBoundingBox?.width / 100;
+      const height = selection.absoluteBoundingBox?.height / 100;
+      const image = await selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 2 } })
+      const keys = Object.keys(selection.componentPropertyDefinitions)
+      const property = {
+        rotationX: Number(componentProperty(keys, selection, 'RotationX')) || 0,
+        rotationY: Number(componentProperty(keys, selection, 'RotationY')) || 0,
+        positionX: Number(componentProperty(keys, selection, 'PositionX')) || 0,
+        positionY: Number(componentProperty(keys, selection, 'PositionY')) || 0,
+        positionZ: Number(componentProperty(keys, selection, 'PositionZ')) || 0,
+        visible: componentProperty(keys, selection, 'Visible') == 'true' || true,
       }
-      let component: { width: number, height: number, image: object, property: object  } = { width, height, image, property }
-      components.push(component)
+      components.push({ width, height, image, property })
     }
   }
   figma.ui.postMessage({isComponent: isComponent(), components: components})
 }
 componentCreate()
 
+function componentProperty (keys: string[], selection: ComponentNode, search: string) {
+  const key = keys.find(key => key.includes(search))
+  if(key) return selection.componentPropertyDefinitions[key]?.defaultValue
+  return null
+}
+
+function isComponent () {
+  if(figma.currentPage.selection.length < 1) return false
+  for(const node of figma.currentPage.selection) {
+    if(node.type !== 'COMPONENT') return false
+  }
+  return true
+}
+
+
 figma.ui.onmessage = msg => {
   
   if (msg.type === 'apply') {
-    var components = figma.currentPage.selection
+    const components = figma.currentPage.selection
     components.forEach((node, i) => {
-      if(node.type === 'COMPONENT'){
+      if(node.type === 'COMPONENT') {
         addComponent(node, 'RotationX', msg.components[i].rotationX.toString())
         addComponent(node, 'RotationY', msg.components[i].rotationY.toString())
         addComponent(node, 'PositionZ', msg.components[i].positionZ.toString())
         addComponent(node, 'PositionX', msg.components[i].positionX.toString())
         addComponent(node, 'PositionY', msg.components[i].positionY.toString())
+        addComponent(node, 'Visible', msg.components[i].visible.toString())
       }
     })
     figma.closePlugin()

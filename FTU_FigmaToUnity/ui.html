@@ -48,6 +48,21 @@
     padding-left: 10px;
   }
 
+  .scrollable-div {
+    width: 165px;
+    height: 325px;
+    overflow: auto;
+  }
+
+  .scrollable-div::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scrollable-div::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+  }
+
   input[type=number]::-webkit-inner-spin-button { 
     -webkit-appearance: none;
     
@@ -187,7 +202,7 @@
         <li id="btn_settings">Settings</li>
       </ul>
     </nav>
-    <div id="scene">
+    <div id="scene" class="scrollable-div">
       <div>
         <p>Positon X</p>
         <div class="input">
@@ -233,6 +248,14 @@
           <input type="number" id="rotationY" value="0" class="input_element">
         </div>
       </div>
+      <div>
+        <p>Display Component</p>
+        <div class="input">
+          <div>
+            <input type="checkbox" id="visible">
+          </div>
+        </div>
+      </div>
     </div>
     <div id="settings" style="display: none;">
       <div>
@@ -261,7 +284,7 @@
       </div>
     </div>
     <div id="float-button">
-      <button id="apply">Apply</button>
+      <button id="apply">Save</button>
       <button id="close">Close</button>
     </div>
   </div>
@@ -277,7 +300,7 @@
 </script>
 
 <script type="module">
-  // https://threejs.org/build/three.module.js
+// https://threejs.org/build/three.module.js
 import * as THREE from 'three'
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js'
@@ -289,12 +312,14 @@ onmessage = (event) => {
     parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
   }
 
+  // Obtenha a largura e altura da tela
+  const screenWidth = 520;
+  const screenHeight = 450;
+
   // Renderer
-  const renderer = new THREE.WebGLRenderer(/*{ alpha: true, premultipliedAlpha: false }*/)
-  renderer.setSize( /*window.innerWidth*0.74, window.innerHeight*/ 520, 450)
+  const renderer = new THREE.WebGLRenderer()
+  renderer.setSize(screenWidth, screenHeight)
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  // renderer.gammaOutput = true
-  // renderer.gammaFactor = 10
   document.querySelector('#threeJS').appendChild(renderer.domElement)
 
   // Scene
@@ -302,12 +327,12 @@ onmessage = (event) => {
   scene.background = new THREE.Color(0x121212)
 
   // Camera
-  const camera = new THREE.PerspectiveCamera(75, /*window.innerWidth / window.innerHeight*/ 520 / 450, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(75, screenWidth / screenHeight, 0.1, 1000)
   const controls = new OrbitControls(camera, renderer.domElement)
   camera.position.set(0, 0, 5)
-
+  
   // Human
-  var human
+  let human
   const conteudo = `# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
 # File Created: 21.08.2014 17:37:51
 
@@ -73725,7 +73750,6 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       // console.log((xhr.loaded / xhr.total * 100) + '% loaded')
     },
     (error) => {
-      // console.log('An error happened')
       // console.log(error)
     }
   );
@@ -73741,21 +73765,23 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   scene.add(circle)
 
   // Component
-  var meshComponents = []
+  const meshComponents = []
+
   for(const component of data.components){
     const geometryComponent = new THREE.BoxGeometry(component.width, component.height, 0.001)
     const imageBlob = new Blob([component.image], {type: "image/png"})
     const url = URL.createObjectURL(imageBlob)
     const textureComponent = new THREE.TextureLoader().load(url, () =>{
-      const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent})
+      const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent })
       materialComponent.needsUpdate = true
       materialComponent.map.encoding = THREE.sRGBEncoding
+
       const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
-      meshComponent.position.x = component.property.positionX
-      meshComponent.position.y = component.property.positionY
-      meshComponent.position.z = component.property.positionZ
-      meshComponent.rotation.x = mapEuler(component.property.rotationX)
-      meshComponent.rotation.y = mapEuler(component.property.rotationY)
+      const { positionX, positionY, positionZ, rotationX, rotationY, visible } = component.property
+      meshComponent.position.set(positionX, positionY, positionZ)
+      meshComponent.rotation.set(mapEuler(rotationX), mapEuler(rotationY), 0)
+      meshComponent.componentVisible = visible
+      meshComponent.material.color.setRGB(visible ? 1 : 0.2, visible ? 1 : 0.2, visible ? 1 : 0.2)
       scene.add(meshComponent)
       meshComponents.push(meshComponent)
     });
@@ -73765,7 +73791,8 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   // Click Object
   const pointer = new THREE.Vector2()
   const raycaster = new THREE.Raycaster()
-  var select, line
+  let select, line
+
   const onMouseClick = (event) => {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 0.7
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1
@@ -73773,23 +73800,28 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     const intersects = raycaster.intersectObjects(meshComponents);  
 
     if(intersects.length > 0) {
-      if(select != undefined) {
-        scene.remove(line)
-      }
+      if(select) scene.remove(line)
+
       select = intersects[0].object
       let parameters = select.geometry.parameters
-      const geometry = new THREE.BoxGeometry(parameters.width, parameters.height, 0.001);
+
+      const { width, height } = select.geometry.parameters;
+      const geometry = new THREE.BoxGeometry(width, height, 0.001);
       const edges = new THREE.EdgesGeometry(geometry);
       line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffffff }));
-      scene.add(line);
-      document.querySelector('#positionX').value = select.position.x
-      document.querySelector('#positionY').value = select.position.y
-      document.querySelector('#distance').value = select.position.z*-1
-      document.querySelector('#rotationX').value = mapRadianos(select.rotation.x)
-      document.querySelector('#rotationY').value = mapRadianos(select.rotation.y)
+
+      const { position, rotation } = select;
+      document.querySelector('#positionX').value = position.x
+      document.querySelector('#positionY').value = position.y
+      document.querySelector('#distance').value = -position.z
+      document.querySelector('#rotationX').value = mapRadianos(rotation.x)
+      document.querySelector('#rotationY').value = mapRadianos(rotation.y)
+      document.querySelector('#visible').checked = select.componentVisible
+      scene.add(line)
     }
     else {
       scene.remove(line)
+      select = undefined
     }
   }
   window.addEventListener('dblclick', onMouseClick)
@@ -73797,33 +73829,40 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   // Animation
   function animate() {
     requestAnimationFrame(animate)
-    controls.update();
-    if(select != undefined){
-      select.position.x = document.querySelector('#positionX').value
-      select.position.y = document.querySelector('#positionY').value
-      select.position.z = document.querySelector('#distance').value*-1
-      select.rotation.x = mapEuler(document.querySelector('#rotationX').value)
-      select.rotation.y = mapEuler(document.querySelector('#rotationY').value)
-      line.position.x = select.position.x
-      line.position.y = select.position.y
-      line.position.z = select.position.z
-      line.rotation.x = select.rotation.x
-      line.rotation.y = select.rotation.y
+    controls.update()
+
+    if(select){
+      const { position, rotation } = select
+      const { checked } = document.querySelector('#visible')
+
+      position.x = document.querySelector('#positionX').value
+      position.y = document.querySelector('#positionY').value
+      position.z = -document.querySelector('#distance').value
+      rotation.x = mapEuler(document.querySelector('#rotationX').value)
+      rotation.y = mapEuler(document.querySelector('#rotationX').value)
+
+      select.componentVisible = checked
+      select.material.color.setRGB(checked ? 1 : 0.2, checked ? 1 : 0.2, checked ? 1 : 0.2)
+
+      line.position.copy(position)
+      line.rotation.copy(rotation)
     }
     renderer.render(scene, camera)
   }
   animate()
 
   // Buttons
-  var components = []
+  const components = []
   document.querySelector('#apply').onclick = () => {
     for(const meshComponent of meshComponents){
-      let component = new Object()
-      component.positionX = meshComponent.position.x
-      component.positionY = meshComponent.position.y
-      component.positionZ = meshComponent.position.z
-      component.rotationX = mapRadianos(meshComponent.rotation._x)
-      component.rotationY = mapRadianos(meshComponent.rotation._y)
+      const component = {
+      positionX: meshComponent.position.x,
+      positionY: meshComponent.position.y,
+      positionZ: meshComponent.position.z,
+      rotationX: mapRadianos(meshComponent.rotation._x),
+      rotationY: mapRadianos(meshComponent.rotation._y),
+      visible: meshComponent.componentVisible,
+      }
       components.push(component)
     }
     parent.postMessage({ pluginMessage: { type: 'apply', components: components } }, '*')
@@ -73849,8 +73888,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
 
   document.querySelector('#showOrbit').addEventListener('click', () => {
     if(document.querySelector('#showOrbit').checked) {
-      scene.add(circle)
-      return
+      return scene.add(circle)
     }
     scene.remove(circle)
   })
@@ -73861,8 +73899,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
 
   document.querySelector('#showUser').addEventListener('click', () => {
     if(document.querySelector('#showUser').checked) {
-      scene.add(human)
-      return
+      return scene.add(human)
     }
     scene.remove(human)
   })
