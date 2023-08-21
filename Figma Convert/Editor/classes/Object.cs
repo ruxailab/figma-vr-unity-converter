@@ -105,7 +105,7 @@ public abstract class Object {
             id = id.Remove(id.IndexOf(';'));
         }
         id = id.Remove(id.IndexOf(":"), 1);
-        string path = $"Assets/Editor/Figma Convert/Images/{id}.png";
+        string path = $"Assets/Figma Convert/Images/{id}.png";
             
         if(!APIService.DownloadImage(imageUrl, path)) {
             Debug.Log("Erro no Download da Imagem");

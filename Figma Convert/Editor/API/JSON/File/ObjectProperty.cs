@@ -24,6 +24,7 @@ public class ObjectProperty {
     // public LayoutGrids[] layoutGrids;
     public ExportSettings[] exportSettings;
     public string[] effects;
+    public string transitionNodeID = null;
     public string characters;
     public Style style;
     public int layoutVersion;

@@ -22,7 +22,11 @@ public class Painel : Object {
             }
         }
 
-        // setRotation(rectTransform);        
+        if(obj.transitionNodeID != null) {
+            Prototype prototype = gameObject.AddComponent<Prototype>();
+            prototype.transitionNodeID = obj.transitionNodeID;
+        }
+
         return gameObject;
     }
 

@@ -4,6 +4,8 @@ using System.Globalization;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 using TMPro;
 
 public class Canva : Object {
@@ -24,6 +26,7 @@ public class Canva : Object {
 
         GameObject gameObject = new GameObject();
         gameObject.AddComponent<Canvas>();
+        gameObject.AddComponent<TrackedDeviceGraphicRaycaster>();
 
         Canvas canvas = gameObject.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
@@ -38,6 +41,21 @@ public class Canva : Object {
         painel.transform.SetParent(gameObject.transform);
         
         setRotation(rectTransform);
+        if(obj.componentPropertyDefinitions.Visible != null) {
+            canvas.enabled = bool.Parse(obj.componentPropertyDefinitions.Visible.defaultValue);
+        }
+
+        Debug.Log("oi");
+        Debug.Log(Global.transitionNodeID.Count);
+
+        foreach (string nodeId in Global.transitionNodeID) {   
+            Debug.Log(nodeId);
+            Debug.Log(obj.id);
+            if(nodeId == obj.id) {
+                canvas.enabled = false;
+            }
+        }
+
         return gameObject;
     }
 }

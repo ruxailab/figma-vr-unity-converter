@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 static class Global {
     public static string documentID;
     public static string token;
@@ -11,4 +14,5 @@ static class Global {
     public static float objHeigth;
     public static float objAbsoluteX;
     public static float objAbsoluteY;
+    public static List<string> transitionNodeID;
 }

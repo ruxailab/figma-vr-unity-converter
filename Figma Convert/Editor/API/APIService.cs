@@ -14,7 +14,7 @@ abstract class APIService {
         using (HttpWebResponse response = (HttpWebResponse) request.GetResponse()) {
             StreamReader reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
-            Regex regex = new Regex("(|(PositionX)|(PositionY)|(PositionZ)|(RotationX)|(RotationY))#[0-9]+:[0-9]+");
+            Regex regex = new Regex("(|(PositionX)|(PositionY)|(PositionZ)|(RotationX)|(RotationY)|(Visiable))#[0-9]+:[0-9]+");
             json = regex.Replace(json, "$1");
             return JsonUtility.FromJson<File>(json);
         }
