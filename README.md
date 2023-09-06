@@ -40,13 +40,13 @@ Now in Uniy Hub, create a new project using the VR option as a template, that wa
 <div id="howInstall"/>
 
 ### How to Install
-First open your Unity project, then install it Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+**1.** First open your Unity project, then install it Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
 
-Then download [Plugin.Unity.unitypackage](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
+**2.** Then download [Plugin.Unity.unitypackage](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
 
 <img src="/assets/download.gif">
 
-Then import the plugin into Unity:
+**3.** Then import the plugin into Unity:
 * Open Unity.
 * In the top menu, click on Asset -> Import Package -> Custom Package.
 * Select the Plugin.Unity.unitypackage file.
@@ -54,7 +54,7 @@ Then import the plugin into Unity:
 
 <img src="/assets/importUnity.gif">
 
-Now, to use the plugin open <a href="https://www.figma.com/" target="_blank">figma</a>:
+**4.** Now, to use the plugin open <a href="https://www.figma.com/" target="_blank">figma</a>:
 * Open a project in Figma.
 * Click the Figma icon to open the menu.
 * Go to Plugins, search for plugins, search for Figma To Unity For Virtual Reality (FUVR) then select.
