@@ -73823,7 +73823,8 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       select = undefined
     }
   }
-  window.addEventListener('dblclick', onMouseClick)
+  const div = document.querySelector('#threeJS')
+  div.addEventListener('dblclick', onMouseClick)
 
   // Animation
   function animate() {
