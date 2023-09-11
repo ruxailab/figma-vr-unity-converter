@@ -73,7 +73,7 @@ public abstract class Object {
         imageUrl = imageUrl.Remove(0, imageUrl.IndexOf("https://"));
         imageUrl = imageUrl.Remove(imageUrl.IndexOf('\"'));
         string contentType = APIService.ContentType(imageUrl);
-        string path = $"Assets/Editor/Figma Convert/Images/{imageRef}.{contentType}";
+        string path = $"Assets/Figma Convert/Images/{imageRef}.{contentType}";
         if(!APIService.DownloadImage(imageUrl, path)) {
             Debug.Log("Erro no Download da Imagem");
             return;
@@ -94,7 +94,9 @@ public abstract class Object {
     public void setVector(Image painel) {
         string id = obj.id;
         string imageUrl = APIService.GetImageID(id);
+
         if(imageUrl.IndexOf(id + "\":null") > 0) {
+            if(id.IndexOf(';') < 0) return;
             id = id.Remove(id.IndexOf(';'));
             imageUrl = APIService.GetImageID(id);
         }
