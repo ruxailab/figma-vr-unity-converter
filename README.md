@@ -31,6 +31,10 @@ The following steps have been tested with Meta's VR Quest 2 glasses. If you have
 
 * Installation link: [Meta VR Setup](https://www.meta.com/quest/setup/)
 
+After installation, open the Oculus software and go to Settings -> General -> OpenXR runtime.
+
+<img src="/assets/configOculus.png">
+
 Then turn on the VR, allow access to the files and activate the VR's "Quest Link" or "Rift" setting.
 
 Now in Uniy Hub, create a new project using the VR option as a template, that way everything will be configured. Now just press play in Unity.
