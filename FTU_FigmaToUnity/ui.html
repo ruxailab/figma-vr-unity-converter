@@ -300,7 +300,6 @@
 </script>
 
 <script type="module">
-// https://threejs.org/build/three.module.js
 import * as THREE from 'three'
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js'
@@ -73808,7 +73807,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       const { width, height } = select.geometry.parameters;
       const geometry = new THREE.BoxGeometry(width, height, 0.001);
       const edges = new THREE.EdgesGeometry(geometry);
-      line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffffff }));
+      line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x3e6deb }));
 
       const { position, rotation } = select;
       document.querySelector('#positionX').value = position.x
@@ -73824,7 +73823,8 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       select = undefined
     }
   }
-  window.addEventListener('dblclick', onMouseClick)
+  const div = document.querySelector('#threeJS')
+  div.addEventListener('dblclick', onMouseClick)
 
   // Animation
   function animate() {

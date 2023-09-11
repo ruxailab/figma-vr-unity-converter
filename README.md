@@ -13,6 +13,7 @@ The objective of this project is to facilitate the prototyping of user interface
     * [Install VR](#installVR)
     * [How to Install](#howInstall)
     * [How to Use](#howUse)
+* [Common Errors](#commonErros)
 * [Technologies](#🛠️-technologies)
 * [Documentations](#📚-documents-used)
 * [Additional Information](#additional-information)
@@ -21,14 +22,16 @@ The objective of this project is to facilitate the prototyping of user interface
 <!--* [Thanks](#thanks)-->
 
 ## Prerequisites
-Before you start, you need to have an account on <a href="https://www.figma.com" target="_blank">Figma</a> and install <a href="https://unity.com/download" target="_blank">Unity (2021.3)</a> on your computer. Then install Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+Before you start, you need to have an account on <a href="https://www.figma.com" target="_blank">Figma</a> and install <a href="https://unity.com/download" target="_blank">Unity (2022.3)</a> on your computer.
 
 <div id="installVR"/>
 
 ### Install VR
-The following steps have been tested with Meta's VR Glasses Quest 2. If you haven't downloaded the software for your VR, install it so you can connect your computer to the VR.
+The following steps have been tested with Meta's VR Quest 2 glasses. If you haven't downloaded the software for your VR, install it so that you can connect your computer to the VR.
 
-Then turn on the VR, allow access to the files and enable the VR's "Quest Link" or "Rift" setting.
+* Installation link: [Meta VR Setup](https://www.meta.com/quest/setup/)
+
+Then turn on the VR, allow access to the files and activate the VR's "Quest Link" or "Rift" setting.
 
 Now in Uniy Hub, create a new project using the VR option as a template, that way everything will be configured. Now just press play in Unity.
 
@@ -37,19 +40,21 @@ Now in Uniy Hub, create a new project using the VR option as a template, that wa
 <div id="howInstall"/>
 
 ### How to Install
-First download the [Plugin.Unity.unitypackage](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
+**1.** First open your Unity project, then install it Unity UI-Rounded Corners following the [documentation](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners).
+
+**2.** Then download [Plugin.Unity.unitypackage](https://github.com/uramakilab/figma-vr-unity-converter/releases) on GitHub.
 
 <img src="/assets/download.gif">
 
-Then import the plugin into Unity:
-* Open the Unity.
-* On the top menu click on Asset -> Import Package -> Custom Package.
+**3.** Then import the plugin into Unity:
+* Open Unity.
+* In the top menu, click on Asset -> Import Package -> Custom Package.
 * Select the Plugin.Unity.unitypackage file.
-* When the import window appears, click import.
+* When the import window appears, click on import. Import all selected items
 
 <img src="/assets/importUnity.gif">
 
-Now, to use the plugin open <a href="https://www.figma.com/" target="_blank">figma</a>:
+**4.** Now, to use the plugin open <a href="https://www.figma.com/" target="_blank">figma</a>:
 * Open a project in Figma.
 * Click the Figma icon to open the menu.
 * Go to Plugins, search for plugins, search for Figma To Unity For Virtual Reality (FUVR) then select.
@@ -72,9 +77,33 @@ In the plugin you can position each component in the place you want, just select
 
 <img src="/assets/pluginFigma.gif">
 
-Now go to Unity click on tools, Figma Convert. With the window of Figma Convert click on Login Browser so that the token can be obtained automatically or enter the token manually. Then copy the url of the Unity Document and finally click on Download Project.
+Now go to Unity click on tools, Figma Convert. With the window of Figma Convert click on Login Browser so that the token can be obtained automatically or enter the token manually. Then copy the url of the Figma Document and finally click on Download Project.
 
 <img src="/assets/pluginUnity.gif">
+
+<div id="commonErros"/>
+
+## ❌ Common Errors
+Nesta seção, listaremos alguns dos erros mais comuns que os usuários podem encontrar ao usar este projeto.
+
+#### 1. Dependency error
+
+![Erro na Dependência](./assets/errors/dependencia.png)
+  * **Error**: `error CS0246: The type or namespace name 'Nobi' could not be found (are you missing a using directive or as assembly reference?)`
+
+ * **Description**: Not having installed the UI Rounded Corners
+ * **Solutions**: Install the [UI Rounded Corners](https://github.com/kirevdokimov/Unity-UI-Rounded-Corners)
+
+ #### 2. Download url error
+
+![Erro na Dependência](./assets/errors/url.png)
+  * **Error**: `NullReferenceException: Object referece not set to an instance of an object Core.Start (System.Int32 escala) (at Assets/Figma Convert/Editor//Core.cs:9)`
+
+ * **Description**: No ter colocado a url do Figma Document na ferramenta do Unity
+ * **Solutions**: Go to [Figma](https://www.figma.com/), enter a document then copy the url of the project.
+
+ ![](./assets/errors/copyUrl.png)
+
 
 ## 🛠️ Technologies
 The following tools and technologies were used in the construction of the project:
