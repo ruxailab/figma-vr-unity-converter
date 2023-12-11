@@ -202,6 +202,7 @@
         <li id="btn_settings">Settings</li>
       </ul>
     </nav>
+
     <div id="scene" class="scrollable-div">
       <div>
         <p>Positon X</p>
@@ -212,6 +213,7 @@
           <input type="number" id="positionX" value="0" class="input_element" step="0.1">
         </div>
       </div>
+
       <div>
         <p>Position Y</p>
         <div class="input">
@@ -221,6 +223,7 @@
           <input type="number" id="positionY" value="0" class="input_element" step="0.1">
         </div>
       </div>
+
       <div>
         <p>Position Z</p>
         <div class="input">
@@ -230,6 +233,7 @@
           <input type="number" id="distance" value="0" class="input_element" step="0.1">
         </div>    
       </div>
+
       <div>
         <p>Rotation X (Graus)</p>
         <div class="input">
@@ -239,6 +243,7 @@
           <input type="number" id="rotationX" value="0" class="input_element">
         </div>
       </div>
+
       <div>
         <p>Rotation Y (Graus)</p>
         <div class="input">
@@ -248,6 +253,7 @@
           <input type="number" id="rotationY" value="0" class="input_element">
         </div>
       </div>
+
       <div>
         <p>Display Component</p>
         <div class="input">
@@ -257,6 +263,7 @@
         </div>
       </div>
     </div>
+
     <div id="settings" style="display: none;">
       <div>
         <p>Show Orbit</p>
@@ -270,6 +277,7 @@
           </div>
         </div>
       </div>
+
       <div>
         <p>Show 3D User</p>
         <div class="input">
@@ -281,8 +289,9 @@
             <input type="color" id="colorUser" value="#ffffff" class="color">
           </div>
         </div>
-      </div>
+      </div>  
     </div>
+
     <div id="float-button">
       <button id="apply">Save</button>
       <button id="close">Close</button>
@@ -303,6 +312,10 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js'
+
+// Mapeando Intervalos
+const mapEuler = x => (x - 0) * ((Math.PI*2) - 0) / (360 - 0) + 0
+const mapRadianos = x => (x - 0) * (360 - 0) / ((Math.PI*2) - 0) + 0
 
 onmessage = (event) => {
   let data = event.data.pluginMessage
@@ -73766,7 +73779,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   // Component
   const meshComponents = []
 
-  for(const component of data.components){
+  for(const component of data.components) {
     const geometryComponent = new THREE.BoxGeometry(component.width, component.height, 0.001)
     const imageBlob = new Blob([component.image], {type: "image/png"})
     const url = URL.createObjectURL(imageBlob)
@@ -73783,7 +73796,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       meshComponent.material.color.setRGB(visible ? 1 : 0.2, visible ? 1 : 0.2, visible ? 1 : 0.2)
       scene.add(meshComponent)
       meshComponents.push(meshComponent)
-    });
+    })
   }
 
 
@@ -73835,11 +73848,11 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       const { position, rotation } = select
       const { checked } = document.querySelector('#visible')
 
-      position.x = document.querySelector('#positionX').value
-      position.y = document.querySelector('#positionY').value
-      position.z = -document.querySelector('#distance').value
-      rotation.x = mapEuler(document.querySelector('#rotationX').value)
-      rotation.y = mapEuler(document.querySelector('#rotationX').value)
+      position.x = document.querySelector('#positionX').value || 0
+      position.y = document.querySelector('#positionY').value || 0
+      position.z = -document.querySelector('#distance').value || 0
+      rotation.x = mapEuler(document.querySelector('#rotationX').value) || 0
+      rotation.y = mapEuler(document.querySelector('#rotationY').value) || 0
 
       select.componentVisible = checked
       select.material.color.setRGB(checked ? 1 : 0.2, checked ? 1 : 0.2, checked ? 1 : 0.2)
@@ -73907,13 +73920,5 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   document.querySelector('#colorUser').addEventListener('change', () => {
     human.children[0].material.emissive = new THREE.Color(document.querySelector('#colorUser').value)
   })
-}
-
-// Mapeando Intervalos
-function mapEuler(x){
-  return (x - 0) * ((Math.PI*2) - 0) / (360 - 0) + 0;
-}
-function mapRadianos(x){
-  return (x - 0) * (360 - 0) / ((Math.PI*2) - 0) + 0;
 }
 </script>

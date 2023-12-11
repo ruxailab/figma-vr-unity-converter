@@ -1,8 +1,10 @@
 {
-  "name": "FTU-Figma-To-Unity",
+  "name": "ftu-figma-to-unity",
   "version": "1.0.0",
   "description": "Your Figma Plugin",
   "main": "code.js",
+  "source": "./ui.html",
+  "browserlist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "watch": "npm run build -- --watch"
@@ -12,5 +14,6 @@
   "devDependencies": {
     "@figma/plugin-typings": "*",
     "typescript": "*"
-  }
+  },
+  "dependencies": {}
 }
