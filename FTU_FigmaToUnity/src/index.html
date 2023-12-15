@@ -1,0 +1,302 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+
+<style>  
+  body {
+    font-family: 'Inter', 'sans serif';
+    background-color: #121212;
+    color: white;
+    font-size: 10px;
+  }
+
+  p {
+    font-weight: 600;
+    color: rgb(200, 200, 200);
+  }
+
+  #ui {
+    border-left: 1px solid rgba(60, 60, 60);
+    position: absolute;
+    float: left;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 25vw;
+    text-align: left;
+  }
+
+  /* Menu */
+  nav {
+    border-bottom: 1px #333 solid;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+  }
+
+  li {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* Scene */
+  #scene, #settings {
+    padding-left: 10px;
+  }
+
+  .scrollable-div {
+    width: 165px;
+    height: 325px;
+    overflow: auto;
+  }
+
+  .scrollable-div::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scrollable-div::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+  }
+
+  input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+  }
+
+  input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input_element {
+    border: none;
+    outline: none;
+    padding: 8px;
+    padding-right: 0;
+    margin: 0;
+    justify-self: stretch;
+    min-width: 0;
+    border-radius: 2px;
+    transition: box-shadow 0.3s ease;
+    background-color: rgba(var(--rgbSurface));
+    height: 32px;
+    width: 100%;
+    color: rgba(200, 200, 200);
+  }
+
+  /* Settings */
+  input[type=checkbox] {
+    position: relative;
+    cursor: pointer;
+    width: 33px;
+    height: 19px;
+  }
+
+  input[type=checkbox]::before, input[type=checkbox]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left .15s cubic-bezier(.25, .8, .25, .1), transform .15s ease-in;
+  }
+
+  input[type=checkbox]::before {
+    background-color: #ccc;
+    width: 100%;
+    height: 100%;
+    border-radius: 28px;
+  }
+
+  input[type=checkbox]::after {
+    margin: 2px 0 0 2px;
+    background: #fff;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+  }
+
+  input[type=checkbox]:checked::before {
+    background-color: #18a0fb;
+  }
+
+  input[type=checkbox]:checked::after {
+    left: 14px;
+  }
+
+  label {
+    color: #979797;
+    font-size: 12px;
+  }
+
+  .color {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+  }
+
+  .color::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+  }  
+
+  .inputColor {
+    width: 100%;
+    text-align: right;
+    padding: 0 10 0 10;
+  }
+
+  /* Buttons */
+  #float-button {
+    position: absolute;
+    bottom: 10px;
+  }
+
+  button {
+    border-radius: 25px;
+    padding: 8px 15px;
+    margin: 10px 10px;
+    color: white;
+  }
+    
+  #apply {
+    background-color: #18a0fb;
+    border: 1px #18a0fb solid;
+    box-shadow: none;
+  }
+    
+  #close {
+    background-color: black;
+    border: 1px #333 solid;
+    box-shadow: inset 0 0 0 1px black;
+  }
+
+  /* TheeJS */
+  #threeJS {
+    position: absolute;
+    float: right;
+    top: 0;
+    left: 0;
+  }
+
+</style>
+
+<div>
+  <div id="ui">
+    <nav id="nav">
+      <ul>
+        <li id="btn_scene" style="color: #18a0fb;">Scene</li>
+        <li id="btn_settings">Settings</li>
+      </ul>
+    </nav>
+
+    <div id="scene" class="scrollable-div">
+      <div>
+        <p>Positon X</p>
+        <div class="input">
+          <div class="input_icon">
+            <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
+          </div>
+          <input type="number" id="positionX" value="0" class="input_element" step="0.1">
+        </div>
+      </div>
+
+      <div>
+        <p>Position Y</p>
+        <div class="input">
+          <div class="input_icon">
+            <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
+          </div>
+          <input type="number" id="positionY" value="0" class="input_element" step="0.1">
+        </div>
+      </div>
+
+      <div>
+        <p>Position Z</p>
+        <div class="input">
+          <div class="input_icon">
+            <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.17678 2.82322C6.07915 2.72559 5.92085 2.72559 5.82322 2.82322L4.23223 4.41421C4.1346 4.51184 4.1346 4.67014 4.23223 4.76777C4.32986 4.8654 4.48816 4.8654 4.58579 4.76777L6 3.35355L7.41421 4.76777C7.51184 4.8654 7.67014 4.8654 7.76777 4.76777C7.8654 4.67014 7.8654 4.51184 7.76777 4.41421L6.17678 2.82322ZM5.75 3V12H6.25V3H5.75Z" fill="currentColor"></path><path d="M9.82322 12.1768C9.92085 12.2744 10.0791 12.2744 10.1768 12.1768L11.7678 10.5858C11.8654 10.4882 11.8654 10.3299 11.7678 10.2322C11.6701 10.1346 11.5118 10.1346 11.4142 10.2322L10 11.6464L8.58579 10.2322C8.48816 10.1346 8.32986 10.1346 8.23223 10.2322C8.1346 10.3299 8.1346 10.4882 8.23223 10.5858L9.82322 12.1768ZM10.25 12L10.25 3L9.75 3L9.75 12L10.25 12Z" fill="currentColor"></path></svg>
+          </div>
+          <input type="number" id="distance" value="0" class="input_element" step="0.1">
+        </div>    
+      </div>
+
+      <div>
+        <p>Rotation X (Graus)</p>
+        <div class="input">
+          <div class="input_icon">
+            <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
+          </div>
+          <input type="number" id="rotationX" value="0" class="input_element">
+        </div>
+      </div>
+
+      <div>
+        <p>Rotation Y (Graus)</p>
+        <div class="input">
+          <div class="input_icon">
+            <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
+          </div>
+          <input type="number" id="rotationY" value="0" class="input_element">
+        </div>
+      </div>
+
+      <div>
+        <p>Display Component</p>
+        <div class="input">
+          <div>
+            <input type="checkbox" id="visible">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings" style="display: none;">
+      <div>
+        <p>Show Orbit</p>
+        <div class="input">
+          <div>
+            <input type="checkbox" id="showOrbit" checked>
+          </div>
+          <div class="inputColor">
+            <label>Color: </label>
+            <input type="color" id="colorOrbit" value="#ffffff" class="color">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p>Show 3D User</p>
+        <div class="input">
+          <div>
+            <input type="checkbox" id="showUser" checked>
+          </div>
+          <div class="inputColor">
+            <label>Color: </label>
+            <input type="color" id="colorUser" value="#ffffff" class="color">
+          </div>
+        </div>
+      </div>  
+    </div>
+
+    <div id="float-button">
+      <button id="apply">Save</button>
+      <button id="close">Close</button>
+    </div>
+  </div>
+  <div id="threeJS"></div>
+</div>
