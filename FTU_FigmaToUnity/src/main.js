@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { human } from './assets/models/human'
 
 // Imports Functions
-import { sceneBtn, setting, show } from './functions/buttons'
+import { sceneBtn, setting } from './functions/buttons'
 import { loaderObj } from './functions/loaderObj'
 import { mapEuler, mapRadianos } from './functions/maps'
 

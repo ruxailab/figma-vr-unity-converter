@@ -11,5 +11,3 @@ export const setting = () => {
   document.querySelector('#settings').style.display = 'block'
   document.querySelector('#scene').style.display = 'none'
 }
-
-export const show = (obj, id, scene) => document.querySelector(id).checked ? scene.add(obj) : scene.remove(obj)
