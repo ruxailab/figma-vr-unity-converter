@@ -22,7 +22,7 @@ async function componentCreate () {
       components.push({ width, height, image, property })
     }
   }
-  figma.ui.postMessage({isComponent: isComponent(), components: components})
+  figma.ui.postMessage({isComponent: isComponent(), components: components, user: figma.currentUser})
 }
 componentCreate()
 

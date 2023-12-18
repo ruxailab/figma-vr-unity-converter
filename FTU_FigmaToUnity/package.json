@@ -12,7 +12,7 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "@figma/plugin-typings": "*",
+    "@figma/plugin-typings": "^1.82.0",
     "html-inline-script-webpack-plugin": "^3.2.1",
     "html-webpack-plugin": "^5.5.4",
     "typescript": "*",

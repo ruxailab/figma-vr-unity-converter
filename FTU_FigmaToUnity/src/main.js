@@ -12,6 +12,8 @@ import { mapEuler, mapRadianos } from './functions/maps'
 
 onmessage = async event => {
   let data = event.data.pluginMessage
+  console.log('oi')
+  console.log(data)
   if(!data.isComponent) {
     alert('Selecione somente componentes')
     parent.postMessage({ pluginMessage: { type: 'close' } }, '*')

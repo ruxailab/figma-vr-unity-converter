@@ -14,33 +14,6 @@ figma.ui.resize(700, 450);
 function componentCreate() {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
-        // const reactions: any[] = [];
-        // const stack: any[] = [figma.currentPage];
-        // while (stack.length > 0) {
-        //   const currentComponent = stack.pop()
-        //   if (currentComponent.children) {
-        //     for (const childComponent of currentComponent.children) {
-        //       stack.push(childComponent);
-        //     }
-        //   }
-        //   if(currentComponent.reactions) {
-        //     console.log(currentComponent.reactions)
-        //   }
-        //   if (currentComponent.reactions) {
-        //     console.log(currentComponent.reactions)
-        //     for (const reaction of currentComponent.reactions) {
-        //       const action = {
-        //         destinationId: reaction.action.destinationId,
-        //         navigate: reaction.action.navigation,
-        //         transition: reaction.action.transition,
-        //         trigger: reaction.trigger.type,
-        //       };
-        //       reactions.push(action);
-        //       console.log(reactions)
-        //     }
-        //   }
-        // }
-        // console.log(reactions)
         const components = [];
         for (const selection of figma.currentPage.selection) {
             if (typeof ((_a = selection.absoluteBoundingBox) === null || _a === void 0 ? void 0 : _a.width) === 'number' && selection.type === 'COMPONENT') {
@@ -59,7 +32,7 @@ function componentCreate() {
                 components.push({ width, height, image, property });
             }
         }
-        figma.ui.postMessage({ isComponent: isComponent(), components: components });
+        figma.ui.postMessage({ isComponent: isComponent(), components: components, user: figma.currentUser });
     });
 }
 componentCreate();
