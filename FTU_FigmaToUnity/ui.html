@@ -249,6 +249,15 @@
         </div>
       </div>
       <div>
+        <p>Rotation Z (Graus)</p>
+        <div class="input">
+          <div class="input_icon">
+            <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
+          </div>
+          <input type="number" id="rotationZ" value="0" class="input_element">
+        </div>
+      </div>
+      <div>
         <p>Display Component</p>
         <div class="input">
           <div>
@@ -73776,9 +73785,9 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       materialComponent.map.encoding = THREE.sRGBEncoding
 
       const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
-      const { positionX, positionY, positionZ, rotationX, rotationY, visible } = component.property
+      const { positionX, positionY, positionZ, rotationX, rotationY, rotationZ, visible } = component.property
       meshComponent.position.set(positionX, positionY, positionZ)
-      meshComponent.rotation.set(mapEuler(rotationX), mapEuler(rotationY), 0)
+      meshComponent.rotation.set(mapEuler(rotationX), mapEuler(rotationY), mapEuler(rotationZ))
       meshComponent.componentVisible = visible
       meshComponent.material.color.setRGB(visible ? 1 : 0.2, visible ? 1 : 0.2, visible ? 1 : 0.2)
       scene.add(meshComponent)
@@ -73815,6 +73824,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       document.querySelector('#distance').value = -position.z
       document.querySelector('#rotationX').value = mapRadianos(rotation.x)
       document.querySelector('#rotationY').value = mapRadianos(rotation.y)
+      document.querySelector('#rotationZ').value = mapRadianos(rotation.z)
       document.querySelector('#visible').checked = select.componentVisible
       scene.add(line)
     }
@@ -73824,7 +73834,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     }
   }
   const div = document.querySelector('#threeJS')
-  div.addEventListener('dblclick', onMouseClick)
+  div.addEventListener('click', onMouseClick)
 
   // Animation
   function animate() {
@@ -73839,7 +73849,8 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       position.y = document.querySelector('#positionY').value
       position.z = -document.querySelector('#distance').value
       rotation.x = mapEuler(document.querySelector('#rotationX').value)
-      rotation.y = mapEuler(document.querySelector('#rotationX').value)
+      rotation.y = mapEuler(document.querySelector('#rotationY').value)
+      rotation.z = mapEuler(document.querySelector('#rotationZ').value)
 
       select.componentVisible = checked
       select.material.color.setRGB(checked ? 1 : 0.2, checked ? 1 : 0.2, checked ? 1 : 0.2)

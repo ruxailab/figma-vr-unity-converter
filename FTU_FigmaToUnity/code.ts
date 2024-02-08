@@ -14,6 +14,7 @@ async function componentCreate () {
       const property = {
         rotationX: Number(componentProperty(keys, selection, 'RotationX')) || 0,
         rotationY: Number(componentProperty(keys, selection, 'RotationY')) || 0,
+        rotationZ: Number(componentProperty(keys, selection, 'RotationZ')) || 0,
         positionX: Number(componentProperty(keys, selection, 'PositionX')) || 0,
         positionY: Number(componentProperty(keys, selection, 'PositionY')) || 0,
         positionZ: Number(componentProperty(keys, selection, 'PositionZ')) || 0,
@@ -42,13 +43,13 @@ function isComponent () {
 
 
 figma.ui.onmessage = msg => {
-  
   if (msg.type === 'apply') {
     const components = figma.currentPage.selection
     components.forEach((node, i) => {
       if(node.type === 'COMPONENT') {
         addComponent(node, 'RotationX', msg.components[i].rotationX.toString())
         addComponent(node, 'RotationY', msg.components[i].rotationY.toString())
+        addComponent(node, 'RotationZ', msg.components[i].rotationZ.toString())
         addComponent(node, 'PositionZ', msg.components[i].positionZ.toString())
         addComponent(node, 'PositionX', msg.components[i].positionX.toString())
         addComponent(node, 'PositionY', msg.components[i].positionY.toString())
