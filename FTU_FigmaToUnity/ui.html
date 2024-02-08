@@ -73845,12 +73845,12 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       const { position, rotation } = select
       const { checked } = document.querySelector('#visible')
 
-      position.x = document.querySelector('#positionX').value
-      position.y = document.querySelector('#positionY').value
-      position.z = -document.querySelector('#distance').value
-      rotation.x = mapEuler(document.querySelector('#rotationX').value)
-      rotation.y = mapEuler(document.querySelector('#rotationY').value)
-      rotation.z = mapEuler(document.querySelector('#rotationZ').value)
+      position.x = document.querySelector('#positionX').value ?? 0
+      position.y = document.querySelector('#positionY').value ?? 0
+      position.z = -document.querySelector('#distance').value ?? 0
+      rotation.x = mapEuler(document.querySelector('#rotationX').value) ?? 0
+      rotation.y = mapEuler(document.querySelector('#rotationY').value) ?? 0
+      rotation.z = mapEuler(document.querySelector('#rotationZ').value) ?? 0
 
       select.componentVisible = checked
       select.material.color.setRGB(checked ? 1 : 0.2, checked ? 1 : 0.2, checked ? 1 : 0.2)
@@ -73863,19 +73863,18 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   animate()
 
   // Buttons
-  const components = []
+  // const components = []
   document.querySelector('#apply').onclick = () => {
-    for(const meshComponent of meshComponents){
-      const component = {
-      positionX: meshComponent.position.x,
-      positionY: meshComponent.position.y,
-      positionZ: meshComponent.position.z,
-      rotationX: mapRadianos(meshComponent.rotation._x),
-      rotationY: mapRadianos(meshComponent.rotation._y),
+    const components = meshComponents.map(meshComponent => ({
+      positionX: meshComponent.position.x || 0,
+      positionY: meshComponent.position.y || 0,
+      positionZ: meshComponent.position.z || 0,
+      rotationX: mapRadianos(meshComponent.rotation._x || 0),
+      rotationY: mapRadianos(meshComponent.rotation._y || 0),
+      rotationZ: mapRadianos(meshComponent.rotation._z || 0),
       visible: meshComponent.componentVisible,
-      }
-      components.push(component)
-    }
+    }))
+
     parent.postMessage({ pluginMessage: { type: 'apply', components: components } }, '*')
   }
 
@@ -73898,9 +73897,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   })
 
   document.querySelector('#showOrbit').addEventListener('click', () => {
-    if(document.querySelector('#showOrbit').checked) {
-      return scene.add(circle)
-    }
+    if(document.querySelector('#showOrbit').checked) return scene.add(circle)
     scene.remove(circle)
   })
 
@@ -73909,9 +73906,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   })
 
   document.querySelector('#showUser').addEventListener('click', () => {
-    if(document.querySelector('#showUser').checked) {
-      return scene.add(human)
-    }
+    if(document.querySelector('#showUser').checked) return scene.add(human)
     scene.remove(human)
   })
 
@@ -73921,10 +73916,11 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
 }
 
 // Mapeando Intervalos
-function mapEuler(x){
+function mapEuler(x) {
   return (x - 0) * ((Math.PI*2) - 0) / (360 - 0) + 0;
 }
-function mapRadianos(x){
+
+function mapRadianos(x) {
   return (x - 0) * (360 - 0) / ((Math.PI*2) - 0) + 0;
 }
 </script>
