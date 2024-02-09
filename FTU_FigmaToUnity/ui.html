@@ -396,8 +396,10 @@ onmessage = async event => {
   scene.background = new THREE.Color(0x121212) 
   
   new GLTFLoader().load(
-    'https://github.com/ruxailab/figma-vr-unity-converter/raw/fix/environment/FTU_FigmaToUnity/assets/vrstore.glb',
-    object => scene.add(object),
+    'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/vr-store/scene.gltf',
+    gltf  => gltf.scene.traverse(child => {
+      if (child.isMesh) scene.add(child)
+    }),
     xhr => console.log( xhr.loaded / xhr.total + '%'),
     error => console.log(error)
   )
