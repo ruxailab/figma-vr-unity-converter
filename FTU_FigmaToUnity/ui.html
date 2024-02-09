@@ -393,16 +393,23 @@ onmessage = async event => {
 
   // Scene
   const scene = new THREE.Scene()
-  scene.background = new THREE.Color(0x121212)  
-
-  new OBJLoader().load(
-    'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/trail.obj',
-    object => {
-      scene.add(object)
-    },
+  scene.background = new THREE.Color(0x121212) 
+  
+  new GLTFLoader().load(
+    'https://github.com/ruxailab/figma-vr-unity-converter/raw/fix/environment/FTU_FigmaToUnity/assets/vrstore.glb',
+    object => scene.add(object),
     xhr => console.log( xhr.loaded / xhr.total + '%'),
-    error => {}
+    error => console.log(error)
   )
+
+  // new OBJLoader().load(
+  //   'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/trail.obj',
+  //   object => {
+  //     scene.add(object)
+  //   },
+  //   xhr => console.log( xhr.loaded / xhr.total + '%'),
+  //   error => {}
+  // )
   // const sphereGeometry = new THREE.SphereGeometry(15, 64, 40)
   // sphereGeometry.scale(-1, 1, 1)
   // const sphereMaterial = new THREE.MeshBasicMaterial({
@@ -451,12 +458,9 @@ onmessage = async event => {
   
   // Human
   let human
-  // const conteudo = ``
-  // const blob = new Blob([conteudo], {type: 'text/plain'})
-  // const url = URL.createObjectURL(blob)
-  const urlHuman = ''
+  const urlHuman = 'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/human.obj'
   new OBJLoader().load(
-    url,
+    urlHuman,
     object => {
       human = object
       human.rotation.y = mapEuler(180)
@@ -470,7 +474,6 @@ onmessage = async event => {
     xhr => {},
     error => {}
   )
-  URL.revokeObjectURL(url)
 
   // Circle
   const radius = 10
