@@ -395,11 +395,21 @@ onmessage = async event => {
   const scene = new THREE.Scene()
   scene.background = new THREE.Color(0x121212) 
   
+  const url_vrStore = 'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/vr-store/scene.gltf'
+  const url_vrApartment = 'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/vr_gallery/scene.gltf'
   new GLTFLoader().load(
-    'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/vr-store/scene.gltf',
-    gltf  => gltf.scene.traverse(child => {
-      if (child.isMesh) scene.add(child)
-    }),
+    url_vrApartment,
+    gltf  => {
+      if (gltf.scene) {
+        gltf.scene.traverse(function (child) {
+          if (child.isMesh) {
+            scene.add(child);
+          }
+        });
+      } else {
+        console.log('gltf.scene is undefined');
+      }
+    },
     xhr => console.log( xhr.loaded / xhr.total + '%'),
     error => console.log(error)
   )

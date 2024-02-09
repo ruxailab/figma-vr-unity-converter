@@ -1,0 +1,11 @@
+Model Information:
+* title:	VR Apartment
+* source:	https://sketchfab.com/3d-models/vr-apartment-fb1b717d457540129c6bf45315aa2612
+* author:	FDU_oficial (https://sketchfab.com/FDU_oficial)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "VR Apartment" (https://sketchfab.com/3d-models/vr-apartment-fb1b717d457540129c6bf45315aa2612) by FDU_oficial (https://sketchfab.com/FDU_oficial) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
