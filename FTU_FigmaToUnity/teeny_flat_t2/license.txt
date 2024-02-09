@@ -1,0 +1,11 @@
+Model Information:
+* title:	Teeny_Flat_T2
+* source:	https://sketchfab.com/3d-models/teeny-flat-t2-634d523d264742079a1560aafc94d68d
+* author:	vasycrukov (https://sketchfab.com/vasycrukov)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Teeny_Flat_T2" (https://sketchfab.com/3d-models/teeny-flat-t2-634d523d264742079a1560aafc94d68d) by vasycrukov (https://sketchfab.com/vasycrukov) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
