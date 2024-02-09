@@ -396,7 +396,7 @@ onmessage = async event => {
   scene.background = new THREE.Color(0x121212)
 
   new GLTFLoader().load(
-      'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/oi.txt',
+      'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/oi.json',
       gltf => {
           scene.add(gltf.scene)
       },
