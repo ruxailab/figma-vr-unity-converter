@@ -19,7 +19,7 @@ function componentCreate() {
             if (typeof ((_a = selection.absoluteBoundingBox) === null || _a === void 0 ? void 0 : _a.width) === 'number' && selection.type === 'COMPONENT') {
                 const width = ((_b = selection.absoluteBoundingBox) === null || _b === void 0 ? void 0 : _b.width) / 100;
                 const height = ((_c = selection.absoluteBoundingBox) === null || _c === void 0 ? void 0 : _c.height) / 100;
-                const image = yield selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 2 } });
+                const image = yield selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 3 } });
                 const keys = Object.keys(selection.componentPropertyDefinitions);
                 const property = {
                     rotationX: Number(componentProperty(keys, selection, 'RotationX')) || 0,

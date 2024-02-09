@@ -9,7 +9,7 @@ async function componentCreate () {
     if(typeof selection.absoluteBoundingBox?.width === 'number' && selection.type === 'COMPONENT') {
       const width = selection.absoluteBoundingBox?.width / 100;
       const height = selection.absoluteBoundingBox?.height / 100;
-      const image = await selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 2 } })
+      const image = await selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 3 } })
       const keys = Object.keys(selection.componentPropertyDefinitions)
       const property = {
         rotationX: Number(componentProperty(keys, selection, 'RotationX')) || 0,

@@ -382,8 +382,8 @@ onmessage = async event => {
   }
 
   // Obtenha a largura e altura da tela
-  const screenWidth = 520;
-  const screenHeight = 450;
+  const screenWidth = 520
+  const screenHeight = 450
 
   // Renderer
   const renderer = new THREE.WebGLRenderer()
@@ -393,242 +393,7 @@ onmessage = async event => {
 
   // Scene
   const scene = new THREE.Scene()
-  scene.background = new THREE.Color(0x121212)
-
-  const test = `{
-  "accessors": [
-    {
-      "bufferView": 2,
-      "componentType": 5126,
-      "count": 3998,
-      "max": [
-        5.372878551483154,
-        3.9000000953674316,
-        4.827599048614502
-      ],
-      "min": [
-        -4.645448207855225,
-        -0.20000000298023224,
-        -4.148597717285156
-      ],
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 2,
-      "byteOffset": 47976,
-      "componentType": 5126,
-      "count": 3998,
-      "max": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "min": [
-        -1.0,
-        -1.0,
-        -1.0
-      ],
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 1,
-      "componentType": 5126,
-      "count": 3998,
-      "max": [
-        0.9977807402610779,
-        1.0
-      ],
-      "min": [
-        -1.3904677409470878e-08,
-        -7.251440337086024e-09
-      ],
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 0,
-      "componentType": 5125,
-      "count": 6783,
-      "type": "SCALAR"
-    }
-  ],
-  "asset": {
-    "extras": {
-      "author": "vasycrukov (https://sketchfab.com/vasycrukov)",
-      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/teeny-flat-t2-634d523d264742079a1560aafc94d68d",
-      "title": "Teeny_Flat_T2"
-    },
-    "generator": "Sketchfab-15.70.0",
-    "version": "2.0"
-  },
-  "bufferViews": [
-    {
-      "buffer": 0,
-      "byteLength": 27132,
-      "name": "floatBufferViews",
-      "target": 34963
-    },
-    {
-      "buffer": 0,
-      "byteLength": 31984,
-      "byteOffset": 27132,
-      "byteStride": 8,
-      "name": "floatBufferViews",
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteLength": 95952,
-      "byteOffset": 59116,
-      "byteStride": 12,
-      "name": "floatBufferViews",
-      "target": 34962
-    }
-  ],
-  "buffers": [
-    {
-      "byteLength": 155068,
-      "uri": "scene.bin"
-    }
-  ],
-  "images": [
-    {
-      "uri": "textures/Material_baseColor.png"
-    }
-  ],
-  "materials": [
-    {
-      "doubleSided": true,
-      "name": "Material",
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 0
-        },
-        "metallicFactor": 0.0,
-        "roughnessFactor": 0.5
-      }
-    }
-  ],
-  "meshes": [
-    {
-      "name": "Object_0",
-      "primitives": [
-        {
-          "attributes": {
-            "NORMAL": 1,
-            "POSITION": 0,
-            "TEXCOORD_0": 2
-          },
-          "indices": 3,
-          "material": 0,
-          "mode": 4
-        }
-      ]
-    }
-  ],
-  "nodes": [
-    {
-      "children": [
-        1
-      ],
-      "matrix": [
-        0.870201826095581,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.932236206804341e-16,
-        -0.870201826095581,
-        0.0,
-        0.0,
-        0.870201826095581,
-        1.932236206804341e-16,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "Sketchfab_model"
-    },
-    {
-      "children": [
-        2
-      ],
-      "name": "root"
-    },
-    {
-      "children": [
-        3
-      ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        2.220446049250313e-16,
-        1.0,
-        0.0,
-        0.0,
-        -1.0,
-        2.220446049250313e-16,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "GLTF_SceneRootNode"
-    },
-    {
-      "children": [
-        4
-      ],
-      "name": "Walls_0"
-    },
-    {
-      "mesh": 0,
-      "name": "Object_4"
-    }
-  ],
-  "samplers": [
-    {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 10497,
-      "wrapT": 10497
-    }
-  ],
-  "scene": 0,
-  "scenes": [
-    {
-      "name": "Sketchfab_Scene",
-      "nodes": [
-        0
-      ]
-    }
-  ],
-  "textures": [
-    {
-      "sampler": 0,
-      "source": 0
-    }
-  ]
-}`
-
-  new GLTFLoader().load(
-      'https://github.com/ruxailab/figma-vr-unity-converter/raw/fix/environment/FTU_FigmaToUnity/teeny_flat_t2.glb',
-      gltf => {
-          scene.add(gltf.scene)
-      },
-      xhr => {
-          console.log((xhr.loaded / xhr.total) + '% carregado');
-      },
-      error => {
-          console.error('Erro ao carregar o modelo GLB', error);
-      }
-  )
+  scene.background = new THREE.Color(0x121212)  
 
   // const sphereGeometry = new THREE.SphereGeometry(15, 64, 40)
   // sphereGeometry.scale(-1, 1, 1)
@@ -671,6 +436,10 @@ onmessage = async event => {
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
   const controls = new OrbitControls(camera, renderer.domElement)
   camera.position.set(0, 0, 5)
+
+  // Light
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+  scene.add(ambientLight)
   
   // Human
   let human
@@ -74087,7 +73856,7 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     },
     xhr => {},
     error => {}
-  );
+  )
   URL.revokeObjectURL(url)
 
   // Circle
@@ -74102,11 +73871,14 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   // Component
   const meshComponents = await Promise.all(
     data.components.map(component => new Promise(resolve => {
-      const geometryComponent = new THREE.BoxGeometry(component.width, component.height, 0.001)
+      const width = component.width / 2
+      const height = component.height / 2
+
+      const geometryComponent = new THREE.BoxGeometry(width, height, 0.001)
       const imageBlob = new Blob([component.image], {type: 'image/png'})
-      const url = URL.createObjectURL(imageBlob)    
-      new THREE.TextureLoader().load(url, texture =>{
-        const materialComponent = new THREE.MeshBasicMaterial({ map: texture })
+      const url = URL.createObjectURL(imageBlob)
+      new THREE.TextureLoader().load(url, texture =>{        
+        const materialComponent = new THREE.MeshStandardMaterial({ map: texture, transparent: true })
         materialComponent.needsUpdate = true
         materialComponent.map.encoding = THREE.sRGBEncoding
 
@@ -74121,7 +73893,6 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
       })
     }))
   )
-
 
   // Click Object
   const pointer = new THREE.Vector2()
@@ -74159,7 +73930,8 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     const { width, height } = select.geometry.parameters
     const geometry = new THREE.BoxGeometry(width, height, 0.5)
     const edges = new THREE.EdgesGeometry(geometry)
-    line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x5100ff, linewidth: 20 }))
+    const lineMaterial = new THREE.LineDashedMaterial({ color: 0x5100ff, linewidth: 20, scale: 20 })
+    line = new THREE.LineSegments(edges, lineMaterial)
 
     const { position, rotation } = select
     document.querySelector('#input-positionX').value = position.x
