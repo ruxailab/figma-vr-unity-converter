@@ -79,7 +79,7 @@
     align-items: center;
   }
   
-  .input_element {
+  .input-element {
     border: none;
     outline: none;
     padding: 8px;
@@ -91,9 +91,41 @@
     transition: box-shadow 0.3s ease;
     background-color: rgba(var(--rgbSurface));
     height: 32px;
-    width: 100%;
+    width: 30px;
     color: rgba(200, 200, 200);
   }
+
+  .input-range {
+    width: 80px;
+    margin-right: 10%;
+    margin-left: 10%;
+    -webkit-appearance: none;
+    background: transparent;
+    appearance: none;
+  }
+
+  .input-range:focus {
+    outline: none;
+  }
+
+  .input-range::-webkit-slider-runnable-track {
+   background-color: #7d7d7d;
+   border-radius: 0.5rem;
+   height: 0.5rem;  
+  }
+
+  .input-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -5px;
+
+    /* custom styles */
+    background-color: var(--figma-color-text);
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 100%;
+  }
+
 
   /* Settings */
   input[type=checkbox] {
@@ -198,18 +230,23 @@
   <div id="ui">
     <nav id="nav">
       <ul>
-        <li id="btn_scene" style="color: #18a0fb;">Scene</li>
+        <li id="btn_layers" style="color: #18a0fb;">Layers</li>
+        <li id="btn_scene">Scene</li>
         <li id="btn_settings">Settings</li>
       </ul>
     </nav>
-    <div id="scene" class="scrollable-div">
+    <div id="layers">
+      <p>Layers</p>
+    </div>
+    <div id="scene" class="scrollable-div" style="display: none;">
       <div>
         <p>Positon X</p>
         <div class="input">
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
-          </div>
-          <input type="number" id="positionX" value="0" class="input_element" step="0.1">
+           </div>
+          <input type="number" id="input-positionX" value="0" class="input-element" step="0.1">
+          <input type="range" min="-15" max="15" value="0" id="range-positionX" class="input-range">
         </div>
       </div>
       <div>
@@ -218,7 +255,8 @@
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
-          <input type="number" id="positionY" value="0" class="input_element" step="0.1">
+          <input type="number" id="input-positionY" value="0" class="input-element" step="0.1">
+          <input type="range" min="-15" max="15" value="0" id="range-positionY" class="input-range">
         </div>
       </div>
       <div>
@@ -227,7 +265,8 @@
           <div class="input_icon">
             <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.17678 2.82322C6.07915 2.72559 5.92085 2.72559 5.82322 2.82322L4.23223 4.41421C4.1346 4.51184 4.1346 4.67014 4.23223 4.76777C4.32986 4.8654 4.48816 4.8654 4.58579 4.76777L6 3.35355L7.41421 4.76777C7.51184 4.8654 7.67014 4.8654 7.76777 4.76777C7.8654 4.67014 7.8654 4.51184 7.76777 4.41421L6.17678 2.82322ZM5.75 3V12H6.25V3H5.75Z" fill="currentColor"></path><path d="M9.82322 12.1768C9.92085 12.2744 10.0791 12.2744 10.1768 12.1768L11.7678 10.5858C11.8654 10.4882 11.8654 10.3299 11.7678 10.2322C11.6701 10.1346 11.5118 10.1346 11.4142 10.2322L10 11.6464L8.58579 10.2322C8.48816 10.1346 8.32986 10.1346 8.23223 10.2322C8.1346 10.3299 8.1346 10.4882 8.23223 10.5858L9.82322 12.1768ZM10.25 12L10.25 3L9.75 3L9.75 12L10.25 12Z" fill="currentColor"></path></svg>
           </div>
-          <input type="number" id="distance" value="0" class="input_element" step="0.1">
+          <input type="number" id="input-positionZ" value="0" class="input-element" step="0.1">
+          <input type="range" min="-15" max="15" value="0" id="range-positionZ" class="input-range">
         </div>    
       </div>
       <div>
@@ -236,7 +275,8 @@
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
-          <input type="number" id="rotationX" value="0" class="input_element">
+          <input type="number" id="input-rotationX" value="0" class="input-element">
+          <input type="range" min="-180" max="180" value="0" id="range-rotationX" class="input-range">
         </div>
       </div>
       <div>
@@ -245,7 +285,8 @@
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
-          <input type="number" id="rotationY" value="0" class="input_element">
+          <input type="number" id="input-rotationY" value="0" class="input-element">
+          <input type="range" min="-180" max="180" value="0" id="range-rotationY" class="input-range">
         </div>
       </div>
       <div>
@@ -254,7 +295,8 @@
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
-          <input type="number" id="rotationZ" value="0" class="input_element">
+          <input type="number" id="input-rotationZ" value="0" class="input-element">
+          <input type="range" min="-180" max="180" value="0" id="range-rotationZ" class="input-range">
         </div>
       </div>
       <div>
@@ -263,6 +305,24 @@
           <div>
             <input type="checkbox" id="visible">
           </div>
+        </div>
+      </div>
+      <div>
+        <p>Draggable</p>
+        <div class="input">
+          <select>
+            <option value="1">Anchor</option>
+            <option value="2">Draggable</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <p>Open</p>
+        <div class="input">
+          <select>
+            <option value="1">New Window</option>
+            <option value="2">Overwrite</option>
+          </select>
         </div>
       </div>
     </div>
@@ -312,8 +372,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js'
+import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js'
 
-onmessage = (event) => {
+onmessage = async event => {
   let data = event.data.pluginMessage
   if(!data.isComponent){
     alert('Selecione somente componentes')
@@ -334,8 +395,59 @@ onmessage = (event) => {
   const scene = new THREE.Scene()
   scene.background = new THREE.Color(0x121212)
 
+  new GLTFLoader().load(
+      'seu_modelo.glb',
+      // Função de callback chamada quando o modelo é carregado
+      gltf => {
+          // Adicione o modelo à cena
+          scene.add(gltf.scene);
+      },
+      xhr => {
+          console.log((xhr.loaded / xhr.total * 100) + '% carregado');
+      },
+      error => {
+          console.error('Erro ao carregar o modelo GLB', error);
+      }
+  )
+  // const sphereGeometry = new THREE.SphereGeometry(15, 64, 40)
+  // sphereGeometry.scale(-1, 1, 1)
+  // const sphereMaterial = new THREE.MeshBasicMaterial({
+  //   map: new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1073959819507150899/1205242675113230406/render-360_1.jpg?ex=65d7a8b6&is=65c533b6&hm=e5faf94764068492a0433bf0af915232c8421de7a16838c7142bad9d24c78f5c&=&format=webp&width=994&height=497')
+  // })
+  // const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial)
+  // console.log(sphereMesh)
+  // sphereMesh.position.y = 10
+  // scene.add(sphereMesh)
+
+  // const textureArray = []
+  // const textureFront = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236093553737808/front.jpg?ex=65d7a294&is=65c52d94&hm=0c3055d67c25212d5862a0e5d0d277cc4bde323ecb2071c9c0a02864a4ca03fe&=&format=webp&width=497&height=497')
+  // const textureBack = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236094329819226/back.jpg?ex=65d7a295&is=65c52d95&hm=9e342a852c83d2f37f95a5dce330d3b874650709cec7d221e0568bfb3dd207e3&=&format=webp&width=497&height=497')
+  // const textureTop = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236092383789127/top.jpg?ex=65d7a294&is=65c52d94&hm=d17bc8afcedf27b0ae0624f7606bd25a7c7025580ccc5d5ee60de22a36966672&=&format=webp&width=497&height=497')
+  // const textureBottom = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236093990076537/bottom.jpg?ex=65d7a295&is=65c52d95&hm=f4bc3e26b783d14c43b2c9b8be1ba8bd9b8b2db80193033bb9b09f39882e59e1&=&format=webp&width=497&height=497')
+  // const textureLeft = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236093189103697/left.jpg?ex=65d7a294&is=65c52d94&hm=511f4d3adb89eb6628d0b8c83f2e7495256a5a4911c022111d2172eb1e6688ce&=&format=webp&width=497&height=497')
+  // const textureRight = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236092857749564/right.jpg?ex=65d7a294&is=65c52d94&hm=7397990306d46b14eeef57d1e17c0e086ab856e31ac1eb0aeffe31e3b303784a&=&format=webp&width=497&height=497')
+
+  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureFront }))
+  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureBack }))
+  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureTop }))
+  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureBottom }))
+  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureLeft }))
+  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureRight }))
+
+  // const geometry = new THREE.BoxGeometry(20, 20, 20);
+  // geometry.scale(-1, 1, 1)
+  // const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff})
+  // const cube = new THREE.Mesh(geometry, textureArray)
+  // console.log(cube)
+  // cube.position.y = 5
+  // scene.add(cube)
+
   // Camera
-  const camera = new THREE.PerspectiveCamera(75, screenWidth / screenHeight, 0.1, 1000)
+  const fov = 45
+  const aspect = screenWidth / screenHeight
+  const near = 0.1
+  const far = 1000
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
   const controls = new OrbitControls(camera, renderer.domElement)
   camera.position.set(0, 0, 5)
   
@@ -73740,60 +73852,54 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
 # 24459 polygons`
   const blob = new Blob([conteudo], {type: 'text/plain'})
   const url = URL.createObjectURL(blob)
-  const loader = new OBJLoader()
-  loader.load(
+  new OBJLoader().load(
     url,
-
-    (object) => {
+    object => {
       human = object
       human.rotation.y = mapEuler(180)
+      human.position.y = -1
       human.scale.x = 0.2
       human.scale.y = 0.2
       human.scale.z = 0.2
-      human.position.y = -1
       human.children[0].material.emissive = new THREE.Color('#ffffff')
       scene.add(human)
     },
-    (xhr) => {
-      // console.log((xhr.loaded / xhr.total * 100) + '% loaded')
-    },
-    (error) => {
-      // console.log(error)
-    }
+    xhr => {},
+    error => {}
   );
   URL.revokeObjectURL(url)
 
   // Circle
-  const radius = 10;
-  const sectors = 16;
-  const rings = 8;
-  const divisions = 64;
-  const circle = new THREE.PolarGridHelper(radius, sectors, rings, divisions);
+  const radius = 10
+  const sectors = 16
+  const rings = 8
+  const divisions = 64
+  const circle = new THREE.PolarGridHelper(radius, sectors, rings, divisions)
   circle.position.y = -1
   scene.add(circle)
 
   // Component
-  const meshComponents = []
+  const meshComponents = await Promise.all(
+    data.components.map(component => new Promise(resolve => {
+      const geometryComponent = new THREE.BoxGeometry(component.width, component.height, 0.001)
+      const imageBlob = new Blob([component.image], {type: 'image/png'})
+      const url = URL.createObjectURL(imageBlob)    
+      new THREE.TextureLoader().load(url, texture =>{
+        const materialComponent = new THREE.MeshBasicMaterial({ map: texture })
+        materialComponent.needsUpdate = true
+        materialComponent.map.encoding = THREE.sRGBEncoding
 
-  for(const component of data.components){
-    const geometryComponent = new THREE.BoxGeometry(component.width, component.height, 0.001)
-    const imageBlob = new Blob([component.image], {type: "image/png"})
-    const url = URL.createObjectURL(imageBlob)
-    const textureComponent = new THREE.TextureLoader().load(url, () =>{
-      const materialComponent = new THREE.MeshBasicMaterial({ map: textureComponent })
-      materialComponent.needsUpdate = true
-      materialComponent.map.encoding = THREE.sRGBEncoding
-
-      const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
-      const { positionX, positionY, positionZ, rotationX, rotationY, rotationZ, visible } = component.property
-      meshComponent.position.set(positionX, positionY, positionZ)
-      meshComponent.rotation.set(mapEuler(rotationX), mapEuler(rotationY), mapEuler(rotationZ))
-      meshComponent.componentVisible = visible
-      meshComponent.material.color.setRGB(visible ? 1 : 0.2, visible ? 1 : 0.2, visible ? 1 : 0.2)
-      scene.add(meshComponent)
-      meshComponents.push(meshComponent)
-    });
-  }
+        const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
+        const { positionX, positionY, positionZ, rotationX, rotationY, rotationZ, visible } = component.property
+        meshComponent.position.set(positionX, positionY, positionZ)
+        meshComponent.rotation.set(mapEuler(rotationX), mapEuler(rotationY), mapEuler(rotationZ))
+        meshComponent.componentVisible = visible
+        meshComponent.material.color.setRGB(visible ? 1 : 0.2, visible ? 1 : 0.2, visible ? 1 : 0.2)
+        scene.add(meshComponent)
+        resolve(meshComponent)
+      })
+    }))
+  )
 
 
   // Click Object
@@ -73801,56 +73907,65 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   const raycaster = new THREE.Raycaster()
   let select, line
 
-  const onMouseClick = (event) => {
+  document.querySelector('#threeJS').addEventListener('click', event => {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 0.7
     pointer.y = -(event.clientY / window.innerHeight) * 2 + 1
-    raycaster.setFromCamera(pointer, camera);
-    const intersects = raycaster.intersectObjects(meshComponents);  
+    raycaster.setFromCamera(pointer, camera)
+    const intersects = raycaster.intersectObjects(meshComponents)  
 
-    if(intersects.length > 0) {
-      if(select) scene.remove(line)
-
-      select = intersects[0].object
-      let parameters = select.geometry.parameters
-
-      const { width, height } = select.geometry.parameters;
-      const geometry = new THREE.BoxGeometry(width, height, 0.001);
-      const edges = new THREE.EdgesGeometry(geometry);
-      line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x3e6deb }));
-
-      const { position, rotation } = select;
-      document.querySelector('#positionX').value = position.x
-      document.querySelector('#positionY').value = position.y
-      document.querySelector('#distance').value = -position.z
-      document.querySelector('#rotationX').value = mapRadianos(rotation.x)
-      document.querySelector('#rotationY').value = mapRadianos(rotation.y)
-      document.querySelector('#rotationZ').value = mapRadianos(rotation.z)
-      document.querySelector('#visible').checked = select.componentVisible
-      scene.add(line)
-    }
-    else {
+    if (intersects.length <= 0) {
       scene.remove(line)
-      select = undefined
+      document.querySelector('#btn_layers').style.color = '#18a0fb'
+      document.querySelector('#btn_scene').style.color = '#ffffff'
+      document.querySelector('#btn_settings').style.color = '#ffffff'
+      document.querySelector('#layers').style.display = 'block'
+      document.querySelector('#scene').style.display = 'none'  
+      document.querySelector('#settings').style.display = 'none'
+      return select = undefined
     }
-  }
-  const div = document.querySelector('#threeJS')
-  div.addEventListener('click', onMouseClick)
+      
+    if(select) scene.remove(line)
+    select = intersects[0].object
+    let parameters = select.geometry.parameters
+
+    document.querySelector('#btn_layers').style.color = '#ffffff'
+    document.querySelector('#btn_scene').style.color = '#18a0fb'
+    document.querySelector('#btn_settings').style.color = '#ffffff'
+    document.querySelector('#layers').style.display = 'none'
+    document.querySelector('#scene').style.display = 'block'  
+    document.querySelector('#settings').style.display = 'none'
+
+    const { width, height } = select.geometry.parameters
+    const geometry = new THREE.BoxGeometry(width, height, 0.5)
+    const edges = new THREE.EdgesGeometry(geometry)
+    line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x5100ff, linewidth: 20 }))
+
+    const { position, rotation } = select
+    document.querySelector('#input-positionX').value = position.x
+    document.querySelector('#input-positionY').value = position.y
+    document.querySelector('#input-positionZ').value = -position.z
+    document.querySelector('#input-rotationX').value = mapRadianos(rotation.x)
+    document.querySelector('#input-rotationY').value = mapRadianos(rotation.y)
+    document.querySelector('#input-rotationZ').value = mapRadianos(rotation.z)
+    document.querySelector('#visible').checked = select.componentVisible
+    scene.add(line)
+  })
 
   // Animation
-  function animate() {
+  const animate = () => {
     requestAnimationFrame(animate)
     controls.update()
 
-    if(select){
+    if(select) {
       const { position, rotation } = select
       const { checked } = document.querySelector('#visible')
 
-      position.x = document.querySelector('#positionX').value ?? 0
-      position.y = document.querySelector('#positionY').value ?? 0
-      position.z = -document.querySelector('#distance').value ?? 0
-      rotation.x = mapEuler(document.querySelector('#rotationX').value) ?? 0
-      rotation.y = mapEuler(document.querySelector('#rotationY').value) ?? 0
-      rotation.z = mapEuler(document.querySelector('#rotationZ').value) ?? 0
+      position.x = document.querySelector('#input-positionX').value
+      position.y = document.querySelector('#input-positionY').value
+      position.z = -document.querySelector('#input-positionZ').value
+      rotation.x = mapEuler(document.querySelector('#input-rotationX').value)
+      rotation.y = mapEuler(document.querySelector('#input-rotationY').value)
+      rotation.z = mapEuler(document.querySelector('#input-rotationZ').value)
 
       select.componentVisible = checked
       select.material.color.setRGB(checked ? 1 : 0.2, checked ? 1 : 0.2, checked ? 1 : 0.2)
@@ -73863,7 +73978,6 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
   animate()
 
   // Buttons
-  // const components = []
   document.querySelector('#apply').onclick = () => {
     const components = meshComponents.map(meshComponent => ({
       positionX: meshComponent.position.x || 0,
@@ -73882,18 +73996,31 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
     parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
   }
 
+  document.querySelector('#btn_layers').addEventListener('click', () => {
+    document.querySelector('#btn_layers').style.color = '#18a0fb'
+    document.querySelector('#btn_scene').style.color = '#ffffff'
+    document.querySelector('#btn_settings').style.color = '#ffffff'
+    document.querySelector('#layers').style.display = 'block'
+    document.querySelector('#scene').style.display = 'none'  
+    document.querySelector('#settings').style.display = 'none'
+  })
+
   document.querySelector('#btn_scene').addEventListener('click', () => {
+    document.querySelector('#btn_layers').style.color = '#ffffff'
     document.querySelector('#btn_scene').style.color = '#18a0fb'
     document.querySelector('#btn_settings').style.color = '#ffffff'
+    document.querySelector('#layers').style.display = 'none'
     document.querySelector('#scene').style.display = 'block'  
     document.querySelector('#settings').style.display = 'none'
   })
 
   document.querySelector('#btn_settings').addEventListener('click', () => {
-    document.querySelector('#btn_settings').style.color = '#18a0fb'
+    document.querySelector('#btn_layers').style.color = '#ffffff'
     document.querySelector('#btn_scene').style.color = '#ffffff'
+    document.querySelector('#btn_settings').style.color = '#18a0fb'
+    document.querySelector('#layers').style.display = 'none'
+    document.querySelector('#scene').style.display = 'none'  
     document.querySelector('#settings').style.display = 'block'
-    document.querySelector('#scene').style.display = 'none'
   })
 
   document.querySelector('#showOrbit').addEventListener('click', () => {
@@ -73916,11 +74043,6 @@ f 21869//21868 21868//21867 19888//19887 19887//19886
 }
 
 // Mapeando Intervalos
-function mapEuler(x) {
-  return (x - 0) * ((Math.PI*2) - 0) / (360 - 0) + 0;
-}
-
-function mapRadianos(x) {
-  return (x - 0) * (360 - 0) / ((Math.PI*2) - 0) + 0;
-}
+const mapEuler = x => (x - 0) * (Math.PI * 2 - 0) / (360 - 0) + 0
+const mapRadianos = x => (x - 0) * (360 - 0) / (Math.PI * 2 - 0) + 0
 </script>
