@@ -396,12 +396,12 @@ onmessage = async event => {
   scene.background = new THREE.Color(0x121212)
 
   new GLTFLoader().load(
-      '',
+      'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/oi.txt',
       gltf => {
           scene.add(gltf.scene)
       },
       xhr => {
-          console.log((xhr.loaded / xhr.total * 100) + '% carregado');
+          console.log((xhr.loaded / xhr.total) + '% carregado');
       },
       error => {
           console.error('Erro ao carregar o modelo GLB', error);
