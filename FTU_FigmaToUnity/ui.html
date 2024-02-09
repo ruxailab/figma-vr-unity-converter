@@ -396,11 +396,9 @@ onmessage = async event => {
   scene.background = new THREE.Color(0x121212)
 
   new GLTFLoader().load(
-      'seu_modelo.glb',
-      // Função de callback chamada quando o modelo é carregado
+      '',
       gltf => {
-          // Adicione o modelo à cena
-          scene.add(gltf.scene);
+          scene.add(gltf.scene)
       },
       xhr => {
           console.log((xhr.loaded / xhr.total * 100) + '% carregado');
@@ -409,6 +407,7 @@ onmessage = async event => {
           console.error('Erro ao carregar o modelo GLB', error);
       }
   )
+
   // const sphereGeometry = new THREE.SphereGeometry(15, 64, 40)
   // sphereGeometry.scale(-1, 1, 1)
   // const sphereMaterial = new THREE.MeshBasicMaterial({
