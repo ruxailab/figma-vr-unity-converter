@@ -1,7 +1,31 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
-<style>  
+<style>
+  .mt-5 {
+    margin-top: 5px;
+  }
+
+  .mb-5 {
+    margin-bottom: 5px;
+  }
+
+  .p-0 {
+    padding: 0px;
+  }
+
+  .pl-10 {
+    padding-left: 10px;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
   body {
     font-family: 'Inter', 'sans serif';
     background-color: #121212;
@@ -11,7 +35,6 @@
 
   p {
     font-weight: 600;
-    color: rgb(200, 200, 200);
   }
 
   #ui {
@@ -32,8 +55,6 @@
 
   ul {
     list-style: none;
-    display: flex;
-    padding: 0px;
     justify-content: center;
   }
 
@@ -43,11 +64,19 @@
     font-weight: 600;
   }
 
-  /* Scene */
-  #scene, #settings {
-    padding-left: 10px;
+  /* Layers */
+  .figmaComponent {
+    border: 1px solid #121212;
+    width: 163px;
+    cursor: default;
+    color: #d1a8ff;
   }
 
+  .figmaComponent:hover {
+    border-color: #18a0fb;
+  }
+
+  /* Scene */
   .scrollable-div {
     width: 165px;
     height: 325px;
@@ -65,18 +94,11 @@
 
   input[type=number]::-webkit-inner-spin-button { 
     -webkit-appearance: none;
-    
   }
 
   input[type=number] { 
     -moz-appearance: textfield;
     appearance: textfield;
-
-  }
-
-  .input {
-    display: flex;
-    align-items: center;
   }
   
   .input-element {
@@ -125,7 +147,6 @@
     width: 1.2rem;
     border-radius: 100%;
   }
-
 
   /* Settings */
   input[type=checkbox] {
@@ -191,6 +212,75 @@
     padding: 0 10 0 10;
   }
 
+  input[type="file"] {
+    outline: none;
+    padding: 4px;
+    /* margin: -4px; */
+  }
+
+  input[type="file"]:focus-within::file-selector-button,
+  input[type="file"]:focus::file-selector-button {
+    outline: 2px solid #18a0fb;
+    outline-offset: 2px;
+  }
+
+  input[type="file"]::before {
+    top: 16px;
+  }
+
+  input[type="file"]::after {
+    top: 14px;
+  }
+
+  input[type="file"] {
+    position: relative;
+  }
+
+  input[type="file"]::file-selector-button {
+    width: 136px;
+    color: transparent;
+  }
+
+  /* Faked label styles and icon */
+  input[type="file"]::before {
+    position: absolute;
+    pointer-events: none;
+    left: 40px;
+    color: #18a0fb;
+    content: "Upload File";
+  }
+
+  input[type="file"]::after {
+    position: absolute;
+    pointer-events: none;
+    left: 16px;
+    height: 16px;
+    width: 16px;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+  }
+
+  /* file upload button */
+  input[type="file"]::file-selector-button {
+    border-radius: 10px;
+    /* padding: 0 16px; */
+    padding: 0px;
+    height: 30px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    /* margin-right: 16px; */
+  }
+
+  #uploadBackground {
+    justify-content: center;
+    color: #18a0fb;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    width: 90%;
+  }
+
   /* Buttons */
   #float-button {
     position: absolute;
@@ -223,25 +313,25 @@
     top: 0;
     left: 0;
   }
-
 </style>
 
 <div>
   <div id="ui">
     <nav id="nav">
-      <ul>
+      <ul class="p-0 d-flex">
         <li id="btn_layers" style="color: #18a0fb;">Layers</li>
         <li id="btn_scene">Scene</li>
         <li id="btn_settings">Settings</li>
       </ul>
     </nav>
-    <div id="layers">
-      <p>Layers</p>
-    </div>
-    <div id="scene" class="scrollable-div" style="display: none;">
+    <div id="layers"></div>
+    <div id="scene" class="scrollable-div pl-10" style="display: none;">
       <div>
-        <p>Positon X</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Position X</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
            </div>
@@ -250,8 +340,11 @@
         </div>
       </div>
       <div>
-        <p>Position Y</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Position Y</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
@@ -260,8 +353,11 @@
         </div>
       </div>
       <div>
-        <p>Position Z</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Position Z</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div class="input_icon">
             <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.17678 2.82322C6.07915 2.72559 5.92085 2.72559 5.82322 2.82322L4.23223 4.41421C4.1346 4.51184 4.1346 4.67014 4.23223 4.76777C4.32986 4.8654 4.48816 4.8654 4.58579 4.76777L6 3.35355L7.41421 4.76777C7.51184 4.8654 7.67014 4.8654 7.76777 4.76777C7.8654 4.67014 7.8654 4.51184 7.76777 4.41421L6.17678 2.82322ZM5.75 3V12H6.25V3H5.75Z" fill="currentColor"></path><path d="M9.82322 12.1768C9.92085 12.2744 10.0791 12.2744 10.1768 12.1768L11.7678 10.5858C11.8654 10.4882 11.8654 10.3299 11.7678 10.2322C11.6701 10.1346 11.5118 10.1346 11.4142 10.2322L10 11.6464L8.58579 10.2322C8.48816 10.1346 8.32986 10.1346 8.23223 10.2322C8.1346 10.3299 8.1346 10.4882 8.23223 10.5858L9.82322 12.1768ZM10.25 12L10.25 3L9.75 3L9.75 12L10.25 12Z" fill="currentColor"></path></svg>
           </div>
@@ -270,8 +366,11 @@
         </div>    
       </div>
       <div>
-        <p>Rotation X (Graus)</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Rotation X (Graus)</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
@@ -280,8 +379,11 @@
         </div>
       </div>
       <div>
-        <p>Rotation Y (Graus)</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Rotation Y (Graus)</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
@@ -290,8 +392,11 @@
         </div>
       </div>
       <div>
-        <p>Rotation Z (Graus)</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Rotation Z (Graus)</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div class="input_icon">
             <svg width="16" height="16" fill="none"><path stroke="currentColor" d="M5 8c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6C6.89 2 5.92 3.207 5.401 5M5 8l-2 2.5M5 8l2.5 2"></path></svg>
           </div>
@@ -300,16 +405,22 @@
         </div>
       </div>
       <div>
-        <p>Display Component</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Display Component</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div>
             <input type="checkbox" id="visible">
           </div>
         </div>
       </div>
       <div>
-        <p>Draggable</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Draggable</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <select>
             <option value="1">Anchor</option>
             <option value="2">Draggable</option>
@@ -317,8 +428,11 @@
         </div>
       </div>
       <div>
-        <p>Open</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Open</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <select>
             <option value="1">New Window</option>
             <option value="2">Overwrite</option>
@@ -326,10 +440,13 @@
         </div>
       </div>
     </div>
-    <div id="settings" style="display: none;">
+    <div id="settings" class="pl-10 scrollable-div" style="display: none;">
       <div>
-        <p>Show Orbit</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Show Orbit</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div>
             <input type="checkbox" id="showOrbit" checked>
           </div>
@@ -340,8 +457,11 @@
         </div>
       </div>
       <div>
-        <p>Show 3D User</p>
-        <div class="input">
+        <div class="d-flex">
+          <p>Show 3D User</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
           <div>
             <input type="checkbox" id="showUser" checked>
           </div>
@@ -349,6 +469,19 @@
             <label>Color: </label>
             <input type="color" id="colorUser" value="#ffffff" class="color">
           </div>
+        </div>
+      </div>
+      <div>
+        <div class="d-flex">
+          <p>Background Model</p>
+          <p style="margin-left: 10px; border: 1px solid #333; padding: 1px 5px; border-radius: 4px;">?</p>
+        </div>
+        <div class="align-items-center d-flex">
+          <div class="align-items-center d-flex" id="uploadBackground">
+            <div style="width: 24px; height: 24px; background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%230964B0\'%3E%3Cpath d=\'M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z\'/%3E%3C/svg%3E');"></div>
+            <p>Upload</p>
+          </div>
+          <!-- <input type="file"> -->
         </div>
       </div>
     </div>
@@ -396,54 +529,19 @@ onmessage = async event => {
   scene.background = new THREE.Color(0x121212) 
 
   const url_vrApartment = 'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/vr-apartment/'
-  const url_vrStore = 'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/assets/vr-store/'
-  new GLTFLoader().setPath(url_vrStore).load(
+  new GLTFLoader().setPath(url_vrApartment).load(
     'scene.gltf',
-    gltf  => scene.add(gltf.scene),
+    gltf  => {
+      const home = gltf.scene
+      home.position.y = 1.1 
+      home.scale.x = 2.5
+      home.scale.y = 2.5
+      home.scale.z = 2.5
+      scene.add(home)
+    },
     xhr => console.log( xhr.loaded / xhr.total + '%'),
     error => console.log(error)
   )
-
-  // new OBJLoader().load(
-  //   'https://raw.githubusercontent.com/ruxailab/figma-vr-unity-converter/fix/environment/FTU_FigmaToUnity/trail.obj',
-  //   object => {
-  //     scene.add(object)
-  //   },
-  //   xhr => console.log( xhr.loaded / xhr.total + '%'),
-  //   error => {}
-  // )
-  // const sphereGeometry = new THREE.SphereGeometry(15, 64, 40)
-  // sphereGeometry.scale(-1, 1, 1)
-  // const sphereMaterial = new THREE.MeshBasicMaterial({
-  //   map: new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1073959819507150899/1205242675113230406/render-360_1.jpg?ex=65d7a8b6&is=65c533b6&hm=e5faf94764068492a0433bf0af915232c8421de7a16838c7142bad9d24c78f5c&=&format=webp&width=994&height=497')
-  // })
-  // const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial)
-  // console.log(sphereMesh)
-  // sphereMesh.position.y = 10
-  // scene.add(sphereMesh)
-
-  // const textureArray = []
-  // const textureFront = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236093553737808/front.jpg?ex=65d7a294&is=65c52d94&hm=0c3055d67c25212d5862a0e5d0d277cc4bde323ecb2071c9c0a02864a4ca03fe&=&format=webp&width=497&height=497')
-  // const textureBack = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236094329819226/back.jpg?ex=65d7a295&is=65c52d95&hm=9e342a852c83d2f37f95a5dce330d3b874650709cec7d221e0568bfb3dd207e3&=&format=webp&width=497&height=497')
-  // const textureTop = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236092383789127/top.jpg?ex=65d7a294&is=65c52d94&hm=d17bc8afcedf27b0ae0624f7606bd25a7c7025580ccc5d5ee60de22a36966672&=&format=webp&width=497&height=497')
-  // const textureBottom = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236093990076537/bottom.jpg?ex=65d7a295&is=65c52d95&hm=f4bc3e26b783d14c43b2c9b8be1ba8bd9b8b2db80193033bb9b09f39882e59e1&=&format=webp&width=497&height=497')
-  // const textureLeft = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236093189103697/left.jpg?ex=65d7a294&is=65c52d94&hm=511f4d3adb89eb6628d0b8c83f2e7495256a5a4911c022111d2172eb1e6688ce&=&format=webp&width=497&height=497')
-  // const textureRight = new THREE.TextureLoader().load('https://media.discordapp.net/attachments/1126517490449666088/1205236092857749564/right.jpg?ex=65d7a294&is=65c52d94&hm=7397990306d46b14eeef57d1e17c0e086ab856e31ac1eb0aeffe31e3b303784a&=&format=webp&width=497&height=497')
-
-  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureFront }))
-  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureBack }))
-  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureTop }))
-  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureBottom }))
-  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureLeft }))
-  // textureArray.push(new THREE.MeshBasicMaterial({ map: textureRight }))
-
-  // const geometry = new THREE.BoxGeometry(20, 20, 20);
-  // geometry.scale(-1, 1, 1)
-  // const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff})
-  // const cube = new THREE.Mesh(geometry, textureArray)
-  // console.log(cube)
-  // cube.position.y = 5
-  // scene.add(cube)
 
   // Camera
   const fov = 45
@@ -471,6 +569,7 @@ onmessage = async event => {
       human.scale.y = 0.2
       human.scale.z = 0.2
       human.children[0].material.emissive = new THREE.Color('#ffffff')
+      console.log(human)
       scene.add(human)
     },
     xhr => {},
@@ -489,6 +588,32 @@ onmessage = async event => {
   // Component
   const meshComponents = await Promise.all(
     data.components.map(component => new Promise(resolve => {
+      const divElement = document.createElement('div')
+      divElement.classList.add('figmaComponent', 'd-flex', 'pl-10')
+
+      const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      svgElement.setAttribute('class', 'mt-5 mb-5')
+      svgElement.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+      svgElement.setAttribute('width', '12')
+      svgElement.setAttribute('height', '12')
+      svgElement.setAttribute('viewBox', '0 0 12 12')
+
+      const pathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      pathElement.setAttribute('fill', '#d1a8ff')
+      pathElement.setAttribute('fill-opacity', '1')
+      pathElement.setAttribute('fill-rule', 'nonzero')
+      pathElement.setAttribute('stroke', 'none')
+      pathElement.setAttribute('d', 'M3.743 2.748 6 .5l2.257 2.248L6 4.996 3.743 2.748zm-.995 5.51L.5 6l2.248-2.257L4.996 6 2.748 8.257zm5.51.994L6 11.5 3.743 9.252 6 7.004l2.257 2.248zM11.5 6 9.252 3.743 7.004 6l2.248 2.257L11.5 6z')
+      
+      const pElement = document.createElement('p')
+      pElement.classList.add('mb-5', 'mt-5', 'pl-10')
+      pElement.textContent = component.name
+      
+      svgElement.appendChild(pathElement)
+      divElement.appendChild(svgElement)
+      divElement.appendChild(pElement)
+      document.querySelector('#layers').appendChild(divElement)
+
       const width = component.width / 2
       const height = component.height / 2
 
@@ -502,6 +627,7 @@ onmessage = async event => {
 
         const meshComponent = new THREE.Mesh(geometryComponent, materialComponent)
         const { positionX, positionY, positionZ, rotationX, rotationY, rotationZ, visible } = component.property
+        meshComponent.name = component.name
         meshComponent.position.set(positionX, positionY, positionZ)
         meshComponent.rotation.set(mapEuler(rotationX), mapEuler(rotationY), mapEuler(rotationZ))
         meshComponent.componentVisible = visible
@@ -516,6 +642,38 @@ onmessage = async event => {
   const pointer = new THREE.Vector2()
   const raycaster = new THREE.Raycaster()
   let select, line
+
+  const divsElement = document.querySelectorAll('.figmaComponent')
+  divsElement.forEach(divElement => {
+    divElement.addEventListener('click', event => {
+      scene.remove(line)
+      select = meshComponents.find(meshComponent => meshComponent.name === divElement.textContent)
+      
+      let parameters = select.geometry.parameters
+      document.querySelector('#btn_layers').style.color = '#ffffff'
+      document.querySelector('#btn_scene').style.color = '#18a0fb'
+      document.querySelector('#btn_settings').style.color = '#ffffff'
+      document.querySelector('#layers').style.display = 'none'
+      document.querySelector('#scene').style.display = 'block'  
+      document.querySelector('#settings').style.display = 'none'
+
+      const { width, height } = select.geometry.parameters
+      const geometry = new THREE.BoxGeometry(width, height, 0.5)
+      const edges = new THREE.EdgesGeometry(geometry)
+      const lineMaterial = new THREE.LineDashedMaterial({ color: 0x5100ff, linewidth: 20, scale: 20 })
+      line = new THREE.LineSegments(edges, lineMaterial)
+
+      const { position, rotation } = select
+      document.querySelector('#input-positionX').value = position.x
+      document.querySelector('#input-positionY').value = position.y
+      document.querySelector('#input-positionZ').value = -position.z
+      document.querySelector('#input-rotationX').value = mapRadianos(rotation.x)
+      document.querySelector('#input-rotationY').value = mapRadianos(rotation.y)
+      document.querySelector('#input-rotationZ').value = mapRadianos(rotation.z)
+      document.querySelector('#visible').checked = select.componentVisible
+      scene.add(line)
+    })
+  })
 
   document.querySelector('#threeJS').addEventListener('click', event => {
     pointer.x = (event.clientX / window.innerWidth) * 2 - 0.7

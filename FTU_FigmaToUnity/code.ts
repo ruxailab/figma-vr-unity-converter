@@ -7,6 +7,7 @@ async function componentCreate () {
 
   for (const selection of figma.currentPage.selection) {
     if(typeof selection.absoluteBoundingBox?.width === 'number' && selection.type === 'COMPONENT') {
+      const name = selection.name
       const width = selection.absoluteBoundingBox?.width / 100;
       const height = selection.absoluteBoundingBox?.height / 100;
       const image = await selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 3 } })
@@ -20,7 +21,7 @@ async function componentCreate () {
         positionZ: Number(componentProperty(keys, selection, 'PositionZ')) || 0,
         visible: componentProperty(keys, selection, 'Visible') == 'true' || true,
       }
-      components.push({ width, height, image, property })
+      components.push({ name, width, height, image, property })
     }
   }
   figma.ui.postMessage({isComponent: isComponent(), components: components})

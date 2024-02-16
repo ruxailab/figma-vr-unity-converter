@@ -17,6 +17,7 @@ function componentCreate() {
         const components = [];
         for (const selection of figma.currentPage.selection) {
             if (typeof ((_a = selection.absoluteBoundingBox) === null || _a === void 0 ? void 0 : _a.width) === 'number' && selection.type === 'COMPONENT') {
+                const name = selection.name;
                 const width = ((_b = selection.absoluteBoundingBox) === null || _b === void 0 ? void 0 : _b.width) / 100;
                 const height = ((_c = selection.absoluteBoundingBox) === null || _c === void 0 ? void 0 : _c.height) / 100;
                 const image = yield selection.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 3 } });
@@ -30,7 +31,7 @@ function componentCreate() {
                     positionZ: Number(componentProperty(keys, selection, 'PositionZ')) || 0,
                     visible: componentProperty(keys, selection, 'Visible') == 'true' || true,
                 };
-                components.push({ width, height, image, property });
+                components.push({ name, width, height, image, property });
             }
         }
         figma.ui.postMessage({ isComponent: isComponent(), components: components });
